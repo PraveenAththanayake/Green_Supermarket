@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.flexCenter {
+  @apply flex justify-center items-center;
+}
+
+.flexBetween {
+  @apply flex justify-between items-center;
+}
+
+.primaryButton {
+  @apply w-[192px] h-[48px] rounded-lg bg-customGreen text-white font-normal text-4xl;
+}
+
+.secondaryButton {
+  @apply w-[192px] h-[48px] rounded-lg outline-customGreen text-black font-normal text-4xl;
+}
+
+.h1-Bold {
+  @apply text-8xl font-bold text-black;
+}
+
+.h1-normal {
+  @apply text-8xl font-normal text-black;
+}
+
+.h2-bold {
+  @apply text-5xl font-semibold text-black;
+}
+
+.h3-bold {
+  @apply text-4xl font-semibold text-black;
+}
+
+.h4-bold {
+  @apply text-xl font-semibold text-black;
+}
+
+.h5-bold {
+  @apply text-lg font-semibold text-black;
+}
+
+.h6-bold {
+  @apply text-base font-normal text-black;
+}
