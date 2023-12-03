@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { CustomButtonProps } from "../../interfaces/index";
+import { CustomButtonProps } from "../../types/index";
 
-const primaryButton: React.FC<CustomButtonProps> = ({ text, url, style }) => {
+const PrimaryButton: React.FC<CustomButtonProps> = ({ text, url, style }) => {
   return (
     <div className={style}>
       <Link to={url}>{text}</Link>
@@ -9,4 +9,4 @@ const primaryButton: React.FC<CustomButtonProps> = ({ text, url, style }) => {
   );
 };
 
-export default primaryButton;
+export default PrimaryButton;

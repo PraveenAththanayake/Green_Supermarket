@@ -28,9 +28,6 @@ export default {
       full: "9999px",
     },
     extend: {
-      fontFamily: {
-        sans: ["Roboto", "sans-serif"],
-      },
       fontSize: {
         xxs: "12px",
         xs: "13px",
