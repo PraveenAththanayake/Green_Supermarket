@@ -1,5 +1,7 @@
-const socialBar = () => {
-  return <div>socialBar</div>;
+import React from "react";
+
+const SocialBar = () => {
+  return <div>SocialBar</div>;
 };
 
-export default socialBar;
+export default SocialBar;
