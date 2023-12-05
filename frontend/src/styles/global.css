@@ -22,7 +22,7 @@
 }
 
 .primaryButton {
-  @apply w-[192px] h-[48px] rounded-lg bg-customGreen text-white font-normal text-4xl flex justify-center items-center;
+  @apply w-[192px] h-[48px] rounded-lg bg-customGreen text-white font-normal text-4xl flex justify-center items-center leading-6;
 }
 
 .secondaryButton {
