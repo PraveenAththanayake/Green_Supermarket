@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
+import PrimaryButton from "../../components/buttons/primaryButton";
 
 export default class SimpleSlider extends Component {
   render() {
@@ -17,15 +17,15 @@ export default class SimpleSlider extends Component {
     };
     return (
       <div className="w-full max-h-screen flexCenter">
-        <div className="w-[1120px] h-[422px] relative">
-          <div className="absolute z-10 flex-col transform translate-y-1/2 translate-x-1/4 flexCenter">
+        <div className="relative lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]">
+          <div className="carouselText">
             <span className="capitalize text-lg font-normal leading-[19.2px]">
               The best skin routines ever.
             </span>
-            <h2 className="capitalize font-semibold text-7xl leading-[54.56px] mt-[19px]">
+            <h2 className="capitalize font-semibold text-2xl sm:text-5xl md:text-5xl lg:text-7xl mt-[10px]">
               Beauty & Personal Care
             </h2>
-            <span className="leading-[43.65px] font-extralight text-6xl mb-[35px]">
+            <span className="font-extralight text-2xl sm:text-4xl md:text-4xl lg:text-6xl mb-[20px]">
               Up to 70% Off
             </span>
             <PrimaryButton
@@ -40,21 +40,21 @@ export default class SimpleSlider extends Component {
                 <img
                   src="../../../public/images/AddCarousel/collection-beauty-products-with-copy-space.jpg"
                   alt="img"
-                  className="object-cover w-[1120px] h-[422px]"
+                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]"
                 />
               </div>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/top-view-frame-with-cosmetics-copy-space.jpg"
                   alt="img"
-                  className="object-cover w-[1120px] h-[422px] scale-x-[-1]"
+                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px] scale-x-[-1]"
                 />
               </div>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/young-beautiful-blonde-girl-cares-face-skin-with-moisturizer-front-mirror.jpg"
                   alt="img"
-                  className="object-cover w-[1120px] h-[422px]"
+                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]"
                 />
               </div>
             </Slider>
