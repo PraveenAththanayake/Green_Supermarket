@@ -4,10 +4,13 @@ import ProductHeader from "./ProductHeader";
 
 function ProductPage() {
   return (
-    <div>
-      <ProductHeader />
-      <ProductDetails />
-      <ProductDesc />
+    <div className="flexCenter max-w-[70rem] mx-auto">
+      <div>
+        <ProductHeader />
+        <hr className="border-1 border-gray my-[35px]" />
+        <ProductDetails />
+        <ProductDesc />
+      </div>
     </div>
   );
 }
