@@ -1,6 +1,8 @@
+import { useState } from "react";
 import PrimaryButton from "../../components/buttons/primaryButton";
 
 const ProductDetails = () => {
+  const [quantity, setQuantity] = useState(1);
   return (
     <div className="md:flex-row flexCenter gap-11 lg:gap-[96px] flex-col">
       <div className="w-[310px] h-[300px] md:w-[400px] md:h-[500px] lg:w-[34rem] lg:h-[33.5rem] flex-row flex rounded-lg border border-solid border-lightGray bg-white shadow-md">
@@ -87,13 +89,23 @@ const ProductDetails = () => {
           <h3 className="text-4xl font-light leading-[24px] mb-2">Quantity:</h3>
           <div className="flex items-center gap-4 flex-col lg:flex-row lg:gap-[36px]">
             <div className="w-[96px] h-[32px] flex flex-row">
-              <button className="w-[32px] h-[32px] bg-gray2 rounded-l-default">
+              <button
+                className="w-[32px] h-[32px] bg-gray2 rounded-l-default"
+                onClick={() => {
+                  if (quantity > 1) {
+                    setQuantity(quantity - 1);
+                  }
+                }}
+              >
                 -
               </button>
               <span className="w-[32px] h-[32px]text-lg leading-[19.2px] font-normal flexCenter">
-                1
+                {quantity}
               </span>
-              <button className="w-[32px] h-[32px] bg-gray2 rounded-r-default">
+              <button
+                className="w-[32px] h-[32px] bg-gray2 rounded-r-default"
+                onClick={() => setQuantity(quantity + 1)}
+              >
                 +
               </button>
             </div>
