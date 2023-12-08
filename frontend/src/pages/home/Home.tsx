@@ -1,7 +1,7 @@
-import Advertisement from "./Advertisement";
-import Category from "./Category";
-import Discount from "./Discount";
-import Hero from "./Hero";
+import Advertisement from "./advertisement";
+import Category from "./category";
+import Discount from "./discount";
+import Hero from "./hero";
 
 const Home = () => {
   return (
