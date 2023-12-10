@@ -77,3 +77,7 @@
 .h6-bold {
   @apply text-base font-normal text-black;
 }
+
+.admin-Headers {
+  @apply text-6xl font-semibold leading-[38.4px] mt-[72px];
+}
