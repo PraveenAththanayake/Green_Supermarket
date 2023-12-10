@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import CategoryDetails from "./pages/CategoryDetails";
 import Category from "./pages/home/Category";
 import ProductPage from "./pages/product/ProductPage";
+import AdminLayout from "./pages/admin/AdminLayout";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/categories/:categoryId" element={<CategoryDetails />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/contact" element={<div>Contact</div>} />
+        <Route path="/admin" element={<AdminLayout />} />
       </Routes>
     </div>
   );
