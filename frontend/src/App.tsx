@@ -5,7 +5,7 @@ import CategoryDetails from "./pages/CategoryDetails";
 import Category from "./pages/home/Category";
 import ProductPage from "./pages/product/ProductPage";
 import AdminLayout from "./pages/admin/AdminLayout";
-
+import TopSales from "./pages/topsales/topsales"; 
 function App() {
   return (
     <div>
@@ -16,6 +16,7 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/contact" element={<div>Contact</div>} />
         <Route path="/admin" element={<AdminLayout />} />
+        <Route path="/topsales" element={<TopSales />} />
       </Routes>
     </div>
   );
