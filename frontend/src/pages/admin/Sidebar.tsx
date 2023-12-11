@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AdminSideList } from "../../constants/AdminSideList";
 import Dashboard from "./Dashboard";
+import AddProduct from "./AddProduct";
 
 const Sidebar = () => {
   const [selectedNav, setSelectedNav] = useState(AdminSideList[0].id);
@@ -14,7 +15,7 @@ const Sidebar = () => {
       case 1:
         return <Dashboard />;
       case 2:
-        return <div>Add Products</div>;
+        return <AddProduct />;
       case 3:
         return <div>Manage Products</div>;
       case 4:
