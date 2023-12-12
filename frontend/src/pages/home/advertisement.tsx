@@ -41,21 +41,21 @@ export default class SimpleSlider extends Component {
                 <img
                   src="../../../public/images/AddCarousel/collection-beauty-products-with-copy-space.jpg"
                   alt="img"
-                  className="object-cover"
+                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]"
                 />
               </div>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/top-view-frame-with-cosmetics-copy-space.jpg"
                   alt="img"
-                  className="object-cover"
+                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px] -scale-x-100"
                 />
               </div>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/young-beautiful-blonde-girl-cares-face-skin-with-moisturizer-front-mirror.jpg"
                   alt="img"
-                  className="object-cover"
+                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]"
                 />
               </div>
             </Slider>
