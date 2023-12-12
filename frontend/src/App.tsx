@@ -2,10 +2,10 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import CategoryDetails from "./pages/CategoryDetails";
-import Category from "./pages/home/Category";
+import Category from "./components/common/category";
 import ProductPage from "./pages/product/ProductPage";
 import AdminLayout from "./pages/admin/AdminLayout";
-import TopSales from "./pages/topsales/topsales"; 
+import TopSales from "./pages/topsales/topsales";
 function App() {
   return (
     <div>
