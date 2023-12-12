@@ -6,6 +6,7 @@ import Category from "./pages/home/Category";
 import ProductPage from "./pages/product/ProductPage";
 import AdminLayout from "./pages/admin/AdminLayout";
 import TopSales from "./pages/topsales/topsales"; 
+import Cart from "./pages/cart/cart";
 function App() {
   return (
     <div>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/contact" element={<div>Contact</div>} />
         <Route path="/admin" element={<AdminLayout />} />
         <Route path="/topsales" element={<TopSales />} />
+        <Route path="/cart" element={<Cart/>} />
       </Routes>
     </div>
   );

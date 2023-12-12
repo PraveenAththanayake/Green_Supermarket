@@ -11,12 +11,9 @@ const topsales = () => {
         <div><h1 className="admin-Headers  ">Top Saver Today</h1></div>
         <div className=' mt-[80px] font-light ml-[42px]'><h2 >Ends In :</h2></div>
       </div>
-
-
-
       <div className=' flexCenter'>
       
-      <div className="grid grid-cols-4 grid-rows-4 gap-x-[12px] gap-y-[12px] mx-0 border items-center justify-between">
+      <div className="grid grid-cols-4 grid-rows-4 gap-x-[12px] gap-y-[12px] mx-0 items-center justify-between">
         <ProductCard/>
         <ProductCard/>
         <ProductCard/>

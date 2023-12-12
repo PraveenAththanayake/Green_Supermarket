@@ -19,8 +19,8 @@ export default {
       gray: "#848482",
       gray2: "#D9D9D9",
       red: "#D30000",
-      yellow : "#FDCC0D",
-      
+      yellow: "#FDCC0D",
+      bgray: "#84848233",
     },
     borderRadius: {
       none: "0",
