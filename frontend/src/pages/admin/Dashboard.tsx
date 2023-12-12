@@ -11,6 +11,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-3 grid-rows-3 gap-x-[18px] gap-y-[15px]">
         {DashboardList.map((item) => (
           <DashboardOrder
+            key={item.id}
             id={item.id}
             url={item.url}
             name={item.name}
