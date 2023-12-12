@@ -1,30 +1,58 @@
-# React + TypeScript + Vite
+# Green_Supermarket Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Frontend of Green Market: Your Eco-friendly E-commerce Destination! 🌿🛒
 
-Currently, two official plugins are available:
+This directory contains the frontend codebase for Green Market, an eco-friendly e-commerce platform aimed at providing sustainable products to users.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+The frontend of Green Market is built using modern web technologies to ensure a seamless and engaging shopping experience for users.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- Intuitive and responsive user interface
+- Efficient navigation and product browsing
+- Interactive shopping cart and checkout process
+- Integration with backend APIs for data retrieval
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Installation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To run the frontend locally, follow these steps:
+
+1. Ensure you have Node.js and npm installed.
+
+2. Clone the repository:
+
+   ```bash
+   git clone https://github.com/PraveenAththanayake/Green_Supermarket.git
+   ```
+   
+3. Navigate to the project directory:
+
+   ```bash
+   cd Green_Supermarket
+   ```
+   
+4. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   
+## Contributors
+[![Contributors](https://contrib.rocks/image?repo=PraveenAththanayake/Green_Supermarket)](https://github.com/PraveenAththanayake/Green_Supermarket/graphs/contributors)
+
+This project is maintained and contributed to by various individuals. You can view all contributors [here](https://github.com/PraveenAththanayake/Green_Supermarket/graphs/contributors).
+
+
+We highly encourage contributions and suggestions! Feel free to open issues or submit pull requests.
+
+Happy shopping at Green Market! 🌱🌍
+
