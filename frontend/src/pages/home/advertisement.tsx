@@ -17,7 +17,7 @@ export default class SimpleSlider extends Component {
     };
 
     return (
-      <div className="w-full max-h-screen flexCenter">
+      <div className="w-full flexCenter">
         <div className="relative lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]">
           <div className="carouselText">
             <span className="capitalize text-lg font-normal leading-[19.2px]">
@@ -35,27 +35,27 @@ export default class SimpleSlider extends Component {
               url="/category/8"
             />
           </div>
-          <div className="z-0">
+          <div className="z-0 lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px] overflow-hidden">
             <Slider {...settings}>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/collection-beauty-products-with-copy-space.jpg"
                   alt="img"
-                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]"
+                  className="object-cover"
                 />
               </div>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/top-view-frame-with-cosmetics-copy-space.jpg"
                   alt="img"
-                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px] scale-x-[-1]"
+                  className="object-cover"
                 />
               </div>
               <div>
                 <img
                   src="../../../public/images/AddCarousel/young-beautiful-blonde-girl-cares-face-skin-with-moisturizer-front-mirror.jpg"
                   alt="img"
-                  className="object-cover lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]"
+                  className="object-cover"
                 />
               </div>
             </Slider>
