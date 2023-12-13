@@ -1,11 +1,11 @@
-import heroImage from "../../../public/images/Hero/supermarket-banner-concept-with-ingredients.jpg";
+import heroImage from "../../../../public/images/Hero/supermarket-banner-concept-with-ingredients.jpg";
 
 const Hero = () => {
   return (
     <>
       <div className="max-w-[1120px] mx-auto relative">
         <div className="absolute left-[64px] top-[40px] w-7xl">
-          <p className="font-lato font-bold">
+          <p className="font-bold font-lato">
             WELCOME GREEN SUPER MARKET ONLINE!
           </p>
           <h1 className="font-nunito font-bold mt-[32px] mb-[96px] text-[48px]">

@@ -5,7 +5,7 @@ const SearchBar = () => {
     <div className="ml-[66px] w-[672px]">
       <label className="relative block">
         <span className="sr-only">Search</span>
-        <span className="absolute inset-y-0 right-6 flex items-center pl-2">
+        <span className="absolute inset-y-0 flex items-center pl-2 right-6">
           <IoSearchOutline size={22} />
         </span>
         <input

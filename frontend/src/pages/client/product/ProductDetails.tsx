@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PrimaryButton from "../../components/buttons/primaryButton";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);

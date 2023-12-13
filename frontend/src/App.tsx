@@ -1,13 +1,13 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/home/Home";
+import Home from "./pages/client/home/Home";
 import CategoryDetails from "./pages/CategoryDetails";
-import ProductPage from "./pages/product/ProductPage";
+import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
-const TopSales = lazy(() => import("./pages/topsales/topsales"));
-const Category = lazy(() => import("./components/common/category"));
+const TopSales = lazy(() => import("./pages/client/topsales/topsales"));
+const Category = lazy(() => import("./components/common/Category"));
 
 function App() {
   return (

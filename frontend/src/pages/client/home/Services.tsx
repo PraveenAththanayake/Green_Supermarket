@@ -1,8 +1,8 @@
-import s1 from "../../../public/images/service-img/Service 1.png";
-import s2 from "../../../public/images/service-img/Service 2.png";
-import s3 from "../../../public/images/service-img/Service 3.png";
-import s4 from "../../../public/images/service-img/Service 4.png";
-const services = () => {
+import s1 from "../../../../public/images/service-img/Service 1.png";
+import s2 from "../../../../public/images/service-img/Service 2.png";
+import s3 from "../../../../public/images/service-img/Service 3.png";
+import s4 from "../../../../public/images/service-img/Service 4.png";
+const Services = () => {
   return (
     <div className="bg-gradient-to-t from-[#53B17540] from-10% to-white pb-[92px] mb-[100px]">
       <div className="max-w-[1120px] mx-auto mt-[36px]">
@@ -51,4 +51,4 @@ const services = () => {
   );
 };
 
-export default services;
+export default Services;

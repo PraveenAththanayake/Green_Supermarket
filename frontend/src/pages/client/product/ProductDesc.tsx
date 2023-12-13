@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ProductNavList } from "../../constants/ProductNav";
 import Description from "./Description";
 import Review from "./Review";
 import QA from "./QA";
 import Info from "./Info";
+import { ProductNavList } from "../../../constants/ProductNav";
 
 const ProductDesc = () => {
   const [selectedNav, setSelectedNav] = useState(ProductNavList[0].id);
