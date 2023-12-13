@@ -4,10 +4,12 @@ import Discount from "./Discount";
 import Hero from "./Hero";
 import "../../styles/home.css";
 import Footer from "../../components/common/footer";
+import Navbar from "../../components/common/navbar";
 
 const Home = () => {
   return (
     <main>
+      <Navbar />
       <Hero />
       <Discount />
       <Advertisement />
