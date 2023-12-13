@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { AdminSideList } from "../../constants/AdminSideList";
 import Dashboard from "./Dashboard";
-import AddProduct from "./AddProduct";
+
+const AddProduct = lazy(() => import("./AddProduct"));
 
 const Sidebar = () => {
   const [selectedNav, setSelectedNav] = useState(AdminSideList[0].id);
