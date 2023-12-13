@@ -51,7 +51,7 @@ const AddProduct = () => {
 
             <div>
               <div className="grid grid-cols-2 grid-rows-2 gap-x-[53px] gap-y-4">
-                <label htmlFor="Product Name" className="adminLabel">
+                <label htmlFor="productName" className="adminLabel">
                   Product Name
                   <input
                     type="text"
@@ -62,7 +62,7 @@ const AddProduct = () => {
                     {errors.productName?.message}
                   </p>
                 </label>
-                <label htmlFor="Slug" className="adminLabel">
+                <label htmlFor="slug" className="adminLabel">
                   Slug
                   <input
                     type="text"
@@ -73,7 +73,7 @@ const AddProduct = () => {
                     {errors.slug?.message}
                   </p>
                 </label>
-                <label htmlFor="Tags" className="adminLabel">
+                <label htmlFor="tags" className="adminLabel">
                   Tags(This tag help you in search result)
                   <input
                     type="text"
@@ -84,7 +84,7 @@ const AddProduct = () => {
                     {errors.tags?.message}
                   </p>
                 </label>
-                <label htmlFor="Brand" className="adminLabel">
+                <label htmlFor="brand" className="adminLabel">
                   Brand
                   <input
                     type="text"
@@ -96,7 +96,7 @@ const AddProduct = () => {
                   </p>
                 </label>
               </div>
-              <label htmlFor="Description" className="mt-4 adminLabel">
+              <label htmlFor="description" className="mt-4 adminLabel">
                 Description
                 <textarea
                   className="w-[963px] h-[162px] resize-none border border-gray/20 rounded-md p-2 mt-4 text-black"
@@ -107,7 +107,7 @@ const AddProduct = () => {
                 </p>
               </label>
               <div className="flex flex-row justify-between">
-                <label htmlFor="Main Image" className="flex flex-col">
+                <label htmlFor="mainImage" className="flex flex-col">
                   <span className="my-4">Main Image</span>
                   <Dropzone maxFiles={1} {...register("mainImage")} />
                   <p className="text-xs italic text-red">
@@ -115,7 +115,7 @@ const AddProduct = () => {
                   </p>
                 </label>
 
-                <label htmlFor="Other Images" className="flex flex-col">
+                <label htmlFor="otherImages" className="flex flex-col">
                   <span className="my-4">Other Images</span>
                   <Dropzone maxFiles={3} {...register("otherImages")} />
                   <p className="text-xs italic text-red">
@@ -132,7 +132,7 @@ const AddProduct = () => {
           </h2>
           <div className="text-base font-normal leading-[18px] text-gray">
             <div className="grid grid-cols-2 gap-x-[53px]">
-              <label htmlFor="Type" className="adminLabel">
+              <label htmlFor="type" className="adminLabel">
                 Type
                 <input
                   type="text"
@@ -143,7 +143,7 @@ const AddProduct = () => {
                   {errors.type?.message}
                 </p>
               </label>
-              <label htmlFor="Stock Limit" className="adminLabel">
+              <label htmlFor="stockLimit" className="adminLabel">
                 Stock Limit
                 <input
                   type="text"
@@ -156,7 +156,7 @@ const AddProduct = () => {
               </label>
             </div>
             <div className="w-[963px] h-[232px] border border-gray/20 mt-4 rounded-[5px] grid grid-cols-3 grid-rows-2 gap-x-[71px] gap-y-4 py-4 px-[19px]">
-              <label htmlFor="Measurement" className="adminLabel">
+              <label htmlFor="measurement" className="adminLabel">
                 Measurement
                 <input
                   type="text"
@@ -167,7 +167,7 @@ const AddProduct = () => {
                   {errors.measurement?.message}
                 </p>
               </label>
-              <label htmlFor="Price (LKR)" className="adminLabel">
+              <label htmlFor="price" className="adminLabel">
                 Price (LKR)
                 <input
                   type="text"
@@ -178,7 +178,7 @@ const AddProduct = () => {
                   {errors.priceLKR?.message}
                 </p>
               </label>
-              <label htmlFor="Price (LKR)" className="adminLabel">
+              <label htmlFor="price" className="adminLabel">
                 Price (LKR)
                 <input
                   type="text"
@@ -189,7 +189,7 @@ const AddProduct = () => {
                   {errors.priceLKR?.message}
                 </p>
               </label>
-              <label htmlFor="Stock" className="adminLabel">
+              <label htmlFor="stock" className="adminLabel">
                 Stock
                 <input
                   type="text"
@@ -200,7 +200,7 @@ const AddProduct = () => {
                   {errors.stock?.message}
                 </p>
               </label>
-              <label htmlFor="Unit" className="adminLabel">
+              <label htmlFor="unit" className="adminLabel">
                 Unit
                 <input
                   type="text"
@@ -211,7 +211,7 @@ const AddProduct = () => {
                   {errors.unit?.message}
                 </p>
               </label>
-              <label htmlFor="Status" className="adminLabel">
+              <label htmlFor="status" className="adminLabel">
                 Status
                 <input
                   type="text"
