@@ -5,12 +5,14 @@ import Hero from "./Hero";
 import "../../styles/home.css";
 import Footer from "../../components/common/footer";
 import Navbar from "../../components/common/navbar";
+import Services from "./services";
 
 const Home = () => {
   return (
     <main>
       <Navbar />
       <Hero />
+      <Services />
       <Discount />
       <Advertisement />
       <Category />
