@@ -3,6 +3,7 @@ import Category from "../../components/common/category";
 import Discount from "./Discount";
 import Hero from "./Hero";
 import "../../styles/home.css";
+import Footer from "../../components/common/footer";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Discount />
       <Advertisement />
       <Category />
+      <Footer />
     </main>
   );
 };
