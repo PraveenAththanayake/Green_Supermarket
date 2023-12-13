@@ -4,6 +4,7 @@ import Home from "./pages/client/home/Home";
 import CategoryDetails from "./pages/CategoryDetails";
 import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";
+import Cart from "./pages/client/cart/Cart";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/topsales"));
@@ -27,6 +28,7 @@ function App() {
           <Route path="/contact" element={<div>Contact</div>} />
           <Route path="/admin" element={<AdminLayout />} />
           <Route path="/topsales" element={<TopSales />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Suspense>
     </div>
