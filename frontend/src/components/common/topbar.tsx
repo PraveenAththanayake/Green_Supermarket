@@ -3,7 +3,7 @@ import { IoCall } from "react-icons/io5";
 
 const Topbar = () => {
   return (
-    <div className="h-14 w-full bg-[#09965D] rounded-b-[20px] px-[20px] flexBetween mx-auto text-base lg:px-[160px]">
+    <div className="h-14 w-full bg-[#09965D] rounded-b-[20px] px-[20px] flexBetween mx-auto text-base lg:px-[100px] xl:px-[160px]">
       <div>
         <div className="hidden xs:block">
           <div className="flex items-center">
