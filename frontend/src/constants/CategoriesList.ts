@@ -16,20 +16,45 @@ export const CategoriesList: CategoryListInterface[] = [
     name: "Milk and Diaries",
     url: "../../public/images/CategoryImages/Milk.png",
   },
-  { id: 4, name: "Meat", url: "../../public/images/CategoryImages/Meat.png" },
+  {
+    id: 4,
+    name: "Tea and Coffee",
+    url: "../../public/images/CategoryImages/Tea.png",
+  },
   {
     id: 5,
+    name: "Meat",
+    url: "../../public/images/CategoryImages/Meet.png",
+  },
+  {
+    id: 6,
     name: "Alcohol and Beverages",
     url: "../../public/images/CategoryImages/Alcohol.png",
   },
   {
-    id: 6,
+    id: 7,
+    name: "Fish and Seafoods",
+    url: "../../public/images/CategoryImages/Fish.png",
+  },
+  { id: 8, name: "Foods", url: "../../public/images/CategoryImages/Food.png" },
+  {
+    id: 9,
+    name: "Cosmetic Products",
+    url: "../../public/images/CategoryImages/Conmatic.png",
+  },
+  {
+    id: 10,
     name: "Tea and Coffee",
     url: "../../public/images/CategoryImages/Tea.png",
   },
-  { id: 7, name: "Sea Foods" },
-  { id: 8, name: "Snacks" },
-  { id: 9, name: "Cosmetic Products" },
-  { id: 10, name: "Cleaning Products" },
-  { id: 11, name: "Pastries" },
+  {
+    id: 11,
+    name: "Cleaning Products",
+    url: "../../public/images/CategoryImages/Clean Product.png",
+  },
+  {
+    id: 11,
+    name: "Breads and Bakery",
+    url: "../../public/images/CategoryImages/Bred.png",
+  },
 ];
