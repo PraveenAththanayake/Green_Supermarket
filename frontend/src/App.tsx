@@ -22,12 +22,12 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/categories" element={<Category />} />
-          <Route path="/categories/:categoryId" element={<CategoryDetails />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/category/:categoryId" element={<CategoryDetails />} />
           <Route path="/product" element={<ProductPage />} />
           <Route path="/contact" element={<div>Contact</div>} />
           <Route path="/admin" element={<AdminLayout />} />
-          <Route path="/topsales" element={<TopSales />} />
+          <Route path="/topsaver" element={<TopSales />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </Suspense>

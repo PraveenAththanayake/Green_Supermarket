@@ -3,7 +3,7 @@ import { IoCall } from "react-icons/io5";
 
 const Topbar = () => {
   return (
-    <div className="h-14 w-full bg-[#09965D] rounded-b-[20px] px-[20px] flexBetween mx-auto text-base lg:px-[100px] xl:px-[160px]">
+    <div className="h-8 text-xs xs:h-14 w-full bg-[#09965D] rounded-b-[20px] px-[20px] flexBetween mx-auto xs:text-base lg:px-[100px] xl:px-[160px]">
       <div>
         <div className="hidden xs:block">
           <div className="flex items-center">
@@ -14,7 +14,7 @@ const Topbar = () => {
             <span className="text-white">64 Front Street, 11, Colombo...</span>
           </div>
         </div>
-        <p className="xs:hidden text-white/90">
+        <p className="cursor-pointer xs:hidden text-white/90 hover:scale-110">
           <TiLocation />
         </p>
       </div>
@@ -26,7 +26,7 @@ const Topbar = () => {
           </p>
           <span className="hidden text-white xs:block">(011) 2696523</span>
         </div>
-        <p className="xs:hidden text-white/90">
+        <p className="cursor-pointer hover:scale-110 xs:hidden text-white/90">
           <IoCall />
         </p>
       </div>

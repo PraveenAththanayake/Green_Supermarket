@@ -1,20 +1,46 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { IoHomeOutline } from "react-icons/io5";
+import { TbCategoryPlus, TbDiscount2 } from "react-icons/tb";
+import { RiCustomerService2Fill, RiContactsLine } from "react-icons/ri";
+
+const links = [
+  { to: "/", label: "Home", icon: <IoHomeOutline /> },
+  { to: "/category", label: "Category", icon: <TbCategoryPlus /> },
+  { to: "/topsaver", label: "Top Saver", icon: <TbDiscount2 /> },
+  { to: "/service", label: "Service", icon: <RiCustomerService2Fill /> },
+  { to: "/contact", label: "Contact", icon: <RiContactsLine /> },
+];
 
 const Navbar = () => {
   return (
-    <div className="flex font-lato font-bold text-[15px] h-[37px] bg-[#84848230] mx-auto max-w-[1120px] mb-[26px] rounded-[5px] items-center">
-      <a className="text-[#09965D] mx-[25px] ml-[280px]" href="#">
-        HOME
-      </a>
-      <a className="text-[#09965D] mx-[25px]" href="#">
-        PAGES
-      </a>
-      <a className="text-[#09965D] mx-[25px]" href="#">
-        CATEGORY
-      </a>
-      <a className="text-[#09965D] mx-[25px]" href="#">
-        TOP SERVER
-      </a>
+    <div className="flexCenter">
+      <div className="hidden w-full sm:block">
+        <div className="flexCenter font-bold text-base h-[37px] bg-[#84848230] mx-auto max-w-[1120px] mb-[26px] rounded-[5px]">
+          {links.map((link, index) => (
+            <NavLink
+              key={index}
+              to={link.to}
+              className="h-full px-6 text-center duration-100 ease-in text-darkerGreen hover:border-b-2 border-darkerGreen flexCenter"
+            >
+              <div className="hidden sm:block">{link.label}</div>
+            </NavLink>
+          ))}
+        </div>
+      </div>
+      <div className="fixed bottom-0 w-full sm:hidden">
+        <div className="flexBetween font-bold text-4xl h-[50px] bg-[#84848230] mx-auto max-w-[1120px] rounded-[5px]">
+          {links.map((link, index) => (
+            <NavLink
+              key={index}
+              to={link.to}
+              className="h-full px-5 text-center duration-100 ease-in text-darkerGreen hover:border-b-2 border-darkerGreen flexCenter"
+            >
+              {link.icon}
+            </NavLink>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

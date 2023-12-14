@@ -11,7 +11,7 @@ const Header = () => {
   const [nav, setNav] = useState(false);
   const [search, setSearch] = useState(false);
   return (
-    <div className="mx-auto mt-10 lg:mt-[74px] mb-[32px] max-w-[1120px]">
+    <div className="mx-auto mt-5 lg:mt-[74px] mb-[32px] max-w-[1120px]">
       <div className="px-6 flexBetween">
         <div
           className="gap-5 cursor-pointer flexCenter"
@@ -21,7 +21,7 @@ const Header = () => {
             <img
               src={hambugerIcon}
               alt="hamburger-icon"
-              className="w-[29px] h-[16px]"
+              className="w-[20px] h-[10px] md:w-[29px] md:h-[16px]"
             />
           </div>
           <div>
@@ -37,23 +37,23 @@ const Header = () => {
           <SearchBar />
         </div>
 
-        <div className="gap-5 xs:gap-[25px] flexCenter text-gray">
+        <div className="gap-5 xs:gap-[25px] flexCenter text-gray text-4xl md:text-5xl">
           <button
             className="block sm:hidden hover:text-customGreen"
             onClick={() =>
               search === false ? setSearch(true) : setSearch(false)
             }
           >
-            <IoSearchOutline size={24} />
+            <IoSearchOutline />
           </button>
           <a href="" className="hover:text-customGreen">
-            <FaRegBell size={24} />
+            <FaRegBell />
           </a>
           <a href="">
-            <LuShoppingCart size={24} className="hover:text-customGreen" />
+            <LuShoppingCart className="hover:text-customGreen" />
           </a>
           <a href="">
-            <CgProfile size={24} className="hover:text-customGreen" />
+            <CgProfile className="hover:text-customGreen" />
           </a>
         </div>
       </div>
