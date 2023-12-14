@@ -1,4 +1,4 @@
-import Category from "../../../components/common/Category";
+import Category from "../../../components/common/category";
 import ClientLayout from "../ClientLayout";
 import Discount from "./Discount";
 import Hero from "./Hero";
