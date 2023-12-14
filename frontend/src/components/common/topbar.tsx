@@ -1,25 +1,34 @@
 import { TiLocation } from "react-icons/ti";
+import { IoCall } from "react-icons/io5";
 
 const Topbar = () => {
   return (
-    <div className="font-lato h-14 w-full bg-[#09965D] rounded-b-[20px] px-[20px]">
-      <div className="flex max-w-[1120px] mx-auto align-middle pt-[14px] justify-between">
-        <div>
-          <p className="flex items-center">
-            Delivery from
+    <div className="h-10 md:h-14 xxl:h-20 w-full bg-[#09965D] rounded-b-[20px] px-[20px] flexBetween mx-auto text-base xxl:text-5xl lg:px-[160px]">
+      <div>
+        <div className="hidden xs:block">
+          <div className="flex items-center">
+            <p className="hidden md:block">Delivery from: </p>
             <span className="mx-1 opacity-50">
               <TiLocation />
             </span>
             <span className="text-white">64 Front Street, 11, Colombo...</span>
-          </p>
+          </div>
         </div>
-        <p className="text-white">Hi! Chamindu</p>
-        <div>
-          <p>
-            Call Us for any query or help:{" "}
-            <span className="text-white">( 011) 2696523</span>
+        <p className="xs:hidden text-white/90">
+          <TiLocation />
+        </p>
+      </div>
+      <p className="text-white xs:hidden md:block">Hi! Chamindu</p>
+      <div className="">
+        <div className="flex-row flexCenter">
+          <p className="hidden md:block">
+            Call Us for any query or help:&nbsp;
           </p>
+          <span className="hidden text-white xs:block">(011) 2696523</span>
         </div>
+        <p className="xs:hidden text-white/90">
+          <IoCall />
+        </p>
       </div>
     </div>
   );
