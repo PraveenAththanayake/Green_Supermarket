@@ -1,5 +1,5 @@
 export interface CategoryListInterface {
-  id: number;
+  id: string;
   name: string;
-  url?: string;
+  url: string;
 }

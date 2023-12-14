@@ -3,14 +3,16 @@ import { useParams } from "react-router-dom";
 import { CategoriesList } from "../constants/CategoriesList";
 
 const CategoryDetails = () => {
-  const { categoryId } = useParams<{ categoryId?: string }>();
+  const { categoryId } = useParams<{ categoryId: string }>();
 
   if (!categoryId) {
     return <div>Invalid category ID</div>;
   }
 
-  const parsedId = parseInt(categoryId);
-  const category = CategoriesList.find((category) => category.id === parsedId);
+  const category = CategoriesList.find(
+    (category) => category.id === categoryId
+  );
+  console.log(category); // Log the category to the console
 
   if (!category) {
     return <div>Category not found</div>;

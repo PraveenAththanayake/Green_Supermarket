@@ -2,58 +2,62 @@ import { CategoryListInterface } from "../types/categoryList";
 
 export const CategoriesList: CategoryListInterface[] = [
   {
-    id: 1,
+    id: "fruits",
     name: "Fruits",
     url: "../../public/images/CategoryImages/Fruites.png",
   },
   {
-    id: 2,
+    id: "vegetables",
     name: "Vegetables",
     url: "../../public/images/CategoryImages/Vegi.png",
   },
   {
-    id: 3,
+    id: "milkanddiaries",
     name: "Milk and Diaries",
     url: "../../public/images/CategoryImages/Milk.png",
   },
   {
-    id: 4,
+    id: "teaandcoffee",
     name: "Tea and Coffee",
     url: "../../public/images/CategoryImages/Tea.png",
   },
   {
-    id: 5,
+    id: "meat",
     name: "Meat",
     url: "../../public/images/CategoryImages/Meet.png",
   },
   {
-    id: 6,
+    id: "alcoholandbeverages",
     name: "Alcohol and Beverages",
     url: "../../public/images/CategoryImages/Alcohol.png",
   },
   {
-    id: 7,
+    id: "fishandseafoods",
     name: "Fish and Seafoods",
     url: "../../public/images/CategoryImages/Fish.png",
   },
-  { id: 8, name: "Foods", url: "../../public/images/CategoryImages/Food.png" },
   {
-    id: 9,
+    id: "foods",
+    name: "Foods",
+    url: "../../public/images/CategoryImages/Food.png",
+  },
+  {
+    id: "cosmeticproducts",
     name: "Cosmetic Products",
     url: "../../public/images/CategoryImages/Conmatic.png",
   },
   {
-    id: 10,
+    id: "teaandcoffee",
     name: "Tea and Coffee",
     url: "../../public/images/CategoryImages/Tea.png",
   },
   {
-    id: 11,
+    id: "cleaningproducts",
     name: "Cleaning Products",
     url: "../../public/images/CategoryImages/Clean Product.png",
   },
   {
-    id: 11,
+    id: "breadsandbakery",
     name: "Breads and Bakery",
     url: "../../public/images/CategoryImages/Bred.png",
   },
