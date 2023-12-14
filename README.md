@@ -36,6 +36,12 @@ To run this project locally, follow these steps:
    cd Green_Supermarket
    ```
    
+3. Navigate to the frontend folder
+
+   ```bash
+   cd frontend
+   ```
+   
 4. Install dependencies:
 
    ```bash
