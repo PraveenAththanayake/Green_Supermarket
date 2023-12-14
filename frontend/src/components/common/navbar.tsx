@@ -1,29 +1,21 @@
-import hambugerIcon from "./../../../public/images/Nav/Ham Nav menu.jpg";
-import SearchBar from "./SearchBar";
-import { useState } from "react";
-import CategoryMenu from "./CategoryMenu";
-import SocialBar from "./SocialBar";
+import React from "react";
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
   return (
-    <nav className="flex font-lato max-w-[1120px] mx-auto py-[14px] mt-[74px] mb-[32px] items-center">
-      <button onClick={() => (nav == false ? setNav(true) : setNav(false))}>
-        <img
-          src={hambugerIcon}
-          alt="hamburger-icon"
-          className="w-[29px] h-[16px]"
-        />
-      </button>
-      <button onClick={() => (nav == false ? setNav(true) : setNav(false))}>
-        <p className="ml-8 font-nunito text-[20px] font-semibold text-xl">
-          All Categories
-        </p>
-      </button>
-      {nav && <CategoryMenu />}
-      <SearchBar />
-      <SocialBar />
-    </nav>
+    <div className="flex font-lato font-bold text-[15px] h-[37px] bg-[#84848230] mx-auto max-w-[1120px] mb-[26px] rounded-[5px] items-center">
+      <a className="text-[#09965D] mx-[25px] ml-[280px]" href="#">
+        HOME
+      </a>
+      <a className="text-[#09965D] mx-[25px]" href="#">
+        PAGES
+      </a>
+      <a className="text-[#09965D] mx-[25px]" href="#">
+        CATEGORY
+      </a>
+      <a className="text-[#09965D] mx-[25px]" href="#">
+        TOP SERVER
+      </a>
+    </div>
   );
 };
 

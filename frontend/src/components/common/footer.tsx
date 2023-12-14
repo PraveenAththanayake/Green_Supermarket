@@ -2,7 +2,6 @@ import visa from "../../../public/images/footerImages/Visa.png";
 import payPal from "../../../public/images/footerImages/PayPal.png";
 import masterCard from "../../../public/images/footerImages/Mastercard Logo.png";
 import dhl from "../../../public/images/footerImages/DHL img.png";
-import socialMedia from "../../../public/images/footerImages/Group 30.png";
 
 const Footer = () => {
   return (
@@ -158,30 +157,6 @@ const Footer = () => {
           <p className="font-lato text-[#848482] text-[14px] mb-[6px]">
             Terms and Conditions
           </p>
-        </div>
-      </div>
-      <div className="max-w-[1120px] mx-auto mt-[32px] mb-[58px]">
-        <h4 className="font-nunito font-semibold text-[14px] text-center">
-          Social Media
-        </h4>
-        <img
-          className="mx-auto mt-[16px]"
-          src={socialMedia}
-          alt="socialMedia"
-        />
-        <p className="font-nunito font-semibold text-[12px] text-center mt-[8px]">
-          Stay in the loop and be part of the GREEN Supermarket community!
-        </p>
-      </div>
-      <div className="font-lato text-[12px] h-[45px] w-full bg-[#09965D] rounded-t-[20px] pt-4">
-        <div className="flex max-w-[1120px] mx-auto justify-between">
-          <div>
-            <p className="text-white">© Copyright 2023. by A65 GROUP TM</p>
-          </div>
-          <p className="text-white">Address: 64 Front Street, 11, Colombo...</p>
-          <div>
-            <p className="text-white">Call: ( 011) 2696523</p>
-          </div>
         </div>
       </div>
     </>

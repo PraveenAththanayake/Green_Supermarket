@@ -1,18 +1,15 @@
 const BottomBar = () => {
   return (
-    <div className="flex font-lato font-bold text-[15px] h-[37px] bg-[#84848230] mx-auto max-w-[1120px] mb-[26px] rounded-[5px] items-center">
-      <a className="text-[#09965D] mx-[25px] ml-[280px]" href="#">
-        HOME
-      </a>
-      <a className="text-[#09965D] mx-[25px]" href="#">
-        PAGES
-      </a>
-      <a className="text-[#09965D] mx-[25px]" href="#">
-        CATEGORY
-      </a>
-      <a className="text-[#09965D] mx-[25px]" href="#">
-        TOP SERVER
-      </a>
+    <div className="font-lato text-[12px] h-[45px] w-full bg-[#09965D] rounded-t-[20px] pt-4">
+      <div className="flex max-w-[1120px] mx-auto justify-between">
+        <div>
+          <p className="text-white">© Copyright 2023. by A65 GROUP TM</p>
+        </div>
+        <p className="text-white">Address: 64 Front Street, 11, Colombo...</p>
+        <div>
+          <p className="text-white">Call: ( 011) 2696523</p>
+        </div>
+      </div>
     </div>
   );
 };
