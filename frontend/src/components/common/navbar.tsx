@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <div className="flexCenter">
       <div className="hidden w-full sm:block">
-        <div className="flexCenter font-bold text-base h-[37px] bg-gray mx-auto max-w-[1120px] mb-[26px] rounded-[5px]">
+        <div className="flexCenter font-bold text-base h-[37px] bg-lightGray mx-auto max-w-[1120px] mb-[26px] rounded-[5px]">
           {links.map((link, index) => (
             <NavLink
               key={index}
@@ -34,7 +34,7 @@ const Navbar = () => {
             <NavLink
               key={index}
               to={link.to}
-              className="h-full px-5 text-center duration-100 ease-in text-darkerGreen hover:border-b-2 border-darkerGreen flexCenter"
+              className="h-full px-5 text-center duration-100 ease-in text-darkerGreen hover:border-b-[3px] border-darkerGreen flexCenter"
             >
               {link.icon}
             </NavLink>

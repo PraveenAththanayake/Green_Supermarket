@@ -4,11 +4,11 @@ const Hero = () => {
   return (
     <>
       <div className="max-w-[1120px] mx-auto relative">
-        <div className="absolute left-[64px] top-[40px] w-7xl">
-          <p className="font-bold font-lato">
+        <div className="absolute left-5 top-4 md:left-[64px] md:top-[40px] w-7xl">
+          <p className="text-xs font-bold md:text-base">
             WELCOME GREEN SUPER MARKET ONLINE!
           </p>
-          <h1 className="font-nunito font-bold mt-[32px] mb-[96px] text-[48px]">
+          <h1 className="font-nunito font-bold mt-[32px] mb-5 md:mb-24 text-6xl md:text-8xl">
             Fresh and Healthy <br />
             Veggies{" "}
             <span className="font-light">
@@ -16,22 +16,26 @@ const Hero = () => {
               Market
             </span>
           </h1>
-          <div className="absolute flex text-[20px] font-lato">
+          <div className="absolute flex gap-6 text-sm md:text-4xl">
             <a
-              className="flex items-center justify-center w-[192px] h-[48px] bg-[#53B176] border-2 border-solid border-[#53B176] text-white rounded-[10px] mr-[32px]"
+              className="flexCenter w-32 h-9 md:w-[192px] md:h-[48px] bg-customGreen border-2 border-solid border-customGreen text-white rounded-[10px] hover:bg-darkerGreen"
               href=""
             >
               Shop Now
             </a>
             <a
-              className="flex items-center justify-center w-[192px] h-[48px] border-2 border-solid border-[#53B176] rounded-[10px]"
+              className="flexCenter w-32 h-9 md:w-[192px] md:h-[48px] border-2 border-solid border-[#53B176] rounded-[10px] hover:bg-customGreen hover:text-white"
               href=""
             >
               See All Products
             </a>
           </div>
         </div>
-        <img src={heroImage} alt="heroImage" />
+        <img
+          src={heroImage}
+          alt="heroImage"
+          className="h-[300px] w-[480px] xs:w-[768px] md:w-[1120px] md:h-[487px] lg:w-[1120px]  object-cover"
+        />
       </div>
     </>
   );
