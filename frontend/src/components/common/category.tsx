@@ -3,7 +3,7 @@ import { CategoriesList } from "../../constants/CategoriesList";
 
 const Category = () => {
   return (
-    <section className="max-w-[1100px] max-h-screen my-[50px] mx-auto">
+    <section className="max-w-[1100px] max-h-screen my-[50px] mx-auto mt-[100px] mb-[200px]">
       <div className="mx-5 flexBetween">
         <h2 className="h2-bold">Category</h2>
         <span className="text-[15px] font-semibold text-gray tracking-[0.5px] leading-[18px]">
