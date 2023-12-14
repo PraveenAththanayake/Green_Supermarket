@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/client/home/Home";
+import Home from "./pages/client/home/HomeLayout";
 import CategoryDetails from "./pages/CategoryDetails";
 import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";

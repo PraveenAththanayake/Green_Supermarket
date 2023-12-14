@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../../styles/slider.global.css";
+import "../../../styles/slider.module.css";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
 export default class SimpleSlider extends Component {
