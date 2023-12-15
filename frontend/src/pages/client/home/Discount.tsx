@@ -81,31 +81,34 @@ const Discount = () => {
   }, [time.seconds]);
   if (time.days >= 0) {
     return (
-      <>
-        <div className="flex mt-[90px] mb-[70px] max-w-[1120px] mx-auto items-center">
+      <section className="mt-10 lg:mt-[90px] mb-[70px] max-w-[1120px] mx-auto ">
+        <div className="flex-col mb-6 flexCenter gap-y-4">
           <h1 className="text-[24px] font-semibold">Top saver today</h1>
-          <p className="ml-[24px] py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
-            {time.days} Days
-          </p>
-          <span>:</span>
-          <p className="py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
-            {time.hours}
-          </p>
-          <span>:</span>
-          <p className="py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
-            {time.minutes}
-          </p>
-          <span>:</span>
-          <p className="py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
-            {time.seconds}
-          </p>
+          <div className="flex flex-row">
+            {" "}
+            <p className="ml-[24px] py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
+              {time.days} Days
+            </p>
+            <span>:</span>
+            <p className="py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
+              {time.hours}
+            </p>
+            <span>:</span>
+            <p className="py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
+              {time.minutes}
+            </p>
+            <span>:</span>
+            <p className="py-[2px] px-[10px] bg-[#D30000] text-white rounded-[5px] mx-2">
+              {time.seconds}
+            </p>
+          </div>
         </div>
-        <div className="flex max-w-[946px] mb-[100px] mx-auto justify-between flex-wrap">
+        <div className="flexCenter max-w-[946px] mb-[100px] mx-auto flex-wrap">
           {product.map((product) => (
             <ProductItem key={product.id} product={product} />
           ))}
         </div>
-      </>
+      </section>
     );
   } else {
     return null;

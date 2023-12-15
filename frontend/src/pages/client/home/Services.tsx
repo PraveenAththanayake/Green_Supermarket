@@ -33,7 +33,7 @@ const serviceData = [
 
 const Services = () => {
   return (
-    <div className="bg-gradient-to-t from-[#53B17540] from-10% to-white h-[580px] xs:h-[400px] md:h-[450px] lg:h-[504px] mb-[100px] px-3 w-full mx-auto mt-[36px]">
+    <div className="bg-gradient-to-t from-[#53B17540] from-10% to-white h-[580px] xs:h-[400px] md:h-[450px] lg:h-[504px] px-3 w-full mx-auto mt-[36px]">
       <div className="flex-col flexCenter">
         <h2 className="font-semibold text-[24px] text-center">Our Services</h2>
         <p className="text-center max-w-[720px] mx-auto text-gray mt-[32px] mb-10 md:mb-16">
