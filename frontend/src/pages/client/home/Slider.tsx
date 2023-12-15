@@ -18,7 +18,7 @@ export default class SimpleSlider extends Component {
     };
 
     return (
-      <div className="w-full flexCenter">
+      <div className="mx-auto flexCenter">
         <div className="relative lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]">
           <div className="carouselText">
             <span className="capitalize text-lg font-normal leading-[19.2px]">
