@@ -11,7 +11,7 @@ const Header = () => {
   const [nav, setNav] = useState(false);
   const [search, setSearch] = useState(false);
   return (
-    <div className="mx-auto mt-5 lg:mt-[74px] mb-[32px] max-w-[1120px]">
+    <div className="mx-auto lg:mt-[74px] my-8 max-w-[1120px]">
       <div className="px-6 flexBetween">
         <div
           className="gap-5 cursor-pointer flexCenter"
@@ -59,7 +59,7 @@ const Header = () => {
       </div>
 
       {search && (
-        <div className="absolute block w-full sm:hidden top-[135px]">
+        <div className="absolute block w-full sm:hidden top-[120px] bg-customGreen z-50 py-1 rounded-lg flexCenter">
           <SearchBar />
         </div>
       )}
