@@ -4,9 +4,6 @@ import CategoryDetails from "./pages/CategoryDetails";
 import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";
 
-import "./styles/global.css";
-import "./styles/scrollbar.css";
-
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
 const Category = lazy(() => import("./components/common/Category"));
@@ -15,14 +12,10 @@ const Home = lazy(() => import("./pages/client/home/Home"));
 
 export const LoadingSpinner: React.FC = () => {
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-full h-screen overflow-hidden opacity-75 bg-lightgray">
-      <div className="w-12 h-12 mb-4 ease-linear border-4 border-t-4 rounded-full border-darker Green loader"></div>
-      <h2 className="text-xl font-semibold text-center text-gray/50">
-        Loading...
-      </h2>
-      <p className="w-1/3 text-center text-customGreen text-8xl">
-        Green Supermarket
-      </p>
+    <div className="absolute flex-col transform translate-x-1/2 translate-y-1/2 right-1/2 bottom-1/2 flexCenter gap-y-5">
+      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-gray/80"></div>
+      <span className="text-base text-gray/80">Loading...</span>
+      <h1 className="text-8xl text-darkerGreen">GREEN SUPERMARKET</h1>
     </div>
   );
 };
