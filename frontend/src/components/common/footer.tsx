@@ -1,21 +1,10 @@
 import React from "react";
-
-const FooterCategory = ({ title, items }) => (
-  <div>
-    <h4 className="font-nunito font-semibold mb-[18px]">{title}</h4>
-    {items.map((item) => (
-      <p key={item} className="font-lato text-[#848482] text-[14px] mb-[6px]">
-        {item}
-      </p>
-    ))}
-  </div>
-);
+import FooterCategory from "./footerCategory";
 
 const Footer = () => {
   return (
     <>
-      {/* Categories Section */}
-      <div className="flex max-w-[1120px] mx-auto py-[64px] border-b-[1px] border-[#84848230] justify-between">
+      <div className="flex flex-col gap-y-3 px-5 md:flex-row max-w-[1120px] mx-auto py-8 md:py-16 border-b border-[#84848230] justify-between">
         <FooterCategory
           title="Vegitables & Fruits"
           items={[
