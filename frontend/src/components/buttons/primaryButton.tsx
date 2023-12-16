@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
 import { CustomButtonProps } from "../../types/index";
 
 const PrimaryButton: React.FC<CustomButtonProps> = ({ text, url, style }) => {
   return (
-    <Link to={url}>
-      <div className={style}>{text}</div>
-    </Link>
+    <button
+      className={`bg-customGreen text-white text-4xl h-10 px-[72px] rounded-md ${style}`}
+    >
+      {text}
+    </button>
   );
 };
 
