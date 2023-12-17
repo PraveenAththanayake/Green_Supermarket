@@ -4,14 +4,13 @@ import CategoryMenu from "./CategoryMenu";
 import { FaRegBell } from "react-icons/fa6";
 import { LuShoppingCart } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
-import { IoSearchOutline } from "react-icons/io5";
 import SearchBar from "./searchBar";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/variants";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
-  const [search, setSearch] = useState(false);
   return (
     <motion.div
       variants={fadeIn("down", 0.2)}
@@ -20,16 +19,16 @@ const Header = () => {
       viewport={{ once: false, amount: 0.2 }}
       className="mx-auto lg:mt-[74px] my-8 max-w-[1120px]"
     >
-      <div className="px-6 flexBetween">
+      <div className="px-2 md:px-6 flexBetween">
         <div
-          className="gap-5 cursor-pointer flexCenter"
+          className="flex-none gap-5 cursor-pointer flexCenter"
           onClick={() => (nav == false ? setNav(true) : setNav(false))}
         >
           <div>
             <img
               src={hambugerIcon}
               alt="hamburger-icon"
-              className="w-[20px] h-[10px] md:w-[29px] md:h-[16px]"
+              className="w-[20px] h-[16px]"
             />
           </div>
           <div>
@@ -41,36 +40,22 @@ const Header = () => {
 
         {nav && <CategoryMenu />}
 
-        <div className="hidden sm:block">
+        <div className="grow">
           <SearchBar />
         </div>
 
-        <div className="gap-5 xs:gap-[25px] flexCenter text-gray text-4xl md:text-5xl">
-          <button
-            className="block sm:hidden hover:text-customGreen"
-            onClick={() =>
-              search === false ? setSearch(true) : setSearch(false)
-            }
-          >
-            <IoSearchOutline />
-          </button>
-          <a href="" className="hover:text-customGreen">
+        <div className="gap-5 xs:gap-[25px] flexCenter text-gray text-4xl md:text-5xl flex-none">
+          <Link to="" className="hover:text-customGreen">
             <FaRegBell />
-          </a>
-          <a href="">
+          </Link>
+          <Link to="">
             <LuShoppingCart className="hover:text-customGreen" />
-          </a>
-          <a href="">
+          </Link>
+          <Link to="" className="hidden sm:block">
             <CgProfile className="hover:text-customGreen" />
-          </a>
+          </Link>
         </div>
       </div>
-
-      {search && (
-        <div className="absolute block w-full sm:hidden top-[120px] bg-customGreen z-50 py-1 rounded-lg flexCenter">
-          <SearchBar />
-        </div>
-      )}
     </motion.div>
   );
 };
