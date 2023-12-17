@@ -30,7 +30,7 @@ const PaymentDeliveryInfoSection = () => {
       <div className="flexCenter flex-col md:flex-row max-w-[1120px] mx-auto gap-y-9">
         <div className="flex-1">
           <motion.p
-            variants={fadeIn("right", 0.2)}
+            variants={fadeIn("up", 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
@@ -44,7 +44,7 @@ const PaymentDeliveryInfoSection = () => {
           <div className="flex">
             {paymentMethods.map((method) => (
               <motion.img
-                variants={fadeIn("right", method.id * 0.2)}
+                variants={fadeIn("up", method.id * 0.2)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: false, amount: 0.2 }}
@@ -58,7 +58,7 @@ const PaymentDeliveryInfoSection = () => {
         </div>
         <div className="flex-1 max-w-[406px]">
           <motion.h4
-            variants={fadeIn("left", 0.2)}
+            variants={fadeIn("down", 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
@@ -68,7 +68,7 @@ const PaymentDeliveryInfoSection = () => {
           </motion.h4>
           <div className="flex justify-between align-center">
             <motion.img
-              variants={fadeIn("left", 0.4)}
+              variants={fadeIn("down", 0.4)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}
@@ -76,7 +76,7 @@ const PaymentDeliveryInfoSection = () => {
               alt={deliveryService.alt}
             />
             <motion.p
-              variants={fadeIn("left", 0.6)}
+              variants={fadeIn("down", 0.6)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}

@@ -6,12 +6,20 @@ import { LuShoppingCart } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { IoSearchOutline } from "react-icons/io5";
 import SearchBar from "./searchBar";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../utils/variants";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
   const [search, setSearch] = useState(false);
   return (
-    <div className="mx-auto lg:mt-[74px] my-8 max-w-[1120px]">
+    <motion.div
+      variants={fadeIn("down", 0.2)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.2 }}
+      className="mx-auto lg:mt-[74px] my-8 max-w-[1120px]"
+    >
       <div className="px-6 flexBetween">
         <div
           className="gap-5 cursor-pointer flexCenter"
@@ -63,7 +71,7 @@ const Header = () => {
           <SearchBar />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

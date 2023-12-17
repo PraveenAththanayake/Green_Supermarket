@@ -8,7 +8,7 @@ const Hero = () => {
     <div className="max-w-[1120px] mx-auto relative">
       <div className="absolute left-5 top-4 md:left-[64px] md:top-[40px] w-7xl">
         <motion.p
-          variants={fadeIn("left", 0.2)}
+          variants={fadeIn("up", 0.2)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.2 }}
@@ -17,7 +17,7 @@ const Hero = () => {
           WELCOME GREEN SUPER MARKET ONLINE!
         </motion.p>
         <motion.h1
-          variants={fadeIn("left", 0.4)}
+          variants={fadeIn("up", 0.4)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.2 }}
