@@ -1,6 +1,4 @@
 import { MdStar } from "react-icons/md";
-import Favorite from "../../../public/images/Product-images/Favorite.png";
-import Cart from "../../../public/images/Product-images/Sell Stock.png";
 import { useMemo } from "react";
 
 export interface Product {
@@ -44,10 +42,15 @@ const ProductItem = ({ product }: Props) => {
           </span>
         </p>
         <div className="flex">
-          <img src={Favorite} alt="Favorite" width={20} height={20} />
+          <img
+            src="/images/Product-images/Favorite.png"
+            alt="Favorite"
+            width={20}
+            height={20}
+          />
           <img
             className="ml-[8px]"
-            src={Cart}
+            src="/images/Product-images/Sell Stock.png"
             alt="Cart"
             width={20}
             height={20}

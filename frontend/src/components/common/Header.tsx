@@ -1,4 +1,3 @@
-import hambugerIcon from "./../../../public/images/Nav/Ham Nav menu.jpg";
 import { useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import { FaRegBell } from "react-icons/fa6";
@@ -26,7 +25,7 @@ const Header = () => {
         >
           <div>
             <img
-              src={hambugerIcon}
+              src="/images/Nav/Ham Nav menu.jpg"
               alt="hamburger-icon"
               className="w-[20px] h-[16px]"
             />

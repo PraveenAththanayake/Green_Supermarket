@@ -7,7 +7,7 @@ export const TopsaleList: TopSales[] = [
     rating: 4,
     price: 600,
     discount: 55,
-    imgLink: "../../public/topsaverimages/anchor.png",
+    imgLink: "/images/topsaverimages/anchor.png",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const TopsaleList: TopSales[] = [
     rating: 4,
     price: 850,
     discount: 30,
-    imgLink: "../../public/topsaverimages/viva.png",
+    imgLink: "/images/topsaverimages/viva.png",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const TopsaleList: TopSales[] = [
     rating: 4,
     price: 729,
     discount: 25,
-    imgLink: "../../public/topsaverimages/maggi.png",
+    imgLink: "/images/topsaverimages/maggi.png",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const TopsaleList: TopSales[] = [
     rating: 4,
     price: 350,
     discount: 15,
-    imgLink: "../../public/topsaverimages/chillipowder.png",
+    imgLink: "/images/topsaverimages/chillipowder.png",
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const TopsaleList: TopSales[] = [
     rating: 4,
     price: 420,
     discount: 10,
-    imgLink: "../../public/topsaverimages/astra.png",
+    imgLink: "/images/topsaverimages/astra.png",
   },
   {
     id: 6,
@@ -47,6 +47,6 @@ export const TopsaleList: TopSales[] = [
     rating: 4,
     price: 430,
     discount: 40,
-    imgLink: "../../public/topsaverimages/jam.png",
+    imgLink: "/images/topsaverimages/jam.png",
   },
 ];

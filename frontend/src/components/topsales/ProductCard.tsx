@@ -10,7 +10,7 @@ function ProductCard() {
       </div>
       <div className="flexCenter mt-[11px]">
         <img
-          src="images 1.png"
+          src="/images/topsaverimages/anchor.png"
           alt="image"
           className="w-[133px] h-[121px] object-cover"
         />

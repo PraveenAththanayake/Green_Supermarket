@@ -1,32 +1,28 @@
-import s1 from "../../../../public/images/service-img/Service 1.png";
-import s2 from "../../../../public/images/service-img/Service 2.png";
-import s3 from "../../../../public/images/service-img/Service 3.png";
-import s4 from "../../../../public/images/service-img/Service 4.png";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../utils/variants";
 
 const serviceData = [
   {
     id: 1,
-    image: s1,
+    image: "/images/service-img/Service 1.png",
     title: "FAST DELIVERY",
     description: "Delivery at your door step",
   },
   {
     id: 2,
-    image: s2,
+    image: "/images/service-img/Service 2.png",
     title: "PAY WITH CREDIT CARD",
     description: "Buy today, Pay tomorrow",
   },
   {
     id: 3,
-    image: s3,
+    image: "/images/service-img/Service 3.png",
     title: "ONLINE PAYMENT OPTION",
     description: "Tap into limitless potential",
   },
   {
     id: 4,
-    image: s4,
+    image: "/images/service-img/Service 4.png",
     title: "ONLINE SHOPPING",
     description: "Say good bye to queues",
   },

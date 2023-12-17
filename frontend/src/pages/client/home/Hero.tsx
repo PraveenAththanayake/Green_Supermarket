@@ -1,4 +1,3 @@
-import heroImage from "../../../../public/images/Hero/supermarket-banner-concept-with-ingredients.webp";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../utils/variants";
 import { Link } from "react-router-dom";
@@ -63,7 +62,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          src={heroImage}
+          src="/images/Hero/supermarket-banner-concept-with-ingredients.webp"
           alt="heroImage"
           className="object-cover w-full min-h-[160px] min-w-[280px] h-full"
         />

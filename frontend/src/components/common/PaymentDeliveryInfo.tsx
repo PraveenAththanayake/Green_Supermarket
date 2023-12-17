@@ -1,16 +1,15 @@
-import visa from "../../../public/images/footerImages/Visa.png";
-import payPal from "../../../public/images/footerImages/PayPal.png";
-import masterCard from "../../../public/images/footerImages/Mastercard Logo.png";
-import dhl from "../../../public/images/footerImages/DHL img.png";
-
 const paymentMethods = [
-  { id: 1, image: visa, alt: "Visa" },
-  { id: 2, image: payPal, alt: "PayPal" },
-  { id: 3, image: masterCard, alt: "MasterCard" },
+  { id: 1, image: "/images/footerImages/Visa.png", alt: "Visa" },
+  { id: 2, image: "/images/footerImages/PayPal.png", alt: "PayPal" },
+  {
+    id: 3,
+    image: "/images/footerImages/Mastercard Logo.png",
+    alt: "MasterCard",
+  },
 ];
 
 const deliveryService = {
-  image: dhl,
+  image: "/images/footerImages/DHL img.png",
   alt: "DHL",
   description:
     "Swift and reliable, our partnership with DHL ensures your orders reach you with speed and care",
