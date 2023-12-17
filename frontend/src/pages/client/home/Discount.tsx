@@ -1,8 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { TopsaleList } from "../../../constants/TopSalesList";
 import ProductItem from "../../../components/product/productItem";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../../utils/variants";
 
 interface Time {
   days: number;
@@ -47,22 +45,8 @@ const Discount = () => {
   return (
     <section className="mt-10 lg:mt-[90px] mb-[70px] max-w-[1120px] mx-auto ">
       <div className="flex-col mb-6 flexCenter gap-y-4">
-        <motion.h1
-          variants={fadeIn("up", 0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
-          className="text-[24px] font-semibold"
-        >
-          Top saver today
-        </motion.h1>
-        <motion.div
-          variants={fadeIn("up", 0.4)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
-          className="flex items-center"
-        >
+        <h1 className="text-[24px] font-semibold">Top saver today</h1>
+        <div className="flex items-center">
           {formattedTime.split(":").map((value, index) => (
             <div key={index} className="flex items-center">
               {index > 0 && <span className="mx-1">:</span>}
@@ -71,20 +55,12 @@ const Discount = () => {
               </p>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <div className="flexCenter max-w-[946px] mb-[100px] mx-auto flex-wrap">
         {discountedProducts.map((product) => (
-          <motion.div
-            variants={fadeIn("up", product.id * 0.1)}
-            initial="hidden"
-            whileHover={{ y: -5 }}
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-          >
-            <ProductItem key={product.id} product={product} />
-          </motion.div>
+          <ProductItem key={product.id} product={product} />
         ))}
       </div>
     </section>

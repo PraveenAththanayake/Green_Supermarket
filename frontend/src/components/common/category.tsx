@@ -1,21 +1,12 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { CategoriesList } from "../../constants/CategoriesList";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../utils/variants";
 
 const Category = () => {
   const CategoryItems = useMemo(
     () =>
-      CategoriesList.map((category, index) => (
-        <motion.div
-          variants={fadeIn("up", index * 0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
-          key={category.id}
-          className="flexCenter"
-        >
+      CategoriesList.map((category) => (
+        <div className="flexCenter">
           <Link to={`/category/${category.id}`}>
             <div className="flexCenter flex-col bg-lightGray rounded-lg h-36 w-32 xs:h-[180px] xs:w-[140px] sm:h-[216px] sm:w-[160px] shadow-[0_4px_4px_0px_#0000000d]">
               <img
@@ -29,25 +20,19 @@ const Category = () => {
               </span>
             </div>
           </Link>
-        </motion.div>
+        </div>
       )),
     []
   );
 
   return (
     <section className="max-w-[1100px] my-[50px] mx-auto mt-[100px] mb-[200px] px-3">
-      <motion.div
-        variants={fadeIn("up", 0.2)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: false, amount: 0.2 }}
-        className="mx-5 flexBetween"
-      >
+      <div className="mx-5 flexBetween">
         <h2 className="h2-bold">Category</h2>
         <span className="text-xs xs:text-[15px] font-semibold text-gray tracking-[0.5px] leading-[18px]">
           View all products
         </span>
-      </motion.div>
+      </div>
       <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1 gap-y-5 md:gap-x-5 md:gap-y-10 mt-11">
         {CategoryItems}
       </div>

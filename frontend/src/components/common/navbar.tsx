@@ -21,7 +21,7 @@ const Navbar = () => {
         <motion.div
           variants={fadeIn("down", 0.2)}
           initial="hidden"
-          whileInView="show"
+          animate="show"
           viewport={{ once: false, amount: 0.2 }}
           className="flexCenter font-bold text-base h-[37px] bg-lightGray mx-auto max-w-[1120px] mb-[26px] rounded-[5px]"
         >
@@ -34,7 +34,7 @@ const Navbar = () => {
               <motion.div
                 variants={fadeIn("donw", index * 0.2)}
                 initial="hidden"
-                whileInView="show"
+                animate="show"
                 viewport={{ once: false, amount: 0.2 }}
                 className="hidden sm:block"
               >

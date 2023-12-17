@@ -16,7 +16,7 @@ const Header = () => {
     <motion.div
       variants={fadeIn("down", 0.2)}
       initial="hidden"
-      whileInView="show"
+      animate="show"
       viewport={{ once: false, amount: 0.2 }}
       className="mx-auto lg:mt-[74px] my-8 max-w-[1120px]"
     >

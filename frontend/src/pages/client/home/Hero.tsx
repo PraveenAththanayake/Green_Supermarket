@@ -10,8 +10,7 @@ const Hero = () => {
         <motion.p
           variants={fadeIn("up", 0.2)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          animate="show"
           className="text-xs font-bold md:text-base"
         >
           WELCOME GREEN SUPER MARKET ONLINE!
@@ -19,8 +18,7 @@ const Hero = () => {
         <motion.h1
           variants={fadeIn("up", 0.4)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          animate="show"
           className="font-nunito font-bold mt-[32px] mb-5 md:mb-24 text-6xl md:text-8xl"
         >
           Fresh and Healthy <br />
@@ -33,8 +31,7 @@ const Hero = () => {
         <motion.div
           variants={fadeIn("up", 0.6)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          animate="show"
           className="absolute flex gap-6 text-sm md:text-4xl"
         >
           <Link
@@ -53,7 +50,7 @@ const Hero = () => {
       </div>
       <motion.img
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         src={heroImage}
         alt="heroImage"

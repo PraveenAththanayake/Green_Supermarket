@@ -41,7 +41,7 @@ const Services = () => {
           variants={fadeIn("up", 0.2)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="font-semibold text-[24px] text-center"
         >
           Our Services
@@ -50,7 +50,7 @@ const Services = () => {
           variants={fadeIn("up", 0.4)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center max-w-[720px] mx-auto text-gray mt-[32px] mb-10 md:mb-16"
         >
           Elevate your grocery shopping experience with our user-friendly
@@ -65,7 +65,7 @@ const Services = () => {
               variants={fadeIn("right", service.id * 0.2)}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               key={service.id}
               className="flex-col flexCenter"
             >
