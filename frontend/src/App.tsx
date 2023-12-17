@@ -15,7 +15,7 @@ export const LoadingSpinner: React.FC = () => {
     <div className="absolute flex-col transform translate-x-1/2 translate-y-1/2 right-1/2 bottom-1/2 flexCenter gap-y-5">
       <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-gray/80"></div>
       <span className="text-base text-gray/80">Loading...</span>
-      <h1 className="text-8xl text-darkerGreen">GREEN SUPERMARKET</h1>
+      <h1 className="text-8xl text-darkerGreen/50">GREEN SUPERMARKET</h1>
     </div>
   );
 };

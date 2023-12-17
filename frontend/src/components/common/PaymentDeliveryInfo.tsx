@@ -32,6 +32,8 @@ const PaymentDeliveryInfoSection = () => {
             {paymentMethods.map((method) => (
               <img
                 key={method.id}
+                width={55}
+                height={55}
                 className="mr-[22px]"
                 src={method.image}
                 alt={method.alt}
@@ -44,7 +46,12 @@ const PaymentDeliveryInfoSection = () => {
             Delivery Service
           </h4>
           <div className="flex justify-between align-center">
-            <img src={deliveryService.image} alt={deliveryService.alt} />
+            <img
+              src={deliveryService.image}
+              alt={deliveryService.alt}
+              width={118}
+              height={75}
+            />
             <p className="font-nunito font-semibold text-[12px] text-right mt-3">
               {deliveryService.description}
             </p>

@@ -44,8 +44,14 @@ const ProductItem = ({ product }: Props) => {
           </span>
         </p>
         <div className="flex">
-          <img src={Favorite} alt="Favorite" />
-          <img className="ml-[8px]" src={Cart} alt="Cart" />
+          <img src={Favorite} alt="Favorite" width={20} height={20} />
+          <img
+            className="ml-[8px]"
+            src={Cart}
+            alt="Cart"
+            width={20}
+            height={20}
+          />
         </div>
         <img
           className="absolute w-[100px] top-[80px] right-[8px]"
