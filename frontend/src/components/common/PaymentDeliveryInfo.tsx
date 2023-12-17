@@ -1,4 +1,3 @@
-import React from "react";
 import visa from "../../../public/images/footerImages/Visa.png";
 import payPal from "../../../public/images/footerImages/PayPal.png";
 import masterCard from "../../../public/images/footerImages/Mastercard Logo.png";

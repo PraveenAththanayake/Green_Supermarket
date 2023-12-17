@@ -1,5 +1,3 @@
-import React from "react";
-
 import ClientLayout from "../ClientLayout";
 import ShoppingCart from "../../../components/cart/ShoppingCart";
 import AdminButton from "../../../components/buttons/AdminButton";
@@ -8,11 +6,11 @@ const Cart = () => {
   return (
     <ClientLayout>
       <div className=" mx-40 mb-[410px] ">
-        <div className="font-semibold text-6xl items-center flexCenter">
+        <div className="items-center text-6xl font-semibold flexCenter">
           <h1>Shopping Cart</h1>
         </div>
-        <div className=" flex flex-row gap-5">
-          <div className=" pt-20">
+        <div className="flex flex-row gap-5 ">
+          <div className="pt-20 ">
             <div className=" w-[769px] h-[365px] border border-gray2">
               <div className=" flex flex-row justify-between w-[767px]  items-center">
                 <div className=" flex flex-row w-[769px] h-[50px] bg-lightGray items-center text-base font-medium text-gray ">
@@ -40,7 +38,7 @@ const Cart = () => {
               <div className="borde flex flex-row justify center items-center pt-[11px]">
                 <AdminButton
                   name="Continue Shopping "
-                  className=" bg-lightGray justify-center items-center font-normal text-lg hover:scale-105"
+                  className="items-center justify-center text-lg font-normal bg-lightGray hover:scale-105"
                 />
               </div>
               <div>
@@ -54,13 +52,13 @@ const Cart = () => {
               <div className="borde flex flex-row justify center items-center pt-[11px]">
                 <AdminButton
                   name="Update Cart"
-                  className="  bg-lightGray justify-center items-center font-normal text-lg hover:scale-105"
+                  className="items-center justify-center text-lg font-normal bg-lightGray hover:scale-105"
                 />
               </div>
             </div>
           </div>
           <div>
-            <div className=" pt-20">
+            <div className="pt-20 ">
               <div className=" w-[332px] h-[194px] border border-gray2 bg-lightGray">
                 <div className="flex flex-row justify-between">
                   <p className=" mt-[12px] ml-[18px] text-base font-normal text-gray">
@@ -100,7 +98,7 @@ const Cart = () => {
             <div className="borde flex flex-row justify center items-center pt-[11px] ">
               <AdminButton
                 name="Proceed to Checkout"
-                className=" bg-customGreen justify-center items-center w-full font-normal text-lg text-white hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
+                className="items-center justify-center w-full text-lg font-normal text-white bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
               />
             </div>
           </div>

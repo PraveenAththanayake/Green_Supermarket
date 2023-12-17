@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCard from "../../../components/topsales/ProductCard";
 import ClientLayout from "../ClientLayout";
 

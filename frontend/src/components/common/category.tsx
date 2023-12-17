@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { CategoriesList } from "../../constants/CategoriesList";
 
-const Category = () => {
+const category = () => {
   const CategoryItems = useMemo(
     () =>
       CategoriesList.map((category) => (
-        <div className="flexCenter">
+        <div className="flexCenter" key={category.id}>
           <Link to={`/category/${category.id}`}>
             <div className="flexCenter flex-col bg-lightGray rounded-lg h-36 w-32 xs:h-[180px] xs:w-[140px] sm:h-[216px] sm:w-[160px] shadow-[0_4px_4px_0px_#0000000d]">
               <img
@@ -40,4 +40,4 @@ const Category = () => {
   );
 };
 
-export default React.memo(Category);
+export default React.memo(category);

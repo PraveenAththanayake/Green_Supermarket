@@ -1,4 +1,3 @@
-import React from "react";
 import FooterCategory from "./footerCategory";
 
 const Footer = () => {

@@ -1,13 +1,14 @@
 import { lazy, useState } from "react";
 import { AdminSideList } from "../../constants/AdminSideList";
 import Dashboard from "./Dashboard";
+import { AdminSideListInterface } from "../../types";
 
 const AddProduct = lazy(() => import("./AddProduct"));
 
 const Sidebar = () => {
   const [selectedNav, setSelectedNav] = useState(AdminSideList[0].id);
 
-  const handleClick = (nav) => {
+  const handleClick = (nav: AdminSideListInterface) => {
     setSelectedNav(nav.id);
   };
 

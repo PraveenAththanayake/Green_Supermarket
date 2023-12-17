@@ -6,7 +6,7 @@ import { lazy, Suspense } from "react";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
-const Category = lazy(() => import("./components/common/Category"));
+const Category = lazy(() => import("./components/common/category"));
 const Cart = lazy(() => import("./pages/client/cart/Cart"));
 const Home = lazy(() => import("./pages/client/home/Home"));
 

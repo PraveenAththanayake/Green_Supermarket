@@ -1,5 +1,3 @@
-import React from "react";
-
 const Description = () => {
   return (
     <div className="text-lg font-normal leading-[19.2px] text-justify text-gray">

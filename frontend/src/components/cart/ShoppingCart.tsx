@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function ShoppingCart() {
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className=" flex flex-row">
+    <div className="flex flex-row ">
       <img
         className=" w=[50px] h-[50px] mt-[27px] ml-[29px]"
         src="topsaverimages/2 6.png"

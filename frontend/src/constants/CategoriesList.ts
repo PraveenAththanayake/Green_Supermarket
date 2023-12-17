@@ -47,11 +47,6 @@ export const CategoriesList: CategoryListInterface[] = [
     url: "../../public/images/CategoryImages/Conmatic.png",
   },
   {
-    id: "teaandcoffee",
-    name: "Tea and Coffee",
-    url: "../../public/images/CategoryImages/Tea.png",
-  },
-  {
     id: "cleaningproducts",
     name: "Cleaning Products",
     url: "../../public/images/CategoryImages/Clean Product.png",

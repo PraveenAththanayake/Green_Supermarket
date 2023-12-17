@@ -1,4 +1,3 @@
-import React from "react";
 import s1 from "../../../../public/images/service-img/Service 1.png";
 import s2 from "../../../../public/images/service-img/Service 2.png";
 import s3 from "../../../../public/images/service-img/Service 3.png";

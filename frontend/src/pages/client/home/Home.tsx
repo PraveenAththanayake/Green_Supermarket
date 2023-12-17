@@ -13,7 +13,7 @@ const HomeLayout = () => {
       <Hero />
       <Services />
       <Discount />
-      {/* <SimpleSlider /> */}
+      <SimpleSlider />
       <Category />
     </ClientLayout>
   );

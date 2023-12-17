@@ -8,7 +8,7 @@ import { ProductNavList } from "../../../constants/ProductNav";
 const ProductDesc = () => {
   const [selectedNav, setSelectedNav] = useState(ProductNavList[0].id);
 
-  const handleClick = (nav) => {
+  const handleClick = (nav: any) => {
     setSelectedNav(nav.id);
   };
 

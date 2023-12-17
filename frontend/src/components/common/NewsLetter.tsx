@@ -1,4 +1,3 @@
-import React from "react";
 import PrimaryButton from "../buttons/primaryButton";
 
 const NewsLetter = () => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { SocialLinkList } from "../../constants/SocialLink";
 import { Link } from "react-router-dom";
 
