@@ -12,8 +12,8 @@ const AddProduct = () => {
     tags: yup.string().required("Tags is required!"),
     brand: yup.string().required("Brand is required!"),
     description: yup.string().required("Description is required!"),
-    mainImage: yup.string().required("Main Image is required!"),
-    otherImages: yup.string().required("Other Images are required!"),
+    mainImage: yup.string(),
+    otherImages: yup.string(),
     type: yup.string().required("Type is required!"),
     stockLimit: yup.string().required("Stock Limit is required!"),
     measurement: yup.string().required("Measurement is required!"),
@@ -160,7 +160,7 @@ const AddProduct = () => {
                 Measurement
                 <input
                   type="text"
-                  className="adminInput w-[261px]"
+                  className="adminInput"
                   {...register("measurement")}
                 />
                 <p className="text-xs italic text-red">
@@ -171,7 +171,7 @@ const AddProduct = () => {
                 Price (LKR)
                 <input
                   type="text"
-                  className="adminInput w-[261px]"
+                  className="adminInput"
                   {...register("priceLKR")}
                 />
                 <p className="text-xs italic text-red">
@@ -182,7 +182,7 @@ const AddProduct = () => {
                 Price (LKR)
                 <input
                   type="text"
-                  className="adminInput w-[261px]"
+                  className="adminInput"
                   {...register("priceLKR")}
                 />
                 <p className="text-xs italic text-red">
@@ -193,7 +193,7 @@ const AddProduct = () => {
                 Stock
                 <input
                   type="text"
-                  className="adminInput w-[261px]"
+                  className="adminInput"
                   {...register("stock")}
                 />
                 <p className="text-xs italic text-red">
@@ -204,7 +204,7 @@ const AddProduct = () => {
                 Unit
                 <input
                   type="text"
-                  className="adminInput w-[261px]"
+                  className="adminInput"
                   {...register("unit")}
                 />
                 <p className="text-xs italic text-red">
@@ -215,7 +215,7 @@ const AddProduct = () => {
                 Status
                 <input
                   type="text"
-                  className="adminInput w-[261px]"
+                  className="adminInput"
                   {...register("status")}
                 />
                 <p className="text-xs italic text-red">

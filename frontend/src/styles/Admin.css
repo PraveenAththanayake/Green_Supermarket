@@ -3,5 +3,5 @@
 }
 
 .adminInput {
-  @apply text-black mt-4 w-[455px] h-11 border rounded-[5px] border-gray/20 p-2;
+  @apply text-black mt-4 w-full h-11 border rounded-[5px] border-gray/20 p-2;
 }

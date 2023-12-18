@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState, forwardRef, useImperativeHandle } from "react";
 import { useDropzone } from "react-dropzone";
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -10,7 +10,8 @@ interface DropzoneProps {
   maxFiles: number;
 }
 
-const Dropzone: React.FC<DropzoneProps> = ({ maxFiles }) => {
+const Dropzone = forwardRef((props: DropzoneProps, ref) => {
+  const { maxFiles } = props;
   const [files, setFiles] = useState<CustomFile[]>([]);
 
   const onDrop = useCallback(
@@ -31,6 +32,11 @@ const Dropzone: React.FC<DropzoneProps> = ({ maxFiles }) => {
     },
     [maxFiles]
   );
+
+  // Expose a function to clear files from parent component
+  useImperativeHandle(ref, () => ({
+    clearFiles: () => setFiles([]),
+  }));
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -79,6 +85,6 @@ const Dropzone: React.FC<DropzoneProps> = ({ maxFiles }) => {
       </ul>
     </div>
   );
-};
+});
 
 export default Dropzone;
