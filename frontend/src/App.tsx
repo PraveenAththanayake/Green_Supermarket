@@ -3,10 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import CategoryDetails from "./pages/client/categoryItems/CategoryDetails";
 import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";
+import CategoryPage from "./pages/client/category/categoryPage";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
-const Category = lazy(() => import("./components/common/category"));
 const Cart = lazy(() => import("./pages/client/cart/Cart"));
 const Home = lazy(() => import("./pages/client/home/Home"));
 
@@ -26,7 +26,7 @@ function App() {
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/category" element={<Category />} />
+          <Route path="/category" element={<CategoryPage />} />
           <Route path="/category/:categoryId" element={<CategoryDetails />} />
           <Route
             path="/category/:categoryId/:productId"

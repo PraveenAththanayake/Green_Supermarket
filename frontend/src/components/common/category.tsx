@@ -40,5 +40,4 @@ const Category = () => {
   );
 };
 
-const MemoizedCategory = React.memo(Category);
-export default MemoizedCategory;
+export default Category;
