@@ -36,8 +36,8 @@ public class Product {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "stock")
-    private int stock;
+    @Column(name = "stockLimit")
+    private int stockLimit;
 
     @Column(name = "measurements")
     private int measurements;
@@ -47,6 +47,9 @@ public class Product {
 
     @Column(name = "second_price")
     private double secondPrice;
+
+    @Column(name = "stock")
+    private int stock;
 
     @Column(name = "unit")
     private int unit;

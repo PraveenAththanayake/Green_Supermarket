@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
@@ -24,7 +24,7 @@ public class ProductDto {
 
     private String type;
 
-    private int stock;
+    private int stockLimit;
 
     private int measurements;
 
@@ -32,9 +32,10 @@ public class ProductDto {
 
     private double secondPrice;
 
-    private int stocks;
+    private int stock;
 
     private int unit;
 
     private String status;
+
 }
