@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { CategoriesList } from "../../constants/CategoriesList";
 
-const category = () => {
+const Category = () => {
   const CategoryItems = useMemo(
     () =>
       CategoriesList.map((category) => (
@@ -40,4 +40,5 @@ const category = () => {
   );
 };
 
-export default React.memo(category);
+const MemoizedCategory = React.memo(Category);
+export default MemoizedCategory;

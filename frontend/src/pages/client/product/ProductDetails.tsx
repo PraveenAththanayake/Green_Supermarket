@@ -1,7 +1,22 @@
 import { useState } from "react";
 import PrimaryButton from "../../../components/buttons/primaryButton";
 
-const ProductDetails = () => {
+const ProductDetails = ({
+  price,
+  priceOne,
+  priceTwo,
+  sizeOne,
+  sizeTwo,
+  secondPrice,
+  save,
+  stock,
+  type,
+  date,
+  life,
+  brand,
+  category,
+  tags,
+}) => {
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="md:flex-row flexCenter gap-11 lg:gap-[96px] flex-col">
@@ -48,17 +63,17 @@ const ProductDetails = () => {
       </div>
       <div className="w-[300px] lg:w-[480px] px-3 md::px-0">
         <h3 className="text-5xl font-semibold leading-[28.8px] mb-2">
-          LKR 600 - LKR 850
+          LKR {priceOne} - LKR {priceTwo}
         </h3>
         <span className="text-lg font-light leading-[19.2px]">
-          liter: 0.75L
+          liter: {sizeOne}
         </span>
         <div className="flex items-center gap-5 my-[5px]">
           <div className="w-[79px] h-[32px] rounded-default border border-solid border-customGreen text-lg font-normal leading-[19.2px] text-gray flexCenter">
-            0.75L
+            {sizeOne}
           </div>
           <div className="w-[79px] h-[32px] rounded-default border border-solid border-gray text-lg font-normal leading-[19.2px] text-gray flexCenter">
-            1L
+            {sizeTwo}
           </div>
         </div>
         <span className="text-sm font-normal leading-[16.8px] text-darkerGreen underline">
@@ -66,23 +81,23 @@ const ProductDetails = () => {
         </span>
         <div className="flex flex-row items-center gap-[14px] my-[15px]">
           <h3 className="font-semibold text-5xl leading-[28.8px] text-customGreen">
-            LKR 550
+            {price}
           </h3>
           <span className="text-sm font-semibold leading-[16.8px] text-gray line-through">
-            LKR 600
+            LKR {secondPrice}
           </span>
           <p className="text-sm font-semibold text-red leading-[16.8px]">
-            LKR 50 save
+            LKR {save} save
           </p>
         </div>
         <div className="w-[251px] h-[32px] flexCenter bg-customGreen/20 border border-solid border-customGreen font-semibold text-xl rounded-default">
           Availability:{" "}
-          <span className="text-customGreen">&nbsp; 30 on stock</span>
+          <span className="text-customGreen">&nbsp; {stock} on stock</span>
         </div>
         <ul className="mt-[23px] mb-[30px] text-sm font-normal text-gray flex flex-col gap-[6px]">
-          <li className=" leading-[16.8px]">Type: Imported</li>
-          <li className=" leading-[16.8px]">MFG: Sep 20, 2023</li>
-          <li className=" leading-[16.8px]">LIFE: 2 years</li>
+          <li className=" leading-[16.8px]">Type: {type}</li>
+          <li className=" leading-[16.8px]">MFG: {date}</li>
+          <li className=" leading-[16.8px]">LIFE: {life}</li>
         </ul>
         <hr />
         <div className="mt-[16px] mb-[36px]">
@@ -119,14 +134,13 @@ const ProductDetails = () => {
         <hr className="mb-[19px]" />
         <div className="font-light text-lg leading-[19.2px] flex justify-center flex-col gap-[5px]">
           <p>
-            Brand: <span className="text-customGreen">Anchor</span>
+            Brand: <span className="text-customGreen">{brand}</span>
           </p>
           <p>
-            Categories: <span className="text-customGreen">Milk</span>
+            Categories: <span className="text-customGreen">{category}</span>
           </p>
           <p>
-            Tags:{" "}
-            <span className="text-customGreen">imported, milk, anchor</span>
+            Tags: <span className="text-customGreen">{tags}</span>
           </p>
         </div>
       </div>

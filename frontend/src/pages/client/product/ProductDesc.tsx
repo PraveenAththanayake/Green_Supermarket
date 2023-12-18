@@ -5,7 +5,7 @@ import QA from "./QA";
 import Info from "./Info";
 import { ProductNavList } from "../../../constants/ProductNav";
 
-const ProductDesc = () => {
+const ProductDesc = ({ desc }) => {
   const [selectedNav, setSelectedNav] = useState(ProductNavList[0].id);
 
   const handleClick = (nav: any) => {
@@ -15,7 +15,7 @@ const ProductDesc = () => {
   const renderContent = () => {
     switch (selectedNav) {
       case 1:
-        return <Description />;
+        return <Description description={desc} />;
       case 2:
         return <Review />;
       case 3:

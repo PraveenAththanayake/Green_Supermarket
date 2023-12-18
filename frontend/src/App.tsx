@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import CategoryDetails from "./pages/CategoryDetails";
+import CategoryDetails from "./pages/client/categoryItems/CategoryDetails";
 import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";
 
@@ -28,7 +28,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/category" element={<Category />} />
           <Route path="/category/:categoryId" element={<CategoryDetails />} />
-          <Route path="/product" element={<ProductPage />} />
+          <Route
+            path="/category/:categoryId/:productId"
+            element={<ProductPage />}
+          />
           <Route path="/contact" element={<div>Contact</div>} />
           <Route path="/admin" element={<AdminLayout />} />
           <Route path="/topsaver" element={<TopSales />} />
