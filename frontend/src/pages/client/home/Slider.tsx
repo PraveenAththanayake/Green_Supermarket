@@ -20,7 +20,7 @@ export default class SimpleSlider extends Component {
     return (
       <div className="mx-auto flexCenter">
         <div className="relative lg:w-[1120px] lg:h-[422px] md:w-[768px] md:h-[280px] sm:w-[640px] sm:h-[240px] w-[310px] h-[200px]">
-          <div className="carouselText">
+          <div className="flex-col items-center carouselText absolute z-10 top-[90px] left-[64px] text-center">
             <span className="capitalize text-lg font-normal leading-[19.2px]">
               The best skin routines ever.
             </span>

@@ -54,7 +54,7 @@ const Services = () => {
           organic goods, and everyday essentials—all from the comfort of your
           home.
         </motion.p>
-        <div className="grid items-center justify-center grid-cols-2 grid-rows-2 mt-5 text-center xs:grid-cols-4 xs:grid-rows-4 gap-x-5 gap-y-7 md:mt-3 lg:mt-6">
+        <div className="grid items-center justify-center grid-cols-2 mt-5 text-center xs:grid-cols-4 gap-x-5 gap-y-7 md:mt-3 lg:mt-6 lg:w-[967px]">
           {serviceData.map((service) => (
             <motion.div
               variants={fadeIn("right", service.id * 0.2)}
