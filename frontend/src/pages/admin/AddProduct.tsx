@@ -1,9 +1,9 @@
 import Dropzone from "../../components/Dropzone";
-import { FaPlusSquare } from "react-icons/fa";
 import AdminButton from "../../components/buttons/AdminButton";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { CategoriesList } from "../../constants/CategoriesList";
 
 const AddProduct = () => {
   const schema = yup.object().shape({
@@ -12,13 +12,13 @@ const AddProduct = () => {
     tags: yup.string().required("Tags is required!"),
     brand: yup.string().required("Brand is required!"),
     description: yup.string().required("Description is required!"),
-    mainImage: yup.string(),
-    otherImages: yup.string(),
+    mainImage: yup.mixed().required("Main Image is required!"),
+    otherImages: yup.mixed(),
     type: yup.string().required("Type is required!"),
-    stockLimit: yup.string().required("Stock Limit is required!"),
+    stock: yup.string().required("Stock Limit is required!"),
     measurement: yup.string().required("Measurement is required!"),
     priceLKR: yup.string().required("Price (LKR) is required!"),
-    stock: yup.string().required("Stock is required!"),
+    category: yup.string().required("Category is required!"),
     unit: yup.string().required("Unit is required!"),
     status: yup.string().required("Status is required!"),
   });
@@ -26,12 +26,46 @@ const AddProduct = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: any) => {
-    console.log(data);
+
+  interface FormData {
+    productName: string;
+    slug: string;
+    tags: string;
+    brand: string;
+    description: string;
+    mainImage: File[];
+    otherImages: File[];
+    type: string;
+    stock: string;
+    measurement: string;
+    priceLKR: string;
+    category: string;
+    unit: string;
+    status: string;
+  }
+
+  const onSubmit = async (data: FormData) => {
+    const { mainImage, otherImages, ...restData } = data;
+
+    const mainImagePaths = mainImage.map((file: File) =>
+      URL.createObjectURL(file)
+    );
+    const otherImagePaths = otherImages.map((file: File) =>
+      URL.createObjectURL(file)
+    );
+
+    const updatedData = {
+      ...restData,
+      mainImage: mainImagePaths.join(","),
+      otherImages: otherImagePaths.join(","),
+    };
+
+    console.log(updatedData);
   };
   return (
     <div>
@@ -109,7 +143,10 @@ const AddProduct = () => {
               <div className="flex flex-row justify-between">
                 <label htmlFor="mainImage" className="flex flex-col">
                   <span className="my-4">Main Image</span>
-                  <Dropzone maxFiles={1} {...register("mainImage")} />
+                  <Dropzone
+                    onFilesSelected={(files) => setValue("mainImage", files)}
+                    maxFiles={1}
+                  />
                   <p className="text-xs italic text-red">
                     {errors.mainImage?.message}
                   </p>
@@ -117,10 +154,10 @@ const AddProduct = () => {
 
                 <label htmlFor="otherImages" className="flex flex-col">
                   <span className="my-4">Other Images</span>
-                  <Dropzone maxFiles={3} {...register("otherImages")} />
-                  <p className="text-xs italic text-red">
-                    {errors.otherImages?.message}
-                  </p>
+                  <Dropzone
+                    onFilesSelected={(files) => setValue("otherImages", files)}
+                    maxFiles={3}
+                  />
                 </label>
               </div>
             </div>
@@ -144,14 +181,14 @@ const AddProduct = () => {
                 </p>
               </label>
               <label htmlFor="stockLimit" className="adminLabel">
-                Stock Limit
+                Stock
                 <input
                   type="text"
                   className="adminInput"
-                  {...register("stockLimit")}
+                  {...register("stock")}
                 />
                 <p className="text-xs italic text-red">
-                  {errors.stockLimit?.message}
+                  {errors.stock?.message}
                 </p>
               </label>
             </div>
@@ -190,14 +227,20 @@ const AddProduct = () => {
                 </p>
               </label>
               <label htmlFor="stock" className="adminLabel">
-                Stock
-                <input
-                  type="text"
+                Category
+                <select
+                  id="category"
+                  {...register("category")}
                   className="adminInput"
-                  {...register("stock")}
-                />
+                >
+                  {CategoriesList.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
                 <p className="text-xs italic text-red">
-                  {errors.stock?.message}
+                  {errors.category?.message}
                 </p>
               </label>
               <label htmlFor="unit" className="adminLabel">
@@ -224,13 +267,7 @@ const AddProduct = () => {
               </label>
             </div>
           </div>
-          <div className="flex flex-row-reverse w-full mt-[65px] mb-8">
-            <button className="w-[241px] h-[47px] bg-customGreen rounded-md text-white text-4xl font-semibold leading-6 flexCenter gap-[18px]">
-              <FaPlusSquare />
-              Add Variant
-            </button>
-          </div>
-          <div className="flex flex-row gap-8 my-[42px] pb-4">
+          <div className="flex flex-row gap-8 my-[42px] pb-4 text-white">
             <AdminButton name="Save" className="bg-customGreen" />
             <AdminButton name="Cancel" className="bg-red" />
           </div>

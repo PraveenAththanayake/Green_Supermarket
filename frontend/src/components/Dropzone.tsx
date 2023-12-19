@@ -1,4 +1,6 @@
-import { useCallback, useState, forwardRef, useImperativeHandle } from "react";
+// Dropzone.tsx
+
+import { useCallback, forwardRef, useImperativeHandle, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -8,41 +10,40 @@ interface CustomFile extends File {
 
 interface DropzoneProps {
   maxFiles: number;
+  onFilesSelected: (files: File[]) => void;
 }
 
 const Dropzone = forwardRef((props: DropzoneProps, ref) => {
-  const { maxFiles } = props;
+  const { maxFiles, onFilesSelected } = props;
   const [files, setFiles] = useState<CustomFile[]>([]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles?.length) {
-        setFiles((prevFiles) => {
-          // Calculate the number of additional files that can be added
-          const remainingFiles = maxFiles - prevFiles.length;
-          const newFiles = acceptedFiles
-            .slice(0, remainingFiles)
-            .map((file) =>
-              Object.assign(file, { preview: URL.createObjectURL(file) })
-            );
+        const remainingFiles = maxFiles - files.length;
+        const newFiles = acceptedFiles
+          .slice(0, remainingFiles)
+          .map((file) =>
+            Object.assign(file, { preview: URL.createObjectURL(file) })
+          );
 
-          return [...prevFiles, ...newFiles];
-        });
+        setFiles([...files, ...newFiles]);
+        onFilesSelected([...files, ...newFiles]);
       }
     },
-    [maxFiles]
+    [files, maxFiles, onFilesSelected]
   );
 
-  // Expose a function to clear files from parent component
   useImperativeHandle(ref, () => ({
     clearFiles: () => setFiles([]),
   }));
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-  const removeFile = (name: string) => {
-    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== name));
-  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/*": [".jpeg", ".png"],
+    },
+  });
 
   return (
     <div>
@@ -76,7 +77,11 @@ const Dropzone = forwardRef((props: DropzoneProps, ref) => {
             <button
               type="button"
               className="absolute top-0 right-0 text-4xl rounded-full text-red outline outline-red -translate-y-2/4 translate-x-2/4"
-              onClick={() => removeFile(file.name)}
+              onClick={() =>
+                setFiles((prevFiles) =>
+                  prevFiles.filter((f) => f.name !== file.name)
+                )
+              }
             >
               <IoMdCloseCircle />
             </button>
