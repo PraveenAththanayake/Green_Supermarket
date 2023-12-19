@@ -44,13 +44,15 @@ const Discount = () => {
 
   return (
     <section className="mt-10 lg:mt-[90px] mb-[70px] max-w-[1120px] mx-auto ">
-      <div className="flex-col mb-6 flexCenter gap-y-4">
-        <h1 className="text-[24px] font-semibold">Top saver today</h1>
-        <div className="flex items-center">
+      <div className="flex mb-[71px] flex-col md:flex-row items-center">
+        <h1 className="font-semibold mr-[25px] text-[24px] pl-[12px] xl:pl-0">
+          Top saver today
+        </h1>
+        <div className="flex items-center text-[16px] mt-1">
           {formattedTime.split(":").map((value, index) => (
             <div key={index} className="flex items-center">
               {index > 0 && <span className="mx-1">:</span>}
-              <p className="py-1 px-2 bg-[#D30000] text-white rounded-[5px] mx-1">
+              <p className="py-[2px] px-2 bg-[#D30000] text-white rounded-[5px] mx-1">
                 {value}
               </p>
             </div>
