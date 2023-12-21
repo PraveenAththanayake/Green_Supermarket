@@ -16,7 +16,7 @@ export const products = [
     date: "2023-01-01",
     life: "30 days",
     brand: "Anchor",
-    category: "milkanddiaries",
+    category: "teaandcoffee",
     tags: ["fresh", "dairy", "nutrition"],
   },
   {
@@ -36,7 +36,7 @@ export const products = [
     date: "2023-01-05",
     life: "7 days",
     brand: "Organic Farms",
-    category: "Fruits",
+    category: "teaandcoffee",
     tags: ["organic", "apples", "fresh"],
   },
   {
@@ -56,7 +56,7 @@ export const products = [
     date: "2023-01-10",
     life: "365 days",
     brand: "Premium Coffee Co.",
-    category: "Coffee",
+    category: "teaandcoffee",
     tags: ["coffee", "beans", "premium"],
   },
   {
@@ -76,7 +76,7 @@ export const products = [
     date: "2023-01-15",
     life: "90 days",
     brand: "Healthy Harvest",
-    category: "Oils",
+    category: "teaandcoffee",
     tags: ["organic", "avocado oil", "cooking"],
   },
   // Add more products as needed

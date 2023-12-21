@@ -1,5 +1,8 @@
 import { useState } from "react";
 import PrimaryButton from "../../../components/buttons/primaryButton";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+import { decrement, increment } from "../../../store/counter/CounterSlice";
 
 const ProductDetails = ({
   price,
@@ -17,7 +20,9 @@ const ProductDetails = ({
   category,
   tags,
 }) => {
-  const [quantity, setQuantity] = useState(1);
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+
   return (
     <div className="md:flex-row flexCenter gap-11 lg:gap-[96px] flex-col">
       <div className="w-[310px] h-[300px] md:w-[400px] md:h-[500px] lg:w-[34rem] lg:h-[33.5rem] flex-row flex rounded-lg border border-solid border-lightGray bg-white shadow-md">
@@ -106,20 +111,16 @@ const ProductDetails = ({
             <div className="w-[96px] h-[32px] flex flex-row">
               <button
                 className="w-[32px] h-[32px] bg-gray2 rounded-l-default"
-                onClick={() => {
-                  if (quantity > 1) {
-                    setQuantity(quantity - 1);
-                  }
-                }}
+                onClick={() => dispatch(decrement())}
               >
                 -
               </button>
               <span className="w-[32px] h-[32px]text-lg leading-[19.2px] font-normal flexCenter">
-                {quantity}
+                {count}
               </span>
               <button
                 className="w-[32px] h-[32px] bg-gray2 rounded-r-default"
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={() => dispatch(increment())}
               >
                 +
               </button>
