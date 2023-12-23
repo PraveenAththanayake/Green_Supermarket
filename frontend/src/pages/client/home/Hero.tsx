@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="flex-col gap-10 flexBetween">
-      <div className="container min-w-[280px] min-h-[160px] max-h-[487px] max-w-[1120px] m-auto relative px-3 py-2">
+      <div className="relative flex items-center p-2">
         <div className="absolute left-6 top-4 sm:left-10 md:left-16 sm:top-[40px] w-7xl">
           <motion.p
             variants={fadeIn("right", 0.2)}
             initial="hidden"
             animate="show"
-            className="text-[10px] font-semibold xs:text-base"
+            className="text-[13px] font-semibold xs:text-base"
           >
             WELCOME GREEN SUPER MARKET ONLINE!
           </motion.p>
@@ -19,7 +19,7 @@ const Hero = () => {
             variants={fadeIn("up", 0.4)}
             initial="hidden"
             animate="show"
-            className="font-nunito font-bold mt-[16px] text-lg xs:text-5xl sm:text-5xl md:text-6xl lg:text-8xl"
+            className="font-nunito font-bold mt-[16px] text-5xl md:text-6xl lg:text-8xl"
           >
             Fresh and Healthy <br />
             Veggies{" "}
@@ -32,7 +32,7 @@ const Hero = () => {
             variants={fadeIn("up", 0.6)}
             initial="hidden"
             animate="show"
-            className="text-[8px] font-normal text-gray mt-[3px] block xs:hidden"
+            className="text-[9px] font-normal text-gray mt-[3px] block xs:hidden"
           >
             Enjoy a seamless online shopping <br />
             experience with just a <br />
@@ -64,7 +64,7 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           src="/images/Hero/supermarket-banner-concept-with-ingredients.webp"
           alt="heroImage"
-          className="object-cover w-full min-h-[160px] min-w-[280px] h-full"
+          className="object-cover w-full min-h-[14em] max-h-[30.4375em]"
         />
       </div>
       <div className="w-full flexCenter xs:hidden mb-11">
