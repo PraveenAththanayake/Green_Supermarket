@@ -8,7 +8,6 @@ import { CategoriesList } from "../../constants/CategoriesList";
 const AddProduct = () => {
   const schema = yup.object().shape({
     productName: yup.string().required("Product Name is required!"),
-    slug: yup.string().required("Slug is required!"),
     tags: yup.string().required("Tags is required!"),
     brand: yup.string().required("Brand is required!"),
     description: yup.string().required("Description is required!"),
@@ -16,17 +15,18 @@ const AddProduct = () => {
     otherImages: yup.mixed(),
     type: yup.string().required("Type is required!"),
     stock: yup.string().required("Stock Limit is required!"),
-    measurement: yup.string().required("Measurement is required!"),
+    life: yup.number(),
     priceLKR: yup.string().required("Price (LKR) is required!"),
     category: yup.string().required("Category is required!"),
     unit: yup.string().required("Unit is required!"),
-    status: yup.string().required("Status is required!"),
+    mfg: yup.date(),
   });
 
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -34,7 +34,6 @@ const AddProduct = () => {
 
   interface FormData {
     productName: string;
-    slug: string;
     tags: string;
     brand: string;
     description: string;
@@ -42,11 +41,10 @@ const AddProduct = () => {
     otherImages: File[];
     type: string;
     stock: string;
-    measurement: string;
     priceLKR: string;
     category: string;
-    unit: string;
-    status: string;
+    life: number;
+    mfg: Date;
   }
 
   const onSubmit = async (data: FormData) => {
@@ -66,6 +64,10 @@ const AddProduct = () => {
     };
 
     console.log(updatedData);
+  };
+
+  const handleCancel = () => {
+    reset();
   };
   return (
     <div>
@@ -96,12 +98,12 @@ const AddProduct = () => {
                     {errors.productName?.message}
                   </p>
                 </label>
-                <label htmlFor="slug" className="adminLabel">
-                  Slug
+                <label htmlFor="stock" className="adminLabel">
+                  Stock
                   <input
                     type="text"
                     className="adminInput"
-                    {...register("slug")}
+                    {...register("stock")}
                   />
                   <p className="text-xs italic text-red">
                     {errors.slug?.message}
@@ -163,12 +165,31 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <div className="w-[1029px] h-[549px] bg-lightGray mt-8 p-8">
+        <div className="w-[1029px] max-h-max bg-lightGray mt-8 p-8">
           <h2 className="text-4xl font-semibold leading-6 mb-[34px]">
             Product Variant
           </h2>
           <div className="text-base font-normal leading-[18px] text-gray">
             <div className="grid grid-cols-2 gap-x-[53px]">
+              <label htmlFor="life" className="adminLabel">
+                Life
+                <input
+                  type="number"
+                  className="adminInput"
+                  {...register("life")}
+                  min={1}
+                />
+              </label>
+              <label htmlFor="MFG" className="adminLabel">
+                MFG
+                <input
+                  type="date"
+                  className="adminInput"
+                  {...register("mfg")}
+                />
+              </label>
+            </div>
+            <div className="w-[963px] border border-gray/20 mt-4 rounded-[5px] grid grid-cols-3 gap-x-[71px] gap-y-4 py-4 px-[19px]">
               <label htmlFor="type" className="adminLabel">
                 Type
                 <input
@@ -180,51 +201,13 @@ const AddProduct = () => {
                   {errors.type?.message}
                 </p>
               </label>
-              <label htmlFor="stockLimit" className="adminLabel">
-                Stock
-                <input
-                  type="text"
-                  className="adminInput"
-                  {...register("stock")}
-                />
-                <p className="text-xs italic text-red">
-                  {errors.stock?.message}
-                </p>
-              </label>
-            </div>
-            <div className="w-[963px] h-[232px] border border-gray/20 mt-4 rounded-[5px] grid grid-cols-3 grid-rows-2 gap-x-[71px] gap-y-4 py-4 px-[19px]">
-              <label htmlFor="measurement" className="adminLabel">
-                Measurement
-                <input
-                  type="text"
-                  className="adminInput"
-                  {...register("measurement")}
-                />
-                <p className="text-xs italic text-red">
-                  {errors.measurement?.message}
-                </p>
-              </label>
               <label htmlFor="price" className="adminLabel">
-                Price (LKR)
+                Discount Price (If have)
                 <input
                   type="text"
                   className="adminInput"
                   {...register("priceLKR")}
                 />
-                <p className="text-xs italic text-red">
-                  {errors.priceLKR?.message}
-                </p>
-              </label>
-              <label htmlFor="price" className="adminLabel">
-                Price (LKR)
-                <input
-                  type="text"
-                  className="adminInput"
-                  {...register("priceLKR")}
-                />
-                <p className="text-xs italic text-red">
-                  {errors.priceLKR?.message}
-                </p>
               </label>
               <label htmlFor="stock" className="adminLabel">
                 Category
@@ -243,7 +226,7 @@ const AddProduct = () => {
                   {errors.category?.message}
                 </p>
               </label>
-              <label htmlFor="unit" className="adminLabel">
+              {/* <label htmlFor="unit" className="adminLabel">
                 Unit
                 <input
                   type="text"
@@ -264,12 +247,16 @@ const AddProduct = () => {
                 <p className="text-xs italic text-red">
                   {errors.status?.message}
                 </p>
-              </label>
+              </label> */}
             </div>
           </div>
           <div className="flex flex-row gap-8 my-[42px] pb-4 text-white">
             <AdminButton name="Save" className="bg-customGreen" />
-            <AdminButton name="Cancel" className="bg-red" />
+            <AdminButton
+              name="Cancel"
+              className="bg-red"
+              onClick={handleCancel}
+            />
           </div>
         </div>
       </form>

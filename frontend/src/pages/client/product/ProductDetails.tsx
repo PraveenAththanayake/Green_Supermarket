@@ -1,17 +1,24 @@
-import { useState } from "react";
 import PrimaryButton from "../../../components/buttons/primaryButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { decrement, increment } from "../../../store/counter/CounterSlice";
+import { Link } from "react-router-dom";
 
-const ProductDetails = ({
+interface ProductDetailsProps {
+  discountedPrice: number;
+  price: number;
+  stock: string;
+  type: string;
+  date: Date;
+  life: number;
+  brand: string;
+  category: string;
+  tags: string;
+}
+
+const ProductDetails: React.FC<ProductDetailsProps> = ({
+  discountedPrice,
   price,
-  priceOne,
-  priceTwo,
-  sizeOne,
-  sizeTwo,
-  secondPrice,
-  save,
   stock,
   type,
   date,
@@ -66,43 +73,56 @@ const ProductDetails = ({
           </div>
         </div>
       </div>
-      <div className="w-[300px] lg:w-[480px] px-3 md::px-0">
+      <div className="w-[300px] lg:w-[480px] px-3 md:px-0">
         <h3 className="text-5xl font-semibold leading-[28.8px] mb-2">
-          LKR {priceOne} - LKR {priceTwo}
+          {discountedPrice ? (
+            <h3 className="font-semibold text-5xl leading-[28.8px] text-red">
+              LKR {discountedPrice}
+            </h3>
+          ) : (
+            <h3 className="font-semibold text-5xl leading-[28.8px] mb-3">
+              LKR {price}
+            </h3>
+          )}
         </h3>
-        <span className="text-lg font-light leading-[19.2px]">
+        {/* <span className="text-lg font-light leading-[19.2px]">
           liter: {sizeOne}
-        </span>
-        <div className="flex items-center gap-5 my-[5px]">
-          <div className="w-[79px] h-[32px] rounded-default border border-solid border-customGreen text-lg font-normal leading-[19.2px] text-gray flexCenter">
-            {sizeOne}
-          </div>
-          <div className="w-[79px] h-[32px] rounded-default border border-solid border-gray text-lg font-normal leading-[19.2px] text-gray flexCenter">
-            {sizeTwo}
-          </div>
-        </div>
-        <span className="text-sm font-normal leading-[16.8px] text-darkerGreen underline">
+        </span> */}
+        {/* <div className="flex items-center gap-3 my-[5px]">
+          {products.map((product) => (
+            <div className="w-[79px] h-[32px] rounded-default border border-solid border-customGreen text-lg font-normal leading-[19.2px] text-gray flexCenter">
+              {product.sizes}
+            </div>
+          ))}
+        </div> */}
+        {/* <span className="text-sm font-normal leading-[16.8px] text-darkerGreen underline">
           Clear
-        </span>
-        <div className="flex flex-row items-center gap-[14px] my-[15px]">
-          <h3 className="font-semibold text-5xl leading-[28.8px] text-customGreen">
-            {price}
-          </h3>
-          <span className="text-sm font-semibold leading-[16.8px] text-gray line-through">
-            LKR {secondPrice}
-          </span>
-          <p className="text-sm font-semibold text-red leading-[16.8px]">
-            LKR {save} save
-          </p>
-        </div>
+        </span> */}
+
+        {discountedPrice && (
+          <div className="flex flex-row items-center gap-[14px] my-[15px]">
+            <h3 className="font-semibold text-5xl leading-[28.8px] text-customGreen">
+              {discountedPrice}
+            </h3>
+            <span className="text-sm font-semibold leading-[16.8px] text-gray line-through">
+              {price}
+            </span>
+            <p className="text-sm font-semibold text-red leading-[16.8px]">
+              LKR {price - discountedPrice} save
+            </p>
+          </div>
+        )}
+
         <div className="w-[251px] h-[32px] flexCenter bg-customGreen/20 border border-solid border-customGreen font-semibold text-xl rounded-default">
           Availability:{" "}
           <span className="text-customGreen">&nbsp; {stock} on stock</span>
         </div>
         <ul className="mt-[23px] mb-[30px] text-sm font-normal text-gray flex flex-col gap-[6px]">
-          <li className=" leading-[16.8px]">Type: {type}</li>
-          <li className=" leading-[16.8px]">MFG: {date}</li>
-          <li className=" leading-[16.8px]">LIFE: {life}</li>
+          <li className=" leading-[16.8px]">Type: {type ? type : "-"}</li>
+          <li className=" leading-[16.8px]">
+            MFG: {date ? date.toString() : "-"}
+          </li>
+          <li className=" leading-[16.8px]">LIFE: {life ? life : "-"}</li>
         </ul>
         <hr />
         <div className="mt-[16px] mb-[36px]">
@@ -137,11 +157,11 @@ const ProductDetails = ({
           <p>
             Brand: <span className="text-customGreen">{brand}</span>
           </p>
-          <p>
+          <Link to={`/category/${category}`}>
             Categories: <span className="text-customGreen">{category}</span>
-          </p>
+          </Link>
           <p>
-            Tags: <span className="text-customGreen">{tags}</span>
+            Tags: <span className="text-customGreen">{tags ? tags : "-"}</span>
           </p>
         </div>
       </div>
