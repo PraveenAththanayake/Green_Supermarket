@@ -40,7 +40,7 @@ const Login = () => {
       .then((res) => {
         const token =
           "Basic" + window.btoa(data.usernameOrEmail + ":" + data.password);
-        savedLoggedInUser(data.username);
+        savedLoggedInUser(data.usernameOrEmail);
         storeToken(token);
         navigator("/");
       })

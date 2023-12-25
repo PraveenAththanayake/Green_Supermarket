@@ -36,16 +36,16 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "mainImage")
+    @Column(name = "mainImage", nullable = true)
     private String mainImage;
 
-    @Column(name = "otherImages")
+    @Column(name = "otherImages", nullable = true)
     private List<String> otherImages;
 
-    @Column(name = "life")
+    @Column(name = "life", nullable = true)
     private Number life;
 
-    @Column(name = "MFG")
+    @Column(name = "MFG", nullable = true)
     private Date mfg;
 
     @Column(name = "type")
