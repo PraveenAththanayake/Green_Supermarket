@@ -7,9 +7,17 @@ import SearchBar from "./searchBar";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/variants";
 import { Link } from "react-router-dom";
+import {
+  getLoggedInUser,
+  isUserLoggedIn,
+} from "../../services/auth/AuthService";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
+  const isAuth = isUserLoggedIn();
+  const LoggedInUser = getLoggedInUser();
   return (
     <motion.div
       variants={fadeIn("down", 0.2)}
@@ -50,9 +58,24 @@ const Header = () => {
           <Link to="">
             <LuShoppingCart className="hover:text-customGreen" />
           </Link>
-          <Link to="" className="hidden sm:block">
-            <CgProfile className="hover:text-customGreen" />
-          </Link>
+
+          {isAuth ? (
+            <Link to="" className="hidden sm:block">
+              <Tooltip title={LoggedInUser}>
+                <IconButton>
+                  <CgProfile className="hover:text-customGreen" />
+                </IconButton>
+              </Tooltip>
+            </Link>
+          ) : (
+            <Link to="/register" className="hidden sm:block">
+              <Tooltip title="Please sign in">
+                <IconButton>
+                  <CgProfile className="hover:text-customGreen" />
+                </IconButton>
+              </Tooltip>
+            </Link>
+          )}
         </div>
       </div>
     </motion.div>

@@ -1,11 +1,12 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import CategoryDetails from "./pages/client/categoryItems/CategoryDetails";
 import ProductPage from "./pages/client/product/ProductPage";
 import { lazy, Suspense } from "react";
 import CategoryPage from "./pages/client/category/categoryPage";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import { isUserLoggedIn } from "./services/auth/AuthService";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
@@ -23,6 +24,11 @@ export const LoadingSpinner: React.FC = () => {
 };
 
 function App() {
+  const AuthenticatedRoute = ({ children }) => {
+    const isAuth = isUserLoggedIn();
+    return isAuth ? children : <Navigate to="/" />;
+  };
+
   return (
     <div>
       <Suspense fallback={<LoadingSpinner />}>
@@ -37,7 +43,14 @@ function App() {
             element={<ProductPage />}
           />
           <Route path="/contact" element={<div>Contact</div>} />
-          <Route path="/admin" element={<AdminLayout />} />
+          <Route
+            path="/admin"
+            element={
+              <AuthenticatedRoute>
+                <AdminLayout />
+              </AuthenticatedRoute>
+            }
+          />
           <Route path="/topsaver" element={<TopSales />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
