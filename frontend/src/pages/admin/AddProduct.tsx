@@ -45,7 +45,6 @@ const AddProduct = () => {
     price: string;
     discountPrice: string;
     category: string;
-    life: number;
     mfg: Date;
   }
 
@@ -65,7 +64,6 @@ const AddProduct = () => {
       ...restData,
       mainImage: mainImagePaths[0], // Use only the first image for the main image
       otherImages: otherImagePaths,
-      mfg: data.mfg.toISOString(), // Convert the Date to ISO string
     };
 
     console.log(updatedData);
