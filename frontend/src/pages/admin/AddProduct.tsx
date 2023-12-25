@@ -19,7 +19,7 @@ const AddProduct = () => {
     price: yup.string().required("Price (LKR) is required!"),
     mfg: yup.date(),
     type: yup.string().required("Type is required!"),
-    discountPrice: yup.string().required("Price (LKR) is required!"),
+    discountPrice: yup.string(),
     category: yup.string().required("Category is required!"),
   });
 
@@ -53,20 +53,21 @@ const AddProduct = () => {
 
   const onSubmit = async (data: FormData) => {
     console.log("Form Submitted:", data);
+
     const { mainImage, otherImages, ...restData } = data;
 
-    const mainImagePaths = mainImage.map((file: File) =>
-      URL.createObjectURL(file)
-    );
-    const otherImagePaths = otherImages.map((file: File) =>
+    const mainImagePaths = mainImage.map((file) => URL.createObjectURL(file));
+    const otherImagePaths = otherImages.map((file) =>
       URL.createObjectURL(file)
     );
 
     const updatedData = {
       ...restData,
-      mainImage: mainImagePaths.join(","),
-      otherImages: otherImagePaths.join(","),
+      mainImage: mainImagePaths[0], // Use only the first image for the main image
+      otherImages: otherImagePaths,
+      mfg: data.mfg.toISOString(), // Convert the Date to ISO string
     };
+
     console.log(updatedData);
 
     addProduct(updatedData).then((res) => {
@@ -192,7 +193,7 @@ const AddProduct = () => {
               <label htmlFor="MFG" className="adminLabel">
                 MFG
                 <input
-                  type="date"
+                  type="datetime-local"
                   className="adminInput"
                   {...register("mfg")}
                 />

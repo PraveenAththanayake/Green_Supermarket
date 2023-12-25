@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -36,10 +37,10 @@ public class Product {
     private String description;
 
     @Column(name = "mainImage")
-    private byte mainImage;
+    private String mainImage;
 
     @Column(name = "otherImages")
-    private byte otherImages;
+    private List<String> otherImages;
 
     @Column(name = "life")
     private Number life;
