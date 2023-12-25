@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,11 +23,11 @@ public class Product {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "slug", nullable = false, unique = true)
-    private String slug;
+    @Column(name = "stock")
+    private int stock;
 
-    @Column(name = "tag")
-    private String tag;
+    @Column(name = "tags")
+    private String tags;
 
     @Column(name = "brand")
     private String brand;
@@ -33,27 +35,21 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "mainImage")
+    private byte mainImage;
+
+    @Column(name = "otherImages")
+    private byte otherImages;
+
+    @Column(name = "life")
+    private Number life;
+
+    @Column(name = "MFG")
+    private Date mfg;
+
     @Column(name = "type")
-    private String type;
+    private int type;
 
-    @Column(name = "stockLimit")
-    private int stockLimit;
-
-    @Column(name = "measurements")
-    private int measurements;
-
-    @Column(name = "price")
-    private double price;
-
-    @Column(name = "second_price")
-    private double secondPrice;
-
-    @Column(name = "stock")
-    private int stock;
-
-    @Column(name = "unit")
-    private int unit;
-
-    @Column(name = "status")
-    private String status;
+    @Column(name = "category")
+    private String category;
 }

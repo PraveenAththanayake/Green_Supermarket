@@ -44,18 +44,16 @@ public class ProductServiceImpl implements ProductService {
         );
         product.setId(updatedProduct.getId());
         product.setProductName(updatedProduct.getProductName());
-        product.setSlug(updatedProduct.getSlug());
-        product.setTag(updatedProduct.getTag());
+        product.setStock(updatedProduct.getStock());
+        product.setTags(updatedProduct.getTags());
         product.setBrand(updatedProduct.getBrand());
         product.setDescription(updatedProduct.getDescription());
+        product.setMainImage(updatedProduct.getMainImage());
+        product.setOtherImages(updatedProduct.getOtherImages());
+        product.setLife(updatedProduct.getLife());
+        product.setMfg(updatedProduct.getMfg());
         product.setType(updatedProduct.getType());
-        product.setStock(updatedProduct.getStockLimit());
-        product.setMeasurements(updatedProduct.getMeasurements());
-        product.setPrice(updatedProduct.getPrice());
-        product.setSecondPrice(updatedProduct.getSecondPrice());
-        product.setStock(updatedProduct.getStock());
-        product.setUnit(updatedProduct.getUnit());
-        product.setStatus(updatedProduct.getStatus());
+        product.setCategory(updatedProduct.getCategory());
 
         Product updatedProductObj =  productRepository.save(product);
 

@@ -17,12 +17,7 @@ axios.interceptors.request.use(
   }
 );
 
-export const fetchProduct = async () => {
-  try {
-    const response = await axios.get(REST_API_BASE_URL);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching product data:", error);
-    throw error;
-  }
-};
+export const fetchProduct = () => axios.get(REST_API_BASE_URL);
+
+export const addProduct = (product: object) =>
+  axios.post(REST_API_BASE_URL, product);

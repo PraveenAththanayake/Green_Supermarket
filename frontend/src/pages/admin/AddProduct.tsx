@@ -4,22 +4,23 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { CategoriesList } from "../../constants/CategoriesList";
+import { addProduct } from "../../services/api/fetchProduct";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const schema = yup.object().shape({
     productName: yup.string().required("Product Name is required!"),
+    stock: yup.string().required("Stock Limit is required!"),
     tags: yup.string().required("Tags is required!"),
     brand: yup.string().required("Brand is required!"),
     description: yup.string().required("Description is required!"),
     mainImage: yup.mixed().required("Main Image is required!"),
     otherImages: yup.mixed(),
-    type: yup.string().required("Type is required!"),
-    stock: yup.string().required("Stock Limit is required!"),
-    life: yup.number(),
-    priceLKR: yup.string().required("Price (LKR) is required!"),
-    category: yup.string().required("Category is required!"),
-    unit: yup.string().required("Unit is required!"),
+    price: yup.string().required("Price (LKR) is required!"),
     mfg: yup.date(),
+    type: yup.string().required("Type is required!"),
+    discountPrice: yup.string().required("Price (LKR) is required!"),
+    category: yup.string().required("Category is required!"),
   });
 
   const {
@@ -41,13 +42,17 @@ const AddProduct = () => {
     otherImages: File[];
     type: string;
     stock: string;
-    priceLKR: string;
+    price: string;
+    discountPrice: string;
     category: string;
     life: number;
     mfg: Date;
   }
 
+  const navigator = useNavigate();
+
   const onSubmit = async (data: FormData) => {
+    console.log("Form Submitted:", data);
     const { mainImage, otherImages, ...restData } = data;
 
     const mainImagePaths = mainImage.map((file: File) =>
@@ -62,8 +67,12 @@ const AddProduct = () => {
       mainImage: mainImagePaths.join(","),
       otherImages: otherImagePaths.join(","),
     };
-
     console.log(updatedData);
+
+    addProduct(updatedData).then((res) => {
+      console.log(res.data);
+      navigator("/admin");
+    });
   };
 
   const handleCancel = () => {
@@ -106,7 +115,7 @@ const AddProduct = () => {
                     {...register("stock")}
                   />
                   <p className="text-xs italic text-red">
-                    {errors.slug?.message}
+                    {errors.stock?.message}
                   </p>
                 </label>
                 <label htmlFor="tags" className="adminLabel">
@@ -171,12 +180,12 @@ const AddProduct = () => {
           </h2>
           <div className="text-base font-normal leading-[18px] text-gray">
             <div className="grid grid-cols-2 gap-x-[53px]">
-              <label htmlFor="life" className="adminLabel">
-                Life
+              <label htmlFor="price" className="adminLabel">
+                Price
                 <input
-                  type="number"
+                  type="text"
                   className="adminInput"
-                  {...register("life")}
+                  {...register("price")}
                   min={1}
                 />
               </label>
@@ -201,15 +210,15 @@ const AddProduct = () => {
                   {errors.type?.message}
                 </p>
               </label>
-              <label htmlFor="price" className="adminLabel">
+              <label htmlFor="discountPrice" className="adminLabel">
                 Discount Price (If have)
                 <input
                   type="text"
                   className="adminInput"
-                  {...register("priceLKR")}
+                  {...register("discountPrice")}
                 />
               </label>
-              <label htmlFor="stock" className="adminLabel">
+              <label htmlFor="category" className="adminLabel">
                 Category
                 <select
                   id="category"
@@ -251,12 +260,8 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="flex flex-row gap-8 my-[42px] pb-4 text-white">
-            <AdminButton name="Save" className="bg-customGreen" />
-            <AdminButton
-              name="Cancel"
-              className="bg-red"
-              onClick={handleCancel}
-            />
+            <AdminButton type="submit" name="Save" className="bg-customGreen" />
+            <AdminButton name="Cancel" className="bg-red" />
           </div>
         </div>
       </form>

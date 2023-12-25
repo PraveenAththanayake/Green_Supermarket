@@ -52,7 +52,7 @@ const Header = () => {
         </div>
 
         <div className="gap-5 xs:gap-[25px] flexCenter text-gray text-4xl md:text-5xl flex-none">
-          <Link to="" className="hover:text-customGreen">
+          <Link to="" className="hidden hover:text-customGreen sm:block">
             <FaRegBell />
           </Link>
           <Link to="">
@@ -60,7 +60,7 @@ const Header = () => {
           </Link>
 
           {isAuth ? (
-            <Link to="" className="hidden sm:block">
+            <Link to="">
               <Tooltip title={LoggedInUser}>
                 <IconButton>
                   <CgProfile className="hover:text-customGreen" />
@@ -68,8 +68,8 @@ const Header = () => {
               </Tooltip>
             </Link>
           ) : (
-            <Link to="/register" className="hidden sm:block">
-              <Tooltip title="Please sign in">
+            <Link to="/register">
+              <Tooltip title="Please sign in!">
                 <IconButton>
                   <CgProfile className="hover:text-customGreen" />
                 </IconButton>

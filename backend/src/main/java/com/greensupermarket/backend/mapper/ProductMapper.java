@@ -4,40 +4,37 @@ import com.greensupermarket.backend.dto.ProductDto;
 import com.greensupermarket.backend.entity.Product;
 
 public class ProductMapper {
-    public static ProductDto mapToProductDto(Product product){
+    public static ProductDto mapToProductDto(Product product) {
         return new ProductDto(
                 product.getId(),
                 product.getProductName(),
-                product.getSlug(),
-                product.getTag(),
+                product.getStock(),
+                product.getTags(),
                 product.getBrand(),
                 product.getDescription(),
+                product.getMainImage(),
+                product.getOtherImages(),
+                product.getLife(),
+                product.getMfg(),
                 product.getType(),
-                product.getStockLimit(),
-                product.getMeasurements(),
-                product.getPrice(),
-                product.getSecondPrice(),
-                product.getStock(),
-                product.getUnit(),
-                product.getStatus()
+                product.getCategory()
         );
     }
-    public static Product mapToProduct(ProductDto productDto){
-        return new Product (
+
+    public static Product mapToProduct(ProductDto productDto) {
+        return new Product(
                 productDto.getId(),
                 productDto.getProductName(),
-                productDto.getSlug(),
-                productDto.getTag(),
+                productDto.getStock(),
+                productDto.getTags(),
                 productDto.getBrand(),
                 productDto.getDescription(),
+                productDto.getMainImage(),
+                productDto.getOtherImages(),
+                productDto.getLife(),
+                productDto.getMfg(),
                 productDto.getType(),
-                productDto.getStockLimit(),
-                productDto.getMeasurements(),
-                productDto.getPrice(),
-                productDto.getSecondPrice(),
-                productDto.getStock(),
-                productDto.getUnit(),
-                productDto.getStatus()
+                productDto.getCategory()
         );
     }
 }
