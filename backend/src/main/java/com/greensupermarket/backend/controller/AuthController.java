@@ -1,5 +1,6 @@
 package com.greensupermarket.backend.controller;
 
+import com.greensupermarket.backend.dto.LoginDto;
 import com.greensupermarket.backend.dto.RegisterDto;
 import com.greensupermarket.backend.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,13 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    //build login rest api
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
+        String response = authService.login(loginDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
