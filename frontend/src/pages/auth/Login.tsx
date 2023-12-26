@@ -12,10 +12,10 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-  usernameOrEmail: yup
+  username: yup
     .string()
     .required("Email or Username is required")
-    .test("usernameOrEmail", "Enter a valid Email or Username", (value) => {
+    .test("username", "Enter a valid Email or Username", (value) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const usernameRegex = /^[a-zA-Z0-9_]+$/;
 
@@ -36,11 +36,11 @@ const Login = () => {
   const navigator = useNavigate();
 
   const onSubmit = (data: any) => {
-    loginApiCall(data.usernameOrEmail, data.password)
+    loginApiCall(data.username, data.password)
       .then((res) => {
         const token =
-          "Basic" + window.btoa(data.usernameOrEmail + ":" + data.password);
-        savedLoggedInUser(data.usernameOrEmail);
+          "Basic" + window.btoa(data.username + ":" + data.password);
+        savedLoggedInUser(data.username);
         storeToken(token);
         navigator("/");
       })
@@ -70,13 +70,11 @@ const Login = () => {
               </button>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <input
-                  {...register("usernameOrEmail")}
+                  {...register("username")}
                   className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
                   placeholder="Email address"
                 />
-                <p className="text-red-500">
-                  {errors.usernameOrEmail?.message}
-                </p>
+                <p className="text-red-500">{errors.username?.message}</p>
 
                 <input
                   {...register("password")}

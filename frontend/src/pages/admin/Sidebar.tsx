@@ -1,9 +1,9 @@
-import { lazy, useState } from "react";
+import React, { useState } from "react";
 import { AdminSideList } from "../../constants/AdminSideList";
 import Dashboard from "./Dashboard";
 import { AdminSideListInterface } from "../../types";
-
-const AddProduct = lazy(() => import("./AddProduct"));
+import ManageProducts from "./ManageOrders";
+import AddProduct from "./AddProduct";
 
 const Sidebar = () => {
   const [selectedNav, setSelectedNav] = useState(AdminSideList[0].id);
@@ -19,18 +19,12 @@ const Sidebar = () => {
       case 2:
         return <AddProduct />;
       case 3:
-        return <div>Manage Products</div>;
-      case 4:
-        return <div>Categories</div>;
-      case 5:
-        return <div>Offer Image</div>;
-      case 6:
-        return <div>Orders</div>;
-      case 7:
-        return <div>FAQ</div>;
-      case 8:
-        return <div>Logout</div>;
+        return <ManageProducts openAddProductModal={handleAddProductClick} />;
     }
+  };
+
+  const handleAddProductClick = () => {
+    setSelectedNav(2);
   };
 
   return (
@@ -56,7 +50,7 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
-      <div className="col-span-2">{selectedNav && renderContent()}</div>
+      <div className="col-span-2">{renderContent()}</div>
     </div>
   );
 };

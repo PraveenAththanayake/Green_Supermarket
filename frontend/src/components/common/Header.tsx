@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import { FaRegBell } from "react-icons/fa6";
@@ -6,18 +7,45 @@ import { CgProfile } from "react-icons/cg";
 import SearchBar from "./searchBar";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/variants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getLoggedInUser,
   isUserLoggedIn,
+  logout,
 } from "../../services/auth/AuthService";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+import Popper, { PopperPlacementType } from "@mui/material/Popper";
+import Typography from "@mui/material/Typography";
+import Fade from "@mui/material/Fade";
+import Paper from "@mui/material/Paper";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
   const isAuth = isUserLoggedIn();
   const LoggedInUser = getLoggedInUser();
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+  const [open, setOpen] = React.useState(false);
+  const [placement, setPlacement] = React.useState<PopperPlacementType>();
+
+  const handleClick =
+    (newPlacement: PopperPlacementType) =>
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+      setOpen((prev) => placement !== newPlacement || !prev);
+      setPlacement(newPlacement);
+    };
+
+  const navigator = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigator("/login");
+  }
+
   return (
     <motion.div
       variants={fadeIn("down", 0.2)}
@@ -60,13 +88,42 @@ const Header = () => {
           </Link>
 
           {isAuth ? (
-            <Link to="">
-              <Tooltip title={LoggedInUser}>
-                <IconButton>
-                  <CgProfile className="hover:text-customGreen" />
-                </IconButton>
-              </Tooltip>
-            </Link>
+            <Box>
+              <Popper
+                // Note: The following zIndex style is specifically for documentation purposes and may not be necessary in your application.
+                sx={{ zIndex: 1200 }}
+                open={open}
+                anchorEl={anchorEl}
+                placement={placement}
+                transition
+              >
+                {({ TransitionProps }) => (
+                  <Fade {...TransitionProps} timeout={350}>
+                    <Paper>
+                      <Typography
+                        sx={{ p: 2, width: "100%" }}
+                        className="flex-col flexCenter gap-y-3"
+                      >
+                        <span className="text-2xl font-semibold capitalize">
+                          Hi! {LoggedInUser}
+                        </span>
+                        <Link to="/login">
+                          <button
+                            className="px-4 py-1 font-medium text-white rounded-default bg-customGreen hover:bg-darkerGreen"
+                            onClick={handleLogout}
+                          >
+                            Log Out
+                          </button>
+                        </Link>
+                      </Typography>
+                    </Paper>
+                  </Fade>
+                )}
+              </Popper>
+              <button onClick={handleClick("bottom")}>
+                <CgProfile className="hover:text-customGreen" />
+              </button>
+            </Box>
           ) : (
             <Link to="/register">
               <Tooltip title="Please sign in!">

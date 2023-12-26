@@ -28,5 +28,10 @@ export const isUserLoggedIn = () => {
 
 export const getLoggedInUser = () => {
   const username = sessionStorage.getItem("authenticatedUser");
-  return username ? username : null;
+  return username;
+};
+
+export const logout = () => {
+  localStorage.clear();
+  sessionStorage.clear();
 };
