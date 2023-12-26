@@ -1,138 +1,13 @@
-// import leftBG from "../../../public/images/Login/LogingVector.png";
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
-// import { FaGoogle } from "react-icons/fa";
-// import {
-//   loginApiCall,
-//   savedLoggedInUser,
-//   storeToken,
-// } from "../../services/auth/AuthService";
-// import { useNavigate } from "react-router-dom";
-
-// const schema = yup.object().shape({
-//   username: yup
-//     .string()
-//     .required("Email or Username is required")
-//     .test("username", "Enter a valid Email or Username", (value) => {
-//       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//       const usernameRegex = /^[a-zA-Z0-9_]+$/;
-
-//       return emailRegex.test(value) || usernameRegex.test(value);
-//     }),
-//   password: yup.string().required("Password is required"),
-// });
-
-// const Login = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({
-//     resolver: yupResolver(schema),
-//   });
-
-//   const navigator = useNavigate();
-
-//   const onSubmit = (data: any) => {
-//     loginApiCall(data.username, data.password)
-//       .then((res) => {
-//         const token =
-//           "Basic" + window.btoa(data.username + ":" + data.password);
-//         savedLoggedInUser(data.username);
-//         storeToken(token);
-//         navigator("/");
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//       });
-//   };
-
-//   return (
-//     <>
-//       <div className="flex justify-between max-h-screen">
-//         <div className="flex-1 px-[50px]">
-//           <h1 className="font-nunito font-extrabold text-[24px] mt-[43px]">
-//             <span className="text-[#09965D]">GREEN</span> SUPERMARKET
-//           </h1>
-//           <div className="flex justify-center items-center mt-[137px]">
-//             <div className="w-[406px]">
-//               <h2 className="font-nunito font-bold text-[48px] text-center">
-//                 Hi there!
-//               </h2>
-//               <p className="text-center mb-[32px]">
-//                 Welcome to green supermarket
-//               </p>
-//               <button className="flex items-center justify-center border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] mb-[80px]">
-//                 <FaGoogle color="black" className="mr-[20px]" />
-//                 Log in with Google
-//               </button>
-//               <form onSubmit={handleSubmit(onSubmit)}>
-//                 <input
-//                   {...register("username")}
-//                   className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-//                   placeholder="Email address"
-//                 />
-//                 <p className="text-red-500">{errors.username?.message}</p>
-
-//                 <input
-//                   {...register("password")}
-//                   type="password"
-//                   className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-//                   placeholder="Password"
-//                 />
-//                 <p className="text-red-500">{errors.password?.message}</p>
-
-//                 <a
-//                   href="#"
-//                   className="inline-block text-[14px] text-[#848482] ml-[300px]"
-//                 >
-//                   Forgot password
-//                 </a>
-
-//                 <button
-//                   type="submit"
-//                   className="w-full mt-[83px] h-[56px] bg-[#53B176] text-[20px] font-bold text-white rounded-[50px] mb-[12px]"
-//                 >
-//                   Log in
-//                 </button>
-//               </form>
-//               <p className="font-medium text-[14px] text-[#848482] text-center">
-//                 Don't have an account?{" "}
-//                 <a className="font-bold text-black" href="/register">
-//                   Sign up
-//                 </a>
-//               </p>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="relative flex justify-end flex-1">
-//           <img
-//             className="max-w-[704px] w-full h-screen object-fill"
-//             src={leftBG}
-//             alt="left-bg"
-//           />
-//           <div className="text-center absolute top-[320px] right-[120px] leading-[80px]">
-//             <h3 className="font-nunito text-[64px]">Welcome!</h3>
-//             <h3 className="font-nunito text-[48px]">back to</h3>
-//             <h3 className="font-nunito text-[48px]">GREEN Supermarket!</h3>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Login;
-
+import leftBG from "../../../public/images/Login/LogingVector.png";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa";
 import {
   loginApiCall,
   savedLoggedInUser,
   storeToken,
 } from "../../services/auth/AuthService";
+import { Link, useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -161,62 +36,90 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
-      <br /> <br />
-      <div className="row">
-        <div className="col-md-6 offset-md-3">
-          <div className="card">
-            <div className="card-header">
-              <h2 className="text-center"> Login Form </h2>
-            </div>
+    <>
+      <div className="flex-col min-h-screen gap-5 p-3 md:max-h-max flexCenter md:flexBetween md:flex-row">
+        <div className="flexCenter flex-col lg:px-[50px]">
+          <h1 className="font-nunito font-extrabold text-3xl lg:text-[24px]  underline underline-offset-8 md:no-underline">
+            <span className="text-[#09965D]">GREEN</span> SUPERMARKET
+          </h1>
+          <div className="flex justify-center items-center mt-8 lg:mt-[10%]">
+            <div className="w-full">
+              <h2 className="font-nunito font-bold text-2xl lg:text-[48px] text-center">
+                Hi there !
+              </h2>
+              <p className="text-center mb-[32px]">
+                Welcome to green supermarket
+              </p>
+              {/* <button className="flex items-center justify-center border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] mb-[80px]">
+                <FaGoogle color="black" className="mr-[20px]" />
+                Log in with Google
+              </button> */}
+              <form className="flex-col gap-3 flexCenter">
+                {/* <input
+                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
+                  placeholder="Email address"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                  type="password"
+                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                /> */}
+                <TextField
+                  label="Username or Email"
+                  variant="outlined"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-[90vw] md:w-[45vw] lg:w-[40vw]"
+                />
+                <TextField
+                  label="Password"
+                  variant="outlined"
+                  value={password}
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-[90vw] md:w-[45vw] lg:w-[40vw]"
+                />
 
-            <div className="card-body">
-              <form>
-                <div className="mb-3 row">
-                  <label className="col-md-3 control-label">
-                    {" "}
-                    Username or Email
-                  </label>
-                  <div className="col-md-9">
-                    <input
-                      type="text"
-                      name="username"
-                      className="form-control"
-                      placeholder="Enter username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    ></input>
-                  </div>
-                </div>
-
-                <div className="mb-3 row">
-                  <label className="col-md-3 control-label"> Password </label>
-                  <div className="col-md-9">
-                    <input
-                      type="password"
-                      name="password"
-                      className="form-control"
-                      placeholder="Enter password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    ></input>
-                  </div>
-                </div>
-
-                <div className="mb-3 form-group">
-                  <button
-                    className="btn btn-primary"
-                    onClick={(e) => handleLoginForm(e)}
-                  >
-                    Submit
-                  </button>
-                </div>
+                <Link
+                  to="#"
+                  className="inline-block text-sm text-[#848482] lg:ml-[300px] hover:underline underline-offset-4"
+                >
+                  Forgot password ?
+                </Link>
+                <button
+                  type="submit"
+                  className="w-[80vw] py-2 mt-8 bg-[#53B176] text-4xl font-bold text-white rounded-[20px] mb-[12px] md:w-[30vw] lg:mt-[83px]"
+                  onClick={(e) => handleLoginForm(e)}
+                >
+                  Log in
+                </button>
               </form>
+              <p className="font-medium text-[14px] text-[#848482] text-center">
+                Don't have an account?{" "}
+                <a
+                  className="ml-1 font-bold text-black hover:underline underline-offset-4"
+                  href="/register"
+                >
+                  Sign up
+                </a>
+              </p>
             </div>
           </div>
         </div>
+        <div className="relative hidden w-full max-h-screen md:flex">
+          <img className="object-cover w-full" src={leftBG} alt="left-bg" />
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-[60px] xl:leading-[80px] font-nunito whitespace-nowrap">
+            <h3 className="text-8xl xl:text-[64px]">Welcome!</h3>
+            <h3 className="text-6xl xl:text-[48px]">back to</h3>
+            <h3 className="text-6xl xl:text-[48px]">GREEN Supermarket!</h3>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
