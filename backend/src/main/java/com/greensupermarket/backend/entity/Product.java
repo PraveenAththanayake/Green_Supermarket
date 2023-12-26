@@ -42,14 +42,11 @@ public class Product {
     @Column(name = "otherImages", nullable = true)
     private List<String> otherImages;
 
-    @Column(name = "life", nullable = true)
-    private Number life;
-
     @Column(name = "MFG", nullable = true)
     private Date mfg;
 
     @Column(name = "type")
-    private int type;
+    private String type;
 
     @Column(name = "category")
     private String category;

@@ -14,10 +14,10 @@ public class ProductMapper {
                 product.getDescription(),
                 product.getMainImage(),
                 product.getOtherImages(),
-                product.getLife(),
                 product.getMfg(),
                 product.getType(),
                 product.getCategory()
+
         );
     }
 
@@ -29,10 +29,9 @@ public class ProductMapper {
                 productDto.getTags(),
                 productDto.getBrand(),
                 productDto.getDescription(),
-                productDto.getMainImage(),
-                productDto.getOtherImages(),
-                productDto.getLife(),
-                productDto.getMfg(),
+                 productDto.getMainImage(),
+                 productDto.getOtherImages(),
+                 productDto.getMfg(),
                 productDto.getType(),
                 productDto.getCategory()
         );

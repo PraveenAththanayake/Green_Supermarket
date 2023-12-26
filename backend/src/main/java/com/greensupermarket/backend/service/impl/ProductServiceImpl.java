@@ -50,7 +50,6 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(updatedProduct.getDescription());
         product.setMainImage(updatedProduct.getMainImage());
         product.setOtherImages(updatedProduct.getOtherImages());
-        product.setLife(updatedProduct.getLife());
         product.setMfg(updatedProduct.getMfg());
         product.setType(updatedProduct.getType());
         product.setCategory(updatedProduct.getCategory());

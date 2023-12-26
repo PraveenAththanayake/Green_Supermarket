@@ -21,8 +21,7 @@ public class ProductDto {
     private String description;
     private String mainImage;
     private List<String> otherImages;
-    private Number life;
     private Date mfg;
-    private int type;
+    private String type;
     private String category;
 }
