@@ -86,7 +86,7 @@ const Login = () => {
 
                 <Link
                   to="#"
-                  className="inline-block text-sm text-[#848482] lg:ml-[300px] hover:underline underline-offset-4"
+                  className="inline-block text-sm text-[#848482] hover:underline underline-offset-4"
                 >
                   Forgot password ?
                 </Link>

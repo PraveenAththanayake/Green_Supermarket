@@ -1,11 +1,13 @@
 import leftBG from "../../../public/images/Login/LogingVector.png";
 // import { FaGoogle } from "react-icons/fa";
 import { registerApiCall } from "../../services/auth/AuthService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextField from "@mui/material/TextField";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import React from "react";
 
 const schema = yup.object().shape({
   name: yup.string().required("Full name is required"),
@@ -14,7 +16,15 @@ const schema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const Register = () => {
+  const navigator = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,14 +33,30 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: object) => {
-    registerApiCall(data)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  interface formData {
+    name: string;
+    username: string;
+    email: string;
+    password: string;
+  }
+
+  const onSubmit = (data: formData) => {
+    {
+      registerApiCall(data)
+        .then((res) => {
+          setTimeout(() => {
+            navigator("/login");
+          }, 3000);
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err.response && err.response.status === 400) {
+            const errorMessage = "Username or Email already exists";
+
+            window.alert(errorMessage);
+          }
+        });
+    }
   };
   return (
     <>
@@ -51,56 +77,55 @@ const Register = () => {
                 <FaGoogle color="black" className="mr-[20px]" />
                 Log in with Google
               </button> */}
-              <form
-                className="flex-col gap-3 flexCenter"
-                onClick={handleSubmit(onSubmit)}
-              >
-                {/* <input
-                  {...register("name")}
-                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-                  placeholder="Full name"
-                />
-                <p className="text-red-500">{errors.name?.message}</p>
-                <input
-                  {...register("username")}
-                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-                  placeholder="User name"
-                />
-                <p className="text-red-500">{errors.username?.message}</p>
-
-                <input
-                  {...register("email")}
-                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-                  placeholder="Email address"
-                />
-                <p className="text-red-500">{errors.email?.message}</p>
-
-                <input
-                  {...register("password")}
-                  type="password"
-                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-                  placeholder="Password"
-                />
-                <p className="text-red-500">{errors.password?.message}</p> */}
+              <form className="flex-col gap-3 flexCenter">
                 <TextField
                   {...register("name")}
-                  label="Username"
+                  type="text"
+                  label="Full Name"
                   variant="outlined"
                   className="w-[90vw] md:w-[45vw] lg:w-[40vw]"
                 />
+                {errors.name && (
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    sx={{ width: "100%" }}
+                  >
+                    {errors.name?.message}
+                  </Alert>
+                )}
                 <TextField
                   {...register("username")}
+                  type="text"
                   label="Username"
                   variant="outlined"
                   className="w-[90vw] md:w-[45vw] lg:w-[40vw]"
                 />
+                {errors.username && (
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    sx={{ width: "100%" }}
+                  >
+                    {errors.username?.message}
+                  </Alert>
+                )}
                 <TextField
                   {...register("email")}
-                  label="Username"
+                  type="email"
+                  label="Email"
                   variant="outlined"
                   className="w-[90vw] md:w-[45vw] lg:w-[40vw]"
                 />
-                <p className="text-red-500">{errors.email?.message}</p>
+                {errors.email && (
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    sx={{ width: "100%" }}
+                  >
+                    {errors.email?.message}
+                  </Alert>
+                )}
                 <TextField
                   {...register("password")}
                   label="Password"
@@ -108,19 +133,27 @@ const Register = () => {
                   type="password"
                   className="w-[90vw] md:w-[45vw] lg:w-[40vw]"
                 />
-                <p className="text-red-500">{errors.password?.message}</p>
-
+                {errors.password && (
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    sx={{ width: "100%" }}
+                  >
+                    {errors.password?.message}
+                  </Alert>
+                )}
                 <Link
                   to="#"
-                  className="inline-block text-sm text-[#848482] lg:ml-[300px] hover:underline underline-offset-4"
+                  className="inline-block text-sm text-[#848482] hover:underline underline-offset-4"
                 >
                   Forgot password ?
                 </Link>
                 <button
                   type="submit"
                   className="w-[80vw] py-2 mt-8 bg-[#53B176] text-4xl font-bold text-white rounded-[20px] mb-[12px] md:w-[30vw] lg:mt-[83px]"
+                  onClick={handleSubmit(onSubmit)}
                 >
-                  Log in
+                  Create Account
                 </button>
               </form>
               <p className="font-medium text-[14px] text-[#848482] text-center">
