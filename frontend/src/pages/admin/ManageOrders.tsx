@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { CategoriesList } from "../../constants/CategoriesList";
 import ColumnGroupingTable from "../../components/admin/Table";
+import { products } from "../../constants/ProductList";
 
 interface ManageProductsProps {
   openAddProductModal: () => void;
@@ -16,16 +17,20 @@ interface ManageProductsProps {
 const ManageProducts: React.FC<ManageProductsProps> = ({
   openAddProductModal,
 }) => {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<string | null>(null);
+  const [status, setStatus] = useState("");
+  const [search, setSearch] = useState<string>("");
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
   };
 
-  const [status, setStatus] = useState("");
-
   const handleChangeStatus = (event: SelectChangeEvent) => {
     setStatus(event.target.value as string);
+  };
+
+  const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
   };
 
   return (
@@ -42,21 +47,17 @@ const ManageProducts: React.FC<ManageProductsProps> = ({
       <div className="gap-5 my-8 flexBetween">
         <Box sx={{ width: "50%" }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <InputLabel id="category-label">Category</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={category}
+              labelId="category-label"
+              id="category-select"
+              value={category || "none"}
               label="Category"
               onChange={handleChangeCategory}
             >
               <MenuItem value="none">None</MenuItem>
               {CategoriesList.map((category) => (
-                <MenuItem
-                  key={category.id}
-                  value="name"
-                  onClick={() => setCategory(category.id)}
-                >
+                <MenuItem key={category.id} value={category.id}>
                   {category.name}
                 </MenuItem>
               ))}
@@ -65,16 +66,16 @@ const ManageProducts: React.FC<ManageProductsProps> = ({
         </Box>
         <Box sx={{ width: "50%" }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+            <InputLabel id="status-label">Status</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="status-label"
+              id="status-select"
               value={status}
               label="Status"
               onChange={handleChangeStatus}
             >
               <MenuItem value="none">None</MenuItem>
-              <MenuItem value="In-Stock">In Stock</MenuItem>
+              <MenuItem value="in-stock">In Stock</MenuItem>
               <MenuItem value="out-of-stock">Out of Stock</MenuItem>
             </Select>
           </FormControl>
@@ -84,7 +85,10 @@ const ManageProducts: React.FC<ManageProductsProps> = ({
             freeSolo
             id="free-solo-2-demo"
             disableClearable
-            options={CategoriesList.map((option) => option.name)}
+            options={[
+              ...CategoriesList.map((option) => option.name),
+              ...products.map((option) => option.name),
+            ]}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -93,13 +97,18 @@ const ManageProducts: React.FC<ManageProductsProps> = ({
                   ...params.InputProps,
                   type: "search",
                 }}
+                onChange={handleChangeSearch}
               />
             )}
           />
         </Box>
       </div>
       <div>
-        <ColumnGroupingTable categoryFilter={category} />
+        <ColumnGroupingTable
+          categoryFilter={category}
+          statusFilter={status}
+          searchFilter={search}
+        />
       </div>
     </div>
   );
