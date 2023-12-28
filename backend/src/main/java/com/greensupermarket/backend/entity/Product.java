@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,18 +33,26 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @Lob
     @Column(name = "mainImage", nullable = true)
     private String mainImage;
 
+    @Lob
     @Column(name = "otherImages", nullable = true)
-    private List<String> otherImages;
+    private String otherImages;
 
-    @Column(name = "MFG", nullable = true)
-    private Date mfg;
+//    @Column(name = "MFG", nullable = true)
+//    private Date mfg;
 
     @Column(name = "type")
     private String type;
 
     @Column(name = "category")
     private String category;
+
+    @Column(name = "price")
+    private double price;
+
+    @Column(name = "discountPrice")
+    private double discountPrice;
 }

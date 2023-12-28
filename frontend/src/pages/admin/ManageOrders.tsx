@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,18 +8,33 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { CategoriesList } from "../../constants/CategoriesList";
 import ColumnGroupingTable from "../../components/admin/Table";
-import { products } from "../../constants/ProductList";
+import { fetchProduct } from "../../services/api/fetchProduct";
+import { ProductData } from "../../types";
 
 interface ManageProductsProps {
-  openAddProductModal: () => void;
+  AddProductDialogModal: () => void;
 }
 
 const ManageProducts: React.FC<ManageProductsProps> = ({
-  openAddProductModal,
+  AddProductDialogModal,
 }) => {
   const [category, setCategory] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const [search, setSearch] = useState<string>("");
+  const [products, setProducts] = useState<ProductData[]>([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -39,7 +54,7 @@ const ManageProducts: React.FC<ManageProductsProps> = ({
         <h1 className="text-4xl font-semibold">Products</h1>
         <button
           className="px-4 py-2 text-white rounded-md bg-customGreen"
-          onClick={openAddProductModal}
+          onClick={AddProductDialogModal}
         >
           Add Product
         </button>
@@ -87,7 +102,7 @@ const ManageProducts: React.FC<ManageProductsProps> = ({
             disableClearable
             options={[
               ...CategoriesList.map((option) => option.name),
-              ...products.map((option) => option.name),
+              ...products.map((option) => option.productName),
             ]}
             renderInput={(params) => (
               <TextField

@@ -19,7 +19,7 @@ const Sidebar = () => {
       case 2:
         return <AddProduct />;
       case 3:
-        return <ManageProducts openAddProductModal={handleAddProductClick} />;
+        return <ManageProducts AddProductDialogModal={handleAddProductClick} />;
     }
   };
 

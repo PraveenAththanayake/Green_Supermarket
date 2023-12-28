@@ -1,5 +1,5 @@
 // ColumnGroupingTable.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,26 +8,35 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { products } from "../../constants/ProductList";
+import { fetchProduct, deleteProduct } from "../../services/api/fetchProduct";
+import { ProductData } from "../../types";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from "@mui/icons-material/Update";
+import IconButton from "@mui/material/IconButton";
+import UpdateProductModal from "./DialogModal";
 
 interface Column {
   id: string;
   label: string;
   minWidth?: number;
   align?: "right";
-  format?: (value: number) => string;
+  format?: (value: any) => React.ReactNode;
 }
 
 const productsListTitle = [
-  "name",
-  "imageUrl",
+  "id",
+  "productName",
+  "mainImage",
+  "otherImages",
+  "tags",
+  "brand",
+  "description",
+  "type",
   "price",
   "discountPrice",
   "stock",
   "status",
-  "type",
-  "date",
-  "brand",
   "category",
 ];
 
@@ -35,34 +44,26 @@ const columns: Column[] = productsListTitle.map((product) => ({
   id: product,
   label: product,
   minWidth: 170,
-  align: "right",
-  format: (value: number) => value.toLocaleString("en-US"),
-}));
-
-interface Data {
-  name: string;
-  imageUrl: string;
-  price: number;
-  discountPrice: number;
-  stock: number;
-  status: string;
-  type: string;
-  date: string;
-  brand: string;
-  category: string;
-}
-
-const rows: Data[] = products.map((product) => ({
-  name: product.name,
-  imageUrl: product.imageUrl,
-  price: product.price,
-  discountPrice: product.discountPrice,
-  stock: product.stock,
-  type: product.type,
-  date: product.date,
-  brand: product.brand,
-  category: product.category,
-  status: product.stock > 0 ? "in-stock" : "out-of-stock",
+  align: "center",
+  format: (value: any) => {
+    if (product === "mainImage" || product === "otherImages") {
+      const images = Array.isArray(value) ? value : [value];
+      return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Product ${product} ${index}`}
+              style={{ maxWidth: "100px", maxHeight: "100px" }}
+            />
+          ))}
+        </div>
+      );
+    } else {
+      return value ? value.toLocaleString("en-US") : "";
+    }
+  },
 }));
 
 interface ColumnGroupingTableProps {
@@ -76,8 +77,63 @@ export default function ColumnGroupingTable({
   statusFilter,
   searchFilter,
 }: ColumnGroupingTableProps) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [products, setProducts] = useState<ProductData[]>([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(
+    null
+  );
+
+  const handleUpdate = (row: ProductData) => {
+    setSelectedProduct(row);
+    setOpenModal(true);
+  };
+
+  const handleView = (row: ProductData) => {
+    console.log("Viewing product:", row);
+  };
+
+  const handleDelete = async (productId: string) => {
+    try {
+      await deleteProduct(productId);
+      // Remove the deleted product from the state
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== productId)
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const rows: ProductData[] = products.map((product) => ({
+    id: product.id,
+    productName: product.productName,
+    mainImage: product.mainImage,
+    otherImages: product.otherImages,
+    tags: product.tags,
+    brand: product.brand,
+    description: product.description,
+    type: product.type,
+    price: product.price,
+    discountPrice: product.discountPrice,
+    stock: product.stock,
+    category: product.category,
+    status: product.stock > 0 ? "in-stock" : "out-of-stock",
+  }));
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -112,7 +168,7 @@ export default function ColumnGroupingTable({
           .toLowerCase()
           .replace(/\s/g, "")
           .includes(searchFilterNormalized) ||
-        row.name
+        row.productName
           .toLowerCase()
           .replace(/\s/g, "")
           .includes(searchFilterNormalized)
@@ -120,51 +176,99 @@ export default function ColumnGroupingTable({
   }
 
   return (
-    <Paper sx={{ width: "100%" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
+    <>
+      <Paper sx={{ width: "100%" }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
                 <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  align="center"
+                  style={{
+                    minWidth: 170,
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    textTransform: "capitalize",
+                  }}
                 >
-                  {column.label}
+                  Actions
                 </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredRows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === "number"
-                          ? column.format(value)
-                          : value}
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{
+                      minWidth: column.minWidth,
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredRows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                    <TableCell align="center">
+                      <IconButton
+                        onClick={() => handleView(row)}
+                        aria-label="view"
+                      >
+                        <VisibilityIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => handleUpdate(row)}
+                        aria-label="update"
+                      >
+                        <UpdateIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => handleDelete(row.id)}
+                        aria-label="delete"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ textAlign: "center" }}
+                        className="truncate flexCenter"
+                      >
+                        {column.format
+                          ? column.format(row[column.id])
+                          : row[column.id]}
                       </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={filteredRows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+                    ))}
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={filteredRows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+      <UpdateProductModal
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false);
+          setSelectedProduct(null);
+        }}
+        product={selectedProduct}
       />
-    </Paper>
+    </>
   );
 }

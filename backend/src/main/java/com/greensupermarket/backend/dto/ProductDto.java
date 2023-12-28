@@ -5,9 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,8 +17,10 @@ public class ProductDto {
     private String brand;
     private String description;
     private String mainImage;
-    private List<String> otherImages;
-    private Date mfg;
+    private String otherImages;
+//    private Date mfg;
     private String type;
     private String category;
+    private double price;
+    private double discountPrice;
 }

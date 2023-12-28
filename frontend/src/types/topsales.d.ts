@@ -1,8 +1,16 @@
-export interface TopSales {
+export interface ProductData {
   id: number;
-  name: string;
-  rating: number;
+  productName: string;
+  mainImage: string;
+  otherImages: string[];
+  description: string;
+  tags: string;
+  brand: string;
+  // mfg: Date;
+  type: string;
   price: number;
-  discount: number;
-  imgLink: string;
+  discountPrice: number;
+  stock: number;
+  status: string;
+  category: string;
 }

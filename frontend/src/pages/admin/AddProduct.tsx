@@ -1,4 +1,4 @@
-import Dropzone from "../../components/Dropzone";
+// import Dropzone from "../../components/Dropzone";
 import AdminButton from "../../components/buttons/AdminButton";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,16 +6,17 @@ import * as yup from "yup";
 import { CategoriesList } from "../../constants/CategoriesList";
 import { addProduct } from "../../services/api/fetchProduct";
 import { useNavigate } from "react-router-dom";
+import { TextField } from "@mui/material";
 
 const AddProduct = () => {
   const schema = yup.object().shape({
     productName: yup.string().required("Product Name is required!"),
-    stock: yup.string().required("Stock Limit is required!"),
+    stock: yup.number().required("Stock Limit is required!"),
     tags: yup.string().required("Tags is required!"),
     brand: yup.string().required("Brand is required!"),
     description: yup.string().required("Description is required!"),
-    mainImage: yup.mixed().required("Main Image is required!"),
-    otherImages: yup.mixed(),
+    mainImage: yup.string().required("Main Image is required!"), // Assuming mainImage is a URL
+    otherImages: yup.string(), // Assuming otherImages is an array of URLs
     price: yup.string().required("Price (LKR) is required!"),
     mfg: yup.date(),
     type: yup.string().required("Type is required!"),
@@ -33,50 +34,24 @@ const AddProduct = () => {
     resolver: yupResolver(schema),
   });
 
-  interface FormData {
-    productName: string;
-    tags: string;
-    brand: string;
-    description: string;
-    mainImage: File[];
-    otherImages: File[];
-    type: string;
-    stock: string;
-    price: string;
-    discountPrice: string;
-    category: string;
-    mfg: Date;
-  }
-
   const navigator = useNavigate();
 
-  const onSubmit = async (data: FormData) => {
-    console.log("Form Submitted:", data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await addProduct(data);
+      console.log(response);
 
-    const { mainImage, otherImages, ...restData } = data;
-
-    const mainImagePaths = mainImage.map((file) => URL.createObjectURL(file));
-    const otherImagePaths = otherImages.map((file) =>
-      URL.createObjectURL(file)
-    );
-
-    const updatedData = {
-      ...restData,
-      mainImage: mainImagePaths[0], // Use only the first image for the main image
-      otherImages: otherImagePaths,
-    };
-
-    console.log(updatedData);
-
-    addProduct(updatedData).then((res) => {
-      console.log(res.data);
-      navigator("/admin");
-    });
+      // Optionally, you can navigate to another page after successful submission
+      // navigator("/path/to/redirect");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleCancel = () => {
     reset();
   };
+
   return (
     <div>
       <h1 className="admin-Headers">Add Product</h1>
@@ -118,7 +93,7 @@ const AddProduct = () => {
                   </p>
                 </label>
                 <label htmlFor="tags" className="adminLabel">
-                  Tags(This tag help you in search result)
+                  Tags(This tag helps you in search results)
                   <input
                     type="text"
                     className="adminInput"
@@ -151,23 +126,31 @@ const AddProduct = () => {
                 </p>
               </label>
               <div className="flex flex-row justify-between">
-                <label htmlFor="mainImage" className="flex flex-col">
-                  <span className="my-4">Main Image</span>
-                  <Dropzone
-                    onFilesSelected={(files) => setValue("mainImage", files)}
-                    maxFiles={1}
+                <label htmlFor="mainImage" className="flex flex-col mt-2">
+                  <TextField
+                    {...register("mainImage")}
+                    type="text"
+                    label="Main Image"
+                    variant="outlined"
+                    className="w-[90vw] md:w-[45vw] lg:w-[30vw]"
                   />
                   <p className="text-xs italic text-red">
                     {errors.mainImage?.message}
                   </p>
                 </label>
 
-                <label htmlFor="otherImages" className="flex flex-col">
-                  <span className="my-4">Other Images</span>
-                  <Dropzone
-                    onFilesSelected={(files) => setValue("otherImages", files)}
-                    maxFiles={3}
+                <label htmlFor="otherImages" className="flex flex-col mt-2">
+                  {/* Use an array input for otherImages */}
+                  <TextField
+                    {...register("otherImages")}
+                    type="text"
+                    label="Other Images (Comma-separated URLs)"
+                    variant="outlined"
+                    className="w-[90vw] md:w-[45vw] lg:w-[30vw]"
                   />
+                  <p className="text-xs italic text-red">
+                    {errors.otherImages?.message}
+                  </p>
                 </label>
               </div>
             </div>
@@ -188,14 +171,6 @@ const AddProduct = () => {
                   min={1}
                 />
               </label>
-              <label htmlFor="MFG" className="adminLabel">
-                MFG
-                <input
-                  type="datetime-local"
-                  className="adminInput"
-                  {...register("mfg")}
-                />
-              </label>
             </div>
             <div className="w-[963px] border border-gray/20 mt-4 rounded-[5px] grid grid-cols-3 gap-x-[71px] gap-y-4 py-4 px-[19px]">
               <label htmlFor="type" className="adminLabel">
@@ -210,7 +185,7 @@ const AddProduct = () => {
                 </p>
               </label>
               <label htmlFor="discountPrice" className="adminLabel">
-                Discount Price (If have)
+                Discount Price (If available)
                 <input
                   type="text"
                   className="adminInput"
@@ -234,33 +209,16 @@ const AddProduct = () => {
                   {errors.category?.message}
                 </p>
               </label>
-              {/* <label htmlFor="unit" className="adminLabel">
-                Unit
-                <input
-                  type="text"
-                  className="adminInput"
-                  {...register("unit")}
-                />
-                <p className="text-xs italic text-red">
-                  {errors.unit?.message}
-                </p>
-              </label>
-              <label htmlFor="status" className="adminLabel">
-                Status
-                <input
-                  type="text"
-                  className="adminInput"
-                  {...register("status")}
-                />
-                <p className="text-xs italic text-red">
-                  {errors.status?.message}
-                </p>
-              </label> */}
+              {/* Add more form fields as needed */}
             </div>
           </div>
           <div className="flex flex-row gap-8 my-[42px] pb-4 text-white">
             <AdminButton type="submit" name="Save" className="bg-customGreen" />
-            <AdminButton name="Cancel" className="bg-red" />
+            <AdminButton
+              name="Cancel"
+              className="bg-red"
+              onClick={handleCancel}
+            />
           </div>
         </div>
       </form>
