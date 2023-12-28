@@ -7,6 +7,7 @@ import CategoryPage from "./pages/client/category/categoryPage";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import { isUserLoggedIn } from "./services/auth/AuthService";
+import Checkout from "./pages/client/checkout/Checkout";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
@@ -53,6 +54,7 @@ function App() {
           />
           <Route path="/topsaver" element={<TopSales />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Suspense>
     </div>
