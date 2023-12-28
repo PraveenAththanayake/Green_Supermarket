@@ -1,23 +1,49 @@
+// Import the necessary modules
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Checkbox, TextField } from "@mui/material";
 import ClientLayout from "../ClientLayout";
 import * as yup from "yup";
 import { useState } from "react";
+import { submitCheckout } from "../../../services/api/checkoutService";
+import { useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
+// Create interfaces for form data
+export interface CheckoutFormData {
+  firstName: string;
+  lastName: string;
+  companyName?: string;
+  address: string;
+  country: string;
+  zipcode: string;
+  town: string;
+  phone: string;
+  email: string;
+  description?: string;
+}
+
+export interface SubmitCheckoutData extends CheckoutFormData {
+  paymentMethod: string;
+  totalPrice: number;
+}
+
+// Define the validation schema using yup
 const schema = yup.object().shape({
   firstName: yup.string().required("First Name is required"),
   lastName: yup.string().required("Last Name is required"),
   companyName: yup.string(),
   address: yup.string().required("Address is required"),
   country: yup.string().required("Country is required"),
-  zipcode: yup.string().required("Zipcode is required"),
+  zipcode: yup.number().required("Zipcode is required"),
   town: yup.string().required("Town is required"),
   phone: yup.string().required("Phone is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   description: yup.string(),
 });
 
+// Define the Checkout component
 const Checkout = () => {
   const {
     handleSubmit,
@@ -27,20 +53,38 @@ const Checkout = () => {
     resolver: yupResolver(schema),
   });
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
-  const [totalPrice, setTotalPrice] = useState(1549.0); // Set the default total price
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>("");
+  const [totalPrice, setTotalPrice] = useState<number>(1549.0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  const handlePaymentMethodChange = (event) => {
+  const navigator = useNavigate();
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
+  const handlePaymentMethodChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setSelectedPaymentMethod(event.target.value);
   };
 
-  const onSubmit = (data) => {
-    console.log({
-      ...data,
-      paymentMethod: selectedPaymentMethod,
-      totalPrice: totalPrice,
-    });
-    // Add your logic to handle form submission with the selected payment method and total price
+  const onSubmit = async (data: CheckoutFormData) => {
+    try {
+      const response = await submitCheckout({
+        ...data,
+        paymentMethod: selectedPaymentMethod,
+        totalPrice: totalPrice,
+      } as SubmitCheckoutData);
+      console.log(response.data);
+
+      // If the form is submitted successfully, show Snackbar and navigate to the home page
+      setSnackbarOpen(true);
+      navigator("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -131,6 +175,20 @@ const Checkout = () => {
             </button>
           </form>
         </div>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={handleCloseSnackbar}
+            severity="success"
+          >
+            Thank you! Your order has been placed.
+          </MuiAlert>
+        </Snackbar>
       </div>
     </ClientLayout>
   );
