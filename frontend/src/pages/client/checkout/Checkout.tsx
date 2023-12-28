@@ -1,14 +1,14 @@
 // Import the necessary modules
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Checkbox, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import ClientLayout from "../ClientLayout";
 import * as yup from "yup";
 import { useState } from "react";
 import { submitCheckout } from "../../../services/api/checkoutService";
-import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { PayPalButton } from "react-paypal-button-v2";
 
 // Create interfaces for form data
 export interface CheckoutFormData {
@@ -17,7 +17,7 @@ export interface CheckoutFormData {
   companyName?: string;
   address: string;
   country: string;
-  zipcode: string;
+  zipcode: number;
   town: string;
   phone: string;
   email: string;
@@ -43,45 +43,33 @@ const schema = yup.object().shape({
   description: yup.string(),
 });
 
-// Define the Checkout component
 const Checkout = () => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<SubmitCheckoutData>({
+    resolver: yupResolver<SubmitCheckoutData>(schema),
   });
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] =
-    useState<string>("");
-  const [totalPrice, setTotalPrice] = useState<number>(1549.0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
-  const navigator = useNavigate();
+  const totalPrice = 1000; // Replace 0 with the actual total price
 
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
 
-  const handlePaymentMethodChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSelectedPaymentMethod(event.target.value);
-  };
-
-  const onSubmit = async (data: CheckoutFormData) => {
+  const onSubmit = async (data: SubmitCheckoutData) => {
     try {
+      // Add the selected payment method to the data
       const response = await submitCheckout({
         ...data,
-        paymentMethod: selectedPaymentMethod,
-        totalPrice: totalPrice,
-      } as SubmitCheckoutData);
+      });
       console.log(response.data);
 
       // If the form is submitted successfully, show Snackbar and navigate to the home page
       setSnackbarOpen(true);
-      navigator("/");
+      // navigator("/");
     } catch (error) {
       console.error(error);
     }
@@ -89,7 +77,7 @@ const Checkout = () => {
 
   return (
     <ClientLayout>
-      <div className="w-full mb-20 flexCenter mt-14">
+      <div className="flex-col w-full mb-20 flexCenter mt-14">
         <div className="max-w-[1120px] flexCenter flex-col">
           <h1 className="text-3xl font-semibold text-center md:text-6xl">
             Checkout
@@ -106,19 +94,7 @@ const Checkout = () => {
                 {Object.keys(schema.fields).map((fieldName, index) => (
                   <div key={index} className="w-[80vw]">
                     <Controller
-                      name={
-                        fieldName as
-                          | "address"
-                          | "firstName"
-                          | "lastName"
-                          | "companyName"
-                          | "country"
-                          | "zipcode"
-                          | "town"
-                          | "phone"
-                          | "email"
-                          | "description"
-                      }
+                      name={fieldName as keyof CheckoutFormData}
                       control={control}
                       defaultValue=""
                       render={({ field }) => (
@@ -140,29 +116,9 @@ const Checkout = () => {
                 ))}
               </div>
             </div>
-            <div className="w-[80vw] max-h-[157px] bg-gray/20 rounded-md p-3 mt-4">
-              <h2 className="text-base font-normal">Select Payment</h2>
-              <div className="flex flex-row items-center">
-                <Checkbox
-                  checked={selectedPaymentMethod === "Cash on Delivery"}
-                  onChange={handlePaymentMethodChange}
-                  inputProps={{ "aria-label": "controlled" }}
-                  value="Cash on Delivery"
-                />
-                <span className="text-sm">Cash on Delivery</span>
-              </div>
-              <div className="flex flex-row items-center">
-                <Checkbox
-                  checked={selectedPaymentMethod === "Paypal"}
-                  onChange={handlePaymentMethodChange}
-                  inputProps={{ "aria-label": "controlled" }}
-                  value="Paypal"
-                />
-                <span className="text-sm">Paypal</span>
-              </div>
-            </div>
+
             <div className="w-[80vw] max-h-[157px] bg-gray/20 rounded-md p-3 mt-4 flexBetween text-2xl">
-              <h2 className="text-base text-2xl font-normal">Total:</h2>
+              <h2 className="text-base font-normal">Total:</h2>
               <span className="text-2xl text-customGreen">
                 LKR {totalPrice}
               </span>
@@ -175,6 +131,24 @@ const Checkout = () => {
             </button>
           </form>
         </div>
+        <div className="mt-4">
+          <PayPalButton
+            // Pass the ref to the component
+            options={{
+              clientId:
+                "AbzOuxKwEicX5cIStPqyASeNpkWvYHR04N2vdi78za17BqOsPsxllJSdkDMMmS8tBPe5RyuB0hYlTa27",
+              currency: "USD",
+            }}
+            amount={totalPrice}
+            onSuccess={(details: any, data: any) => {
+              alert(
+                "Transaction completed by " + details.payer.name.given_name
+              );
+              console.log({ details, data });
+            }}
+          />
+        </div>
+
         <Snackbar
           open={snackbarOpen}
           autoHideDuration={6000}
