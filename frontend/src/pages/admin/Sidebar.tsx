@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { AdminSideList } from "../../constants/AdminSideList";
 import Dashboard from "./Dashboard";
 import { AdminSideListInterface } from "../../types";
-import ManageProducts from "./ManageOrders";
+import ManageProducts from "./ManageProducts";
 import AddProduct from "./AddProduct";
+import Orders from "./Orders";
 
 const Sidebar = () => {
   const [selectedNav, setSelectedNav] = useState(AdminSideList[0].id);
@@ -20,6 +21,8 @@ const Sidebar = () => {
         return <AddProduct />;
       case 3:
         return <ManageProducts AddProductDialogModal={handleAddProductClick} />;
+      case 4:
+        return <Orders />;
     }
   };
 
