@@ -1,52 +1,83 @@
-import { IoIosStar } from "react-icons/io";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { IoCart } from "react-icons/io5";
+import { formatCurrency } from "../../utils/formatCurrency";
+import RemoveShoppingCart from "@mui/icons-material/RemoveShoppingCart";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useShoppingCart } from "../../store/CartContext";
+import { Link } from "react-router-dom";
 
-function ProductCard() {
+export interface Product {
+  id: number;
+  productName: string;
+  price: number;
+  discountPrice: number;
+  mainImage: string;
+  category: string;
+}
+
+interface Props {
+  product: Product;
+}
+
+function ProductCard({ product }: Props) {
+  const { getItemQuantity, increaseCartQuantity, removeFromCart } =
+    useShoppingCart();
+
+  const quantity = getItemQuantity(product.id);
+
   return (
-    <div className="h-[345px] w-[270px] sm:w-[240px] lg:w-[270px] rounded-lg shadow-lg shadow-gray/20 p-4 border border-gray/50">
+    <div className="h-[345px] w-[270px] sm:w-[240px] lg:w-[270px] rounded-lg shadow-lg shadow-gray/20 p-4 border border-gray/50 mb-10">
       <div className="bg-customGreen w-[43px] h-[24px] text-white rounded-[7px] text-xs flexCenter leading-[15.6px] font-semibold">
-        55%
+        {Math.floor(100 - (product.discountPrice / product.price) * 100)} %
       </div>
       <div className="flexCenter mt-[11px]">
         <img
-          src="/images/topsaverimages/anchor.png"
+          src={product.mainImage}
           alt="image"
-          className="w-[133px] h-[121px] object-cover"
+          className="w-[143px] h-[121px] object-contain"
         />
       </div>
-      <div className="w-[180px] h-[40px] text-xl leading-[20.4px] font-semibold mt-[27px]">
-        Anchor Full Cream Fresh Milk 1L
-      </div>
-      <div className="flex items-center flex-row mt-[6px] gap-3">
-        <div className="flex flex-row text-yellow">
-          <IoIosStar />
-          <IoIosStar />
-          <IoIosStar />
-          <IoIosStar />
-          <IoIosStar />
-        </div>
-        <span className=" text-gray">(4)</span>
+      <div className="w-[180px] h-[40px] text-xl leading-[20.4px] font-semibold mt-[50px]">
+        {product.productName}
       </div>
 
       <div className="flex items-center flex-row mt-[8px] gap-[14px]">
         <div className="font-semibold text-sm leading-[16.8px]">
-          <p className="text-gray">
-            LKR : <span className="text-customGreen">850.00</span>
-          </p>
+          <p className="text-gray">{formatCurrency(product.price)}</p>
         </div>
         <div className="flex flex-row justify-center text-red font-semibold text-[12px] leading-[14.4px]">
-          LKR 50 save
+          {formatCurrency(product.price - product.discountPrice)} save
         </div>
       </div>
 
-      <div className="flex items-center flex-row my-[12px] text-gray2 gap-[10px]">
-        <div className="text-5xl shadow-lg shadow-black/[15%] w-7 h-7 rounded-xs flexCenter rounded-sm">
-          <IoMdHeartEmpty />
+      <div className="flex items-center gap-2 mt-4 text-4xl text-gray/30">
+        <div className="hover:text-red flexCenter">
+          <FavoriteBorderIcon />
         </div>
-        <div className="text-5xl shadow-lg shadow-black/[15%] w-7 h-7 rounded-xs flexCenter rounded-sm">
-          <IoCart />
+        <div>
+          {quantity === 0 ? (
+            <button
+              className="hover:text-customGreen flexCenter"
+              onClick={() => increaseCartQuantity(product.id)}
+            >
+              <ShoppingCartIcon />
+            </button>
+          ) : (
+            <button
+              className="hover:text-customGreen flexCenter"
+              onClick={() => removeFromCart(product.id)}
+            >
+              <RemoveShoppingCart />
+            </button>
+          )}
         </div>
+
+        <Link
+          to={`/category/${product.category}/${product.id}`}
+          className="p-1 ml-5 rounded-full flexCenter hover:text-white hover:bg-darkerGreen"
+        >
+          <ArrowForwardIcon />
+        </Link>
       </div>
     </div>
   );
