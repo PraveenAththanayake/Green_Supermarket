@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Anchor Full Cream Fresh Milk 1L",
-    imageUrl: "/images/topsaverimages/anchor.png",
+    mainImage: "/images/topsaverimages/anchor.png",
     price: 850.0,
     discountPrice: 900.0,
     stock: 100,
@@ -15,7 +15,7 @@ export const products = [
   {
     id: 2,
     name: "Fresh Organic Apples (Pack of 6)",
-    imageUrl: "/images/topsaverimages/apples.png",
+    mainImage: "/images/topsaverimages/apples.png",
     price: 12.99,
     discountPrice: 14.99,
     stock: 0,
@@ -28,7 +28,7 @@ export const products = [
   {
     id: 3,
     name: "Premium Coffee Beans 500g",
-    imageUrl: "/images/topsaverimages/coffee.png",
+    mainImage: "/images/topsaverimages/coffee.png",
     price: 19.99,
     discountPrice: 22.99,
     stock: 0,
@@ -41,7 +41,7 @@ export const products = [
   {
     id: 4,
     name: "Organic Avocado Oil 250ml",
-    imageUrl: "/images/topsaverimages/avocado-oil.png",
+    mainImage: "/images/topsaverimages/avocado-oil.png",
     price: 50,
     discountPrice: 17.5,
     stock: 20,

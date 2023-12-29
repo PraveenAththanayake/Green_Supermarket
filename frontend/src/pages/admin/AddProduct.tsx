@@ -13,7 +13,7 @@ const AddProduct = () => {
     productName: yup.string().required("Product Name is required!"),
     stock: yup.number().required("Stock Limit is required!"),
     tags: yup.string().required("Tags is required!"),
-    brand: yup.string().required("Brand is required!"),
+    brand: yup.string(),
     description: yup.string().required("Description is required!"),
     mainImage: yup.string().required("Main Image is required!"), // Assuming mainImage is a URL
     otherImages: yup.string(), // Assuming otherImages is an array of URLs
@@ -110,9 +110,6 @@ const AddProduct = () => {
                     className="adminInput"
                     {...register("brand")}
                   />
-                  <p className="text-xs italic text-red">
-                    {errors.brand?.message}
-                  </p>
                 </label>
               </div>
               <label htmlFor="description" className="mt-4 adminLabel">

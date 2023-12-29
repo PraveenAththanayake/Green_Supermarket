@@ -1,23 +1,34 @@
 import { useParams } from "react-router-dom";
 import ClientLayout from "../ClientLayout";
-import ProductDesc from "./ProductDesc";
 import ProductDetails from "./ProductDetails";
 import ProductHeader from "./ProductHeader";
-import { useMemo } from "react";
-import { products } from "../../../constants/ProductList";
+import { useEffect, useState } from "react";
+import { fetchProduct } from "../../../services/api/fetchProduct";
+import { ProductData } from "../../../types";
 
 function ProductPageLayout() {
+  const [products, setProducts] = useState<ProductData[]>([]);
   const { productId } = useParams<{
     productId: string;
   }>();
 
-  const product = useMemo(
-    () => products.find((product) => product.id === Number(productId)),
-    [productId]
-  );
+  useEffect(() => {
+    getProducts();
+  }, []);
 
-  if (!productId) {
-    return <div>Invalid product ID</div>;
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const product = products.find((product) => product.id === Number(productId));
+
+  if (!productId || products.length === 0) {
+    return <div>Invalid product ID or no products available</div>;
   }
 
   if (!product) {
@@ -26,44 +37,32 @@ function ProductPageLayout() {
 
   const {
     price,
-    priceOne,
-    priceTwo,
-    sizeOne,
-    sizeTwo,
-    secondPrice,
-    save,
+    discountPrice,
     stock,
     type,
-    date,
-    life,
     brand,
     category,
     tags,
+    mainImage,
   } = product;
 
   return (
     <ClientLayout>
-      <div className="max-w-[70rem] mx-auto">
+      <div className="max-w-[70rem] mx-auto my-14">
         <div>
-          <ProductHeader name={product.name} />
+          <ProductHeader name={product.productName} />
           <hr className="border-1 border-gray my-6 md:my-[35px]" />
           <ProductDetails
             price={price}
-            priceOne={priceOne}
-            priceTwo={priceTwo}
-            sizeOne={sizeOne}
-            sizeTwo={sizeTwo}
-            secondPrice={secondPrice}
-            save={save}
+            discountedPrice={discountPrice}
             stock={stock}
             type={type}
-            date={date}
-            life={life}
             brand={brand}
             category={category}
             tags={tags}
+            mainImage={mainImage}
+            id={Number(productId)}
           />
-          <ProductDesc desc={product.desc} />
         </div>
       </div>
     </ClientLayout>

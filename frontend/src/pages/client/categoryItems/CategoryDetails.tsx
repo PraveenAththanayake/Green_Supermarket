@@ -49,18 +49,18 @@ const CategoryDetails = () => {
         </h1>
         <div className="flex-wrap gap-5 flexCenter">
           {products
-            .filter((product) => product.category.toLowerCase() == categoryId)
+            .filter((product) => product.category.toLowerCase() === categoryId)
             .map((product) => (
-              <Link
-                to={`/category/${categoryId}/${product.id}`}
-                key={product.id}
-              >
+              <div key={product.id}>
                 <CategoryProduct
+                  product={product} // Pass the entire product object
                   name={product.productName}
                   price={product.price}
+                  discountedPrice={product.discountPrice}
                   mainImage={product.mainImage}
+                  categoryId={categoryId}
                 />
-              </Link>
+              </div>
             ))}
         </div>
       </div>

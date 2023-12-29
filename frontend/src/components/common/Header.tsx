@@ -20,6 +20,8 @@ import Popper, { PopperPlacementType } from "@mui/material/Popper";
 import Typography from "@mui/material/Typography";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
+import { Badge } from "@mui/material";
+import { useShoppingCart } from "../../store/CartContext";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
@@ -30,6 +32,8 @@ const Header = () => {
   );
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState<PopperPlacementType>();
+
+  const { cartQuantity } = useShoppingCart();
 
   const handleClick =
     (newPlacement: PopperPlacementType) =>
@@ -83,8 +87,10 @@ const Header = () => {
           <Link to="" className="hidden hover:text-customGreen sm:block">
             <FaRegBell />
           </Link>
-          <Link to="">
-            <LuShoppingCart className="hover:text-customGreen" />
+          <Link to="/cart">
+            <Badge badgeContent={cartQuantity} color="primary">
+              <LuShoppingCart className="hover:text-customGreen" />
+            </Badge>
           </Link>
 
           {isAuth ? (

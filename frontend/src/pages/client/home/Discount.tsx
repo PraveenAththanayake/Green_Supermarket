@@ -1,5 +1,4 @@
 import { useEffect, useState, useMemo } from "react";
-import { TopsaleList } from "../../../constants/TopSalesList";
 import ProductItem from "../../../components/product/productItem";
 import { fetchProduct } from "../../../services/api/fetchProduct";
 import { ProductData } from "../../../types";
@@ -40,10 +39,6 @@ const Discount = () => {
   const formattedTime = useMemo(() => {
     return `${time.days} Days : ${time.hours} : ${time.minutes} : ${time.seconds}`;
   }, [time]);
-
-  const discountedProducts = useMemo(() => {
-    return TopsaleList.filter((product) => product.discount > 0);
-  }, []);
 
   useEffect(() => {
     getProducts();

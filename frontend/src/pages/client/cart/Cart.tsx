@@ -1,106 +1,114 @@
+// Cart.js
 import ClientLayout from "../ClientLayout";
 import ShoppingCart from "../../../components/cart/ShoppingCart";
 import AdminButton from "../../../components/buttons/AdminButton";
+import { useShoppingCart } from "../../../store/CartContext";
+import { useEffect, useState } from "react";
+import { fetchProduct } from "../../../services/api/fetchProduct";
+import { ProductData } from "../../../types";
 
 const Cart = () => {
+  const {
+    cartItems,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+  const [products, setProducts] = useState<ProductData[]>([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getTotalPrice = () => {
+    return cartItems.reduce(
+      (total, cartItem) =>
+        total +
+        cartItem.quantity *
+          (products.find((p) => p.id === cartItem.id)?.discountPrice ||
+            products.find((p) => p.id === cartItem.id)?.price ||
+            0),
+      0
+    );
+  };
+
   return (
     <ClientLayout>
-      <div className=" mx-40 mb-[410px] ">
-        <div className="items-center text-6xl font-semibold flexCenter">
-          <h1>Shopping Cart</h1>
+      <div className="flex-col mx-4 my-10 flexCenter">
+        <div className="mb-8 text-3xl font-semibold md:text-4xl lg:text-5xl">
+          Shopping Cart
         </div>
-        <div className="flex flex-row gap-5 ">
-          <div className="pt-20 ">
-            <div className=" w-[769px] h-[365px] border border-gray2">
-              <div className=" flex flex-row justify-between w-[767px]  items-center">
-                <div className=" flex flex-row w-[769px] h-[50px] bg-lightGray items-center text-base font-medium text-gray ">
-                  <div>
-                    <p className=" ml-[89px]">Products</p>
+        <div className="flexBetween flex-wrap gap-3 w-[90vw] md:w-[85vw] lg:w-[90vw]">
+          {/* <div className="p-4 bg-lightGray">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm text-gray">Products</p>
+                    <p className="text-sm text-gray">Price</p>
+                    <p className="text-sm text-gray">Quantity</p>
+                    <p className="text-sm text-gray">Total</p>
                   </div>
-                  <div>
-                    <p className=" ml-[220px]">Price</p>
-                  </div>
-                  <div>
-                    <p className=" ml-[106px]">Quantity</p>
-                  </div>
-                  <div>
-                    <p className=" ml-[94px]">Total</p>
-                  </div>
-                </div>
+                </div> */}
+          {cartItems.map((cartItem) => {
+            const item = products.find((i) => i.id === cartItem.id);
+            return (
+              <ShoppingCart
+                key={cartItem.id}
+                productName={item?.productName || ""}
+                price={item?.discountPrice || item?.price || 0}
+                mainImage={item?.mainImage || ""}
+                totalPrice={
+                  cartItem.quantity *
+                  (item?.discountPrice ? item.discountPrice : item?.price ?? 0)
+                }
+                onQuantityChange={(newQuantity) => {
+                  if (newQuantity > cartItem.quantity) {
+                    increaseCartQuantity(cartItem.id);
+                  } else if (newQuantity < cartItem.quantity) {
+                    decreaseCartQuantity(cartItem.id);
+                  }
+                }}
+                onRemove={() => removeFromCart(cartItem.id)}
+              />
+            );
+          })}
+        </div>
+
+        <div className="mt-8">
+          <div className="overflow-hidden border rounded-lg w-[90vw] md:w-[85vw] lg:w-[90vw]">
+            <div className="p-4 bg-lightGray">
+              <div className="flex justify-between">
+                <p className="text-base font-normal text-gray">Sub Total</p>
+                <p className="text-base font-normal">
+                  LKR {getTotalPrice().toFixed(2)}
+                </p>
               </div>
-              <ShoppingCart />
-              <hr className=" w-[725px] ml-[21px] mt-[15px]  border-gray2" />
-              <ShoppingCart />
-              <hr className=" w-[725px] ml-[21px] mt-[30px]  border-gray2" />
-              <ShoppingCart />
-            </div>
-            <div className=" flex flex-row justify-between pt-[55px] text-lg">
-              <div className="borde flex flex-row justify center items-center pt-[11px]">
-                <AdminButton
-                  name="Continue Shopping "
-                  className="items-center justify-center text-lg font-normal bg-lightGray hover:scale-105"
-                />
+              <hr className="mt-2 border-gray2" />
+              <div className="mt-2">
+                <p className="text-base font-normal text-gray">Shipping</p>
+                <p className="text-sm font-light">FREE SHIPPING</p>
               </div>
-              <div>
-                <div className="borde flex flex-row justify center items-center pt-[24px]">
-                  <AdminButton
-                    name="Clear all items"
-                    className="  bg-white justify-center items-center font-normal text-lg text-customGreen w-[100px] h-5 underline hover:text-xl"
-                  />
-                </div>
-              </div>
-              <div className="borde flex flex-row justify center items-center pt-[11px]">
-                <AdminButton
-                  name="Update Cart"
-                  className="items-center justify-center text-lg font-normal bg-lightGray hover:scale-105"
-                />
+              <hr className="mt-2 border-gray2" />
+              <div className="flex justify-between mt-2">
+                <p className="text-base font-medium">TOTAL</p>
+                <p className="text-base font-normal text-customGreen">
+                  LKR {getTotalPrice().toFixed(2)}
+                </p>
               </div>
             </div>
           </div>
-          <div>
-            <div className="pt-20 ">
-              <div className=" w-[332px] h-[194px] border border-gray2 bg-lightGray">
-                <div className="flex flex-row justify-between">
-                  <p className=" mt-[12px] ml-[18px] text-base font-normal text-gray">
-                    Sub Total
-                  </p>
-                  <p className="mt-[12px] ml-[18px] mr-[18px] text-base font-normal">
-                    LKR 1549.00
-                  </p>
-                </div>
-                <div className="w-[296px] ml-[18px] mt-[10px]  ">
-                  <hr className="border-gray2" />
-                </div>
-                <div className="ml-[18px] mt-[28px] ">
-                  <p className="text-base font-normal text-gray ">Shipping</p>
-                  <p className="text-sm font-light">FREE SHIPPING</p>
-                  <div className="flex flex-row">
-                    <p className="text-base font-normal text-gray ">
-                      Estimate for
-                    </p>
-                    <p className="text-base font-normal ml-[12px] ">
-                      User Address
-                    </p>
-                  </div>
-                </div>
-                <div className="w-[296px] ml-[18px] mt-[10px]  ">
-                  <hr className="border-gray2" />
-                </div>
-                <div className=" ml-[12px] mt-[14px] flex flex-row justify-between">
-                  <p className="text-base font-medium">TOTAL</p>
-                  <p className="text-base font-normal text-customGreen mr-[18px] ">
-                    LKR 1549.00
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="borde flex flex-row justify center items-center pt-[11px] ">
-              <AdminButton
-                name="Proceed to Checkout"
-                className="items-center justify-center w-full text-lg font-normal text-white bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
-              />
-            </div>
+          <div className="mt-4">
+            <AdminButton
+              name="Proceed to Checkout"
+              className="w-full text-lg font-normal text-white bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
+            />
           </div>
         </div>
       </div>

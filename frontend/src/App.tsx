@@ -8,6 +8,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import { isUserLoggedIn } from "./services/auth/AuthService";
 import Checkout from "./pages/client/checkout/Checkout";
+import { ShoppingCartProvider } from "./store/CartContext";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
@@ -32,31 +33,33 @@ function App() {
 
   return (
     <div>
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/category/:categoryId" element={<CategoryDetails />} />
-          <Route
-            path="/category/:categoryId/:productId"
-            element={<ProductPage />}
-          />
-          <Route path="/contact" element={<div>Contact</div>} />
-          <Route
-            path="/admin"
-            element={
-              <AuthenticatedRoute>
-                <AdminLayout />
-              </AuthenticatedRoute>
-            }
-          />
-          <Route path="/topsaver" element={<TopSales />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-        </Routes>
-      </Suspense>
+      <ShoppingCartProvider>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/category/:categoryId" element={<CategoryDetails />} />
+            <Route
+              path="/category/:categoryId/:productId"
+              element={<ProductPage />}
+            />
+            <Route path="/contact" element={<div>Contact</div>} />
+            <Route
+              path="/admin"
+              element={
+                <AuthenticatedRoute>
+                  <AdminLayout />
+                </AuthenticatedRoute>
+              }
+            />
+            <Route path="/topsaver" element={<TopSales />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </Suspense>
+      </ShoppingCartProvider>
     </div>
   );
 }

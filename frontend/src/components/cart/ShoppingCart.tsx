@@ -1,54 +1,88 @@
 import { useState } from "react";
+import { formatCurrency } from "../../utils/formatCurrency";
+import Delete from "@mui/icons-material/Delete";
 
-function ShoppingCart() {
-  const [quantity, setQuantity] = useState(1);
+interface ShoppingCartProps {
+  productName: string;
+  price: number;
+  discountPrice?: number;
+  mainImage: string;
+  totalPrice: number;
+  onQuantityChange: (newQuantity: number) => void;
+  onRemove: () => void;
+}
+
+function ShoppingCart({
+  productName,
+  price,
+  mainImage,
+  totalPrice,
+  onQuantityChange,
+  onRemove,
+  discountPrice,
+}: ShoppingCartProps) {
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    onQuantityChange(newQuantity);
+  };
+
   return (
-    <div className="flex flex-row ">
-      <img
-        className=" w=[50px] h-[50px] mt-[27px] ml-[29px]"
-        src="topsaverimages/2 6.png"
-        alt="2 6"
-      />
-      <div>
-        <div>
-          <p className=" mt-[27px] ml-[15px] text-sm font-semibold  w-[175px] ">
-            Wijaya Chili Powder - 500g
-          </p>
-        </div>
-        <div>
-          <p className=" mt-[7px] w-[28px] ml-[15px] text-xs font-semibold text-gray">
-            500g
-          </p>
+    <div className="flex flex-col items-center justify-between py-8 px-5 border border-gray/50 w-[90vw] md:w-[40vw] lg:w-[25vw] rounded-md">
+      <div className="flex-col flexCenter">
+        <img
+          className="object-contain w-[15vw] h-[15vw]"
+          src={mainImage}
+          alt="product image"
+        />
+        <div className="flex-1 mt-2">
+          <p className="text-base font-semibold">{productName}</p>
         </div>
       </div>
-      <div>
-        <p className=" text-sm font-semibold mt-[47px] ml-[86px]">LKR 400.00</p>
-      </div>
-      <div className=" mt-[41px] ml-[66px]  ">
-        <div className="w-[96px] h-[32px] flex flex-row">
+
+      <div className="flex-col flexCenter">
+        <div className="text-base font-semibold ">
+          {discountPrice ? (
+            <span className="text-xs text-gray-400">
+              {formatCurrency(discountPrice)}
+            </span>
+          ) : (
+            <span className="text-xs text-gray-400">
+              {formatCurrency(price)}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center my-3">
           <button
-            className="w-[32px] h-[32px] bg-gray2 rounded-l-default"
-            onClick={() => {
-              if (quantity > 1) {
-                setQuantity(quantity - 1);
-              }
-            }}
+            className="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-l-default bg-customGreen"
+            onClick={() => handleQuantityChange(quantity - 1)}
           >
             -
           </button>
-          <span className="w-[32px] h-[32px]text-lg leading-[19.2px] font-normal flexCenter">
+          <span className="flex items-center justify-center w-8 h-8 bg-gray/20">
             {quantity}
           </span>
           <button
-            className="w-[32px] h-[32px] bg-gray2 rounded-r-default"
-            onClick={() => setQuantity(quantity + 1)}
+            className="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-r-default bg-customGreen"
+            onClick={() => handleQuantityChange(quantity + 1)}
           >
             +
           </button>
         </div>
-      </div>
-      <div>
-        <p className=" text-sm font-semibold mt-[47px] ml-[56px]">LKR 400.00</p>
+        <div className="gap-20 mt-3 flexBetween">
+          <div className="ml-4 mr-8 text-base font-semibold">
+            Total:{" "}
+            <span className="text-red">{formatCurrency(totalPrice)}</span>
+          </div>
+
+          <button
+            className="text-base font-semibold cursor-pointer text-red hover:scale-105"
+            onClick={onRemove}
+          >
+            <Delete />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ export interface ProductData {
   mainImage: string;
   otherImages: string[];
   description: string;
-  tags: string;
+  tags: string[];
   brand: string;
   // mfg: Date;
   type: string;
