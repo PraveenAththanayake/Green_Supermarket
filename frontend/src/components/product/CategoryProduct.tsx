@@ -20,7 +20,9 @@ const CategoryProduct = ({ name, price }) => {
           <IoIosStar />
           <IoIosStar />
         </p>
-        <h2 className="mt-4 text-sm font-semibold text-red">{price}</h2>
+        <h2 className="mt-4 text-sm font-semibold text-red">
+          <span className="text-gray">LKR:</span> {price}
+        </h2>
         <div className="flex gap-2 mt-3 text-4xl">
           <IoMdHeartEmpty />
           <IoCart />

@@ -1,17 +1,34 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CategoriesList } from "../../../constants/CategoriesList";
 import ClientLayout from "../ClientLayout";
 import CategoryProduct from "../../../components/product/CategoryProduct";
-import { products } from "../../../constants/ProductList";
+import { fetchProduct } from "../../../services/api/fetchProduct";
+import { ProductData } from "../../../types";
 
 const CategoryDetails = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
+  const [products, setProducts] = useState<ProductData[]>([]);
 
   const category = useMemo(
     () => CategoriesList.find((category) => category.id === categoryId),
     [categoryId]
   );
+
+  useEffect(() => {
+    if (categoryId && category) {
+      getProducts();
+    }
+  }, [categoryId, category]);
+
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   if (!categoryId) {
     return <div>Invalid category ID</div>;
@@ -38,7 +55,10 @@ const CategoryDetails = () => {
                 to={`/category/${categoryId}/${product.id}`}
                 key={product.id}
               >
-                <CategoryProduct name={product.name} price={product.price} />
+                <CategoryProduct
+                  name={product.productName}
+                  price={product.price}
+                />
               </Link>
             ))}
         </div>
