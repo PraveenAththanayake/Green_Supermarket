@@ -4,12 +4,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import ClientLayout from "../ClientLayout";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { submitCheckout } from "../../../services/api/checkoutService";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import emailjs from "emailjs-com";
+import { useShoppingCart } from "../../../store/CartContext";
+import { ProductData } from "../../../types";
+import { fetchProduct } from "../../../services/api/fetchProduct";
+import { formatCurrency } from "../../../utils/formatCurrency";
 
 // Create interfaces for form data
 export interface CheckoutFormData {
@@ -53,8 +57,30 @@ const Checkout = () => {
     resolver: yupResolver<SubmitCheckoutData>(schema),
   });
 
+  const { cartItems } = useShoppingCart();
+  const [products, setProducts] = useState<ProductData[]>([]);
+  const [loading, setLoading] = useState(true);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const totalPrice = 1549;
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  const totalPrice = new URLSearchParams(location.search).get("totalPrice");
 
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
@@ -65,6 +91,7 @@ const Checkout = () => {
       // Add the selected payment method to the data
       const response = await submitCheckout({
         ...data,
+        cartItems: cartItems,
       });
       console.log(response.data);
 
@@ -152,9 +179,28 @@ const Checkout = () => {
                 ))}
               </div>
             </div>
+            <div className="bg-gray/20 mt-5 w-[80vw] p-5 rounded-lg">
+              {cartItems.map((cartItem) => {
+                const item = products.find((i) => i.id === cartItem.id);
+                return (
+                  <div className="flexBetween" key={item?.id}>
+                    <p>{item?.productName}</p>
+
+                    <p className="">
+                      {formatCurrency(
+                        cartItem.quantity *
+                          (item?.discountPrice
+                            ? item.discountPrice
+                            : item?.price ?? 0)
+                      )}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
 
             <div className="w-[80vw] max-h-[157px] bg-gray/20 rounded-md p-3 mt-4 flexBetween text-2xl">
-              <h2 className="text-base font-normal">Total:</h2>
+              <h2 className="text-xl font-semibold">Total:</h2>
               <span className="text-2xl text-customGreen">
                 LKR {totalPrice}
               </span>

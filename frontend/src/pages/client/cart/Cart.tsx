@@ -6,6 +6,7 @@ import { useShoppingCart } from "../../../store/CartContext";
 import { useEffect, useState } from "react";
 import { fetchProduct } from "../../../services/api/fetchProduct";
 import { ProductData } from "../../../types";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const {
@@ -15,6 +16,7 @@ const Cart = () => {
     removeFromCart,
   } = useShoppingCart();
   const [products, setProducts] = useState<ProductData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getProducts();
@@ -24,9 +26,14 @@ const Cart = () => {
     try {
       const response = await fetchProduct();
       setProducts(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   const getTotalPrice = () => {
@@ -47,15 +54,7 @@ const Cart = () => {
         <div className="mb-8 text-3xl font-semibold md:text-4xl lg:text-5xl">
           Shopping Cart
         </div>
-        <div className="flexBetween flex-wrap gap-3 w-[90vw] md:w-[85vw] lg:w-[90vw]">
-          {/* <div className="p-4 bg-lightGray">
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm text-gray">Products</p>
-                    <p className="text-sm text-gray">Price</p>
-                    <p className="text-sm text-gray">Quantity</p>
-                    <p className="text-sm text-gray">Total</p>
-                  </div>
-                </div> */}
+        <div className="flexCenter flex-wrap gap-3 w-[90vw] md:w-[85vw] lg:w-[90vw]">
           {cartItems.map((cartItem) => {
             const item = products.find((i) => i.id === cartItem.id);
             return (
@@ -105,10 +104,12 @@ const Cart = () => {
             </div>
           </div>
           <div className="mt-4">
-            <AdminButton
-              name="Proceed to Checkout"
-              className="w-full text-lg font-normal text-white bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
-            />
+            <Link to={`/checkout?totalPrice=${getTotalPrice().toFixed(2)}`}>
+              <AdminButton
+                name="Proceed to Checkout"
+                className="w-full text-lg font-normal text-white bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
+              />
+            </Link>
           </div>
         </div>
       </div>
