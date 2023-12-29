@@ -2,13 +2,21 @@ import { IoIosStar } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCart } from "react-icons/io5";
 
-const CategoryProduct = ({ name, price }) => {
+const CategoryProduct = ({
+  name,
+  price,
+  mainImage,
+}: {
+  name: string;
+  price: number;
+  mainImage: string;
+}) => {
   return (
-    <div className="w-[280px] xs:w-[250px] bg-white shadow-md border border-lightGray rounded-lg h-[180px] xs:h-[200px] md:w-[320px] flexBetween px-2">
+    <div className="w-[280px] xs:w-[250px] bg-white shadow-md border border-lightGray rounded-lg h-[180px] xs:h-[200px] md:w-[320px] flexBetween gap-5 px-5">
       <img
-        src="/images/topsaverimages/anchor.png"
-        width={120}
-        height={120}
+        src={mainImage}
+        width={80}
+        height={80}
         className="object-contain object-center"
       />
       <div className="w-full">

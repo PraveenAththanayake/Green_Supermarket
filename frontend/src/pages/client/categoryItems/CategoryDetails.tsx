@@ -58,6 +58,7 @@ const CategoryDetails = () => {
                 <CategoryProduct
                   name={product.productName}
                   price={product.price}
+                  mainImage={product.mainImage}
                 />
               </Link>
             ))}
