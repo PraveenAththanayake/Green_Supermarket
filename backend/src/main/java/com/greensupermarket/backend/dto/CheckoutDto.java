@@ -10,13 +10,13 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CheckoutDto {
-    private Long id;
+    private Long Id;
     private String firstName;
     private String lastName;
     private String address;
     private String companyName;
     private String country;
-    private String zipcode;
+    private int zipcode;
     private String town;
     private String phone;
     private String email;

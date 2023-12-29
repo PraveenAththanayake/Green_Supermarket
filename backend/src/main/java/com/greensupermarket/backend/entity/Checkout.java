@@ -33,7 +33,7 @@ public class Checkout {
     private String country;
 
     @Column(name = "zipcode")
-    private String zipcode;
+    private int zipcode;
 
     @Column(name = "town")
     private String town;

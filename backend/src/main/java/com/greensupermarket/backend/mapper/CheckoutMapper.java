@@ -7,16 +7,16 @@ public class CheckoutMapper {
     public static CheckoutDto mapToCheckoutDto(Checkout checkout){
         return new CheckoutDto(
                 checkout.getId(),
+                checkout.getFirstName(),
+                checkout.getLastName(),
                 checkout.getCompanyName(),
                 checkout.getAddress(),
-                checkout.getDesc(),
-                checkout.getEmail(),
                 checkout.getCountry(),
-                checkout.getFirstName(),
+                checkout.getZipcode(),
                 checkout.getTown(),
                 checkout.getPhone(),
-                checkout.getLastName(),
-                checkout.getZipcode()
+                checkout.getEmail(),
+                checkout.getDesc()
         );
     }
 
