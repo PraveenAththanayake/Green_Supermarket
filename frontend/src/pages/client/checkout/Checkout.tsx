@@ -9,6 +9,7 @@ import { submitCheckout } from "../../../services/api/checkoutService";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import emailjs from "emailjs-com";
 
 // Create interfaces for form data
 export interface CheckoutFormData {
@@ -67,12 +68,40 @@ const Checkout = () => {
       });
       console.log(response.data);
 
-      // If the form is submitted successfully, show Snackbar and navigate to the home page
+      // If the form is submitted successfully, send an email and show Snackbar
+      sendEmail(data); // Call the function to send email
       setSnackbarOpen(true);
       // navigator("/");
     } catch (error) {
       console.error(error);
     }
+  };
+
+  // Function to send an email using emailjs-com
+  const sendEmail = (data: SubmitCheckoutData) => {
+    // Replace these values with your own EmailJS template and user ID
+    const serviceId = "service_wf5sbz1";
+    const templateId = "template_m5om2uo";
+    const userId = "GoN6Nf0EO0e8It19v";
+
+    // Prepare the template parameters
+    const templateParams = {
+      to_email: data.email,
+      to_name: `${data.firstName} ${data.lastName}`,
+      date: new Date().toLocaleDateString(),
+      totalAmount: totalPrice,
+      // Add more parameters as needed
+    };
+
+    // Send the email using EmailJS
+    emailjs
+      .send(serviceId, templateId, templateParams, userId)
+      .then((response) => {
+        console.log("Email sent:", response);
+      })
+      .catch((error) => {
+        console.error("Email error:", error);
+      });
   };
 
   const initialOptions = {
