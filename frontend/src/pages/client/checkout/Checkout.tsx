@@ -8,7 +8,7 @@ import { useState } from "react";
 import { submitCheckout } from "../../../services/api/checkoutService";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 // Create interfaces for form data
 export interface CheckoutFormData {
@@ -53,7 +53,7 @@ const Checkout = () => {
   });
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const totalPrice = 1000; // Replace 0 with the actual total price
+  const totalPrice = 1549;
 
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
@@ -73,6 +73,13 @@ const Checkout = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const initialOptions = {
+    clientId:
+      "AbzOuxKwEicX5cIStPqyASeNpkWvYHR04N2vdi78za17BqOsPsxllJSdkDMMmS8tBPe5RyuB0hYlTa27",
+    currency: "USD",
+    intent: "capture",
   };
 
   return (
@@ -132,21 +139,9 @@ const Checkout = () => {
           </form>
         </div>
         <div className="mt-4">
-          <PayPalButton
-            // Pass the ref to the component
-            options={{
-              clientId:
-                "AbzOuxKwEicX5cIStPqyASeNpkWvYHR04N2vdi78za17BqOsPsxllJSdkDMMmS8tBPe5RyuB0hYlTa27",
-              currency: "USD",
-            }}
-            amount={totalPrice}
-            onSuccess={(details: any, data: any) => {
-              alert(
-                "Transaction completed by " + details.payer.name.given_name
-              );
-              console.log({ details, data });
-            }}
-          />
+          <PayPalScriptProvider options={initialOptions}>
+            <PayPalButtons />
+          </PayPalScriptProvider>
         </div>
 
         <Snackbar
