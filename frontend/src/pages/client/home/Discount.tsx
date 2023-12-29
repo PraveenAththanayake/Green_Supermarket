@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { TopsaleList } from "../../../constants/TopSalesList";
 import ProductItem from "../../../components/product/productItem";
+import { fetchProduct } from "../../../services/api/fetchProduct";
+import { ProductData } from "../../../types";
 
 interface Time {
   days: number;
@@ -16,6 +18,7 @@ const Discount = () => {
     minutes: 59,
     seconds: 59,
   });
+  const [products, setProducts] = useState<ProductData[]>([]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -42,6 +45,19 @@ const Discount = () => {
     return TopsaleList.filter((product) => product.discount > 0);
   }, []);
 
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  async function getProducts() {
+    try {
+      const response = await fetchProduct();
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <section className="mt-10 lg:mt-[90px] mb-[70px] max-w-[1120px] mx-auto ">
       <div className="flex mb-[71px] flex-col md:flex-row items-center">
@@ -61,9 +77,12 @@ const Discount = () => {
       </div>
 
       <div className="flexCenter max-w-[946px] mb-[100px] mx-auto flex-wrap">
-        {discountedProducts.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
+        {products.map(
+          (product) =>
+            product.discountPrice > 0 && (
+              <ProductItem key={product.id} product={product} />
+            )
+        )}
       </div>
     </section>
   );

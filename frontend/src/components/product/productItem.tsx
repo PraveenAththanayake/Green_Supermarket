@@ -3,11 +3,11 @@ import { useMemo } from "react";
 
 export interface Product {
   id: number;
-  name: string;
+  productName: string;
   rating: number;
   price: number;
-  discount: number;
-  imgLink: string;
+  discountPrice: number;
+  mainImage: string;
 }
 
 interface Props {
@@ -25,42 +25,44 @@ const ProductItem = ({ product }: Props) => {
       )
     );
   }, [product.rating]);
+
+  const discountPercentage =
+    100 - Math.floor((product.discountPrice / product.price) * 100);
+
   return (
     <>
-      <div className="w-[270px] h-[216px] p-[16px] rounded-[10px] m-4 shadow-2xl relative">
-        <span className="text-white text-[13px] px-[8px] py-[4px] rounded-[7px] bg-[#53B176]">
-          {product.discount}%
-        </span>
-        <h3 className="w-[160px] text-[17px] font-semibold mt-[16px]">
-          {product.name}
-        </h3>
-        <div className="flex w-[90px] justify-between mb-[18px]">{stars}</div>
-        <p className="mb-[16px]">
-          LKR :{" "}
-          <span className="text-[#D30000] font-semibold">
-            {product.price}.00
+      <div className="w-[270px] h-[216px] p-[16px] rounded-[10px] m-4 shadow-2xl flexBetween">
+        <div className="">
+          <span className="text-white text-[13px] px-[8px] py-[4px] rounded-[7px] bg-[#53B176]">
+            {discountPercentage}%
           </span>
-        </p>
-        <div className="flex">
-          <img
-            src="/images/Product-images/Favorite.png"
-            alt="Favorite"
-            width={20}
-            height={20}
-          />
-          <img
-            className="ml-[8px]"
-            src="/images/Product-images/Sell Stock.png"
-            alt="Cart"
-            width={20}
-            height={20}
-          />
+          <h3 className="text-[17px] font-semibold mt-[16px]">
+            {product.productName}
+          </h3>
+          <div className="flex w-[90px] justify-between mb-[18px]">{stars}</div>
+          <p className="mb-[16px]">
+            LKR :{" "}
+            <span className="text-[#D30000] font-semibold">
+              {product.price}.00
+            </span>
+          </p>
+          <div className="flex">
+            <img
+              src="/images/Product-images/Favorite.png"
+              alt="Favorite"
+              width={20}
+              height={20}
+            />
+            <img
+              className="ml-[8px]"
+              src="/images/Product-images/Sell Stock.png"
+              alt="Cart"
+              width={20}
+              height={20}
+            />
+          </div>
         </div>
-        <img
-          className="absolute w-[100px] top-[80px] right-[8px]"
-          src={product.imgLink}
-          alt=""
-        />
+        <img className="w-[80px] object-cover" src={product.mainImage} alt="" />
       </div>
     </>
   );
