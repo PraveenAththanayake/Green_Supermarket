@@ -1,6 +1,6 @@
 import { IoIosStar } from "react-icons/io";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import { useShoppingCart } from "../../store/CartSlice";
+import { useShoppingCart } from "../../store/CartContext";
 import { ProductData } from "../../types";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -49,7 +49,7 @@ const CategoryProduct = ({
           {discountedPrice ? (
             <span className="font-semibold text-xl leading-[28.8px] text-red">
               {formatCurrency(discountedPrice)}
-              <p className="text-xs line-through  text-darkerGreen">
+              <p className="text-xs line-through text-darkerGreen">
                 {formatCurrency(price)}
               </p>
             </span>

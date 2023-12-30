@@ -26,7 +26,7 @@ const Category = () => {
   );
 
   return (
-    <section className="max-w-[1100px] my-[50px] mx-auto mt-[100px] mb-[200px] px-3">
+    <section className="max-w-[1100px] my-[80px] mx-auto px-3">
       <div className="mx-5 flexBetween">
         <h2 className="h2-bold">Category</h2>
         <span className="text-xs xs:text-[15px] font-semibold text-gray tracking-[0.5px] leading-[18px]">
