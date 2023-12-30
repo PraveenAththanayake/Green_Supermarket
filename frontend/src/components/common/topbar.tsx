@@ -1,8 +1,14 @@
 import { TiLocation } from "react-icons/ti";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/variants";
+import {
+  getLoggedInUser,
+  isUserLoggedIn,
+} from "../../services/auth/AuthService";
 
 const Topbar = () => {
+  const isAuth = isUserLoggedIn();
+  const LoggedInUser = getLoggedInUser();
   return (
     <motion.div
       variants={fadeIn("down", 0.2)}
@@ -23,16 +29,26 @@ const Topbar = () => {
           <span className="text-white">64 Front Street, 11, Colombo...</span>
         </div>
       </motion.div>
-
-      <motion.p
-        variants={fadeIn("down", 0.2)}
-        initial="hidden"
-        animate="show"
-        className="hidden text-[10px] text-white sm:block lg:text-base"
-      >
-        Hi! Chamindu
-      </motion.p>
-
+      {/* {isAuth && LoggedInUser?.role === "admin" && (} */}
+      {isAuth ? (
+        <motion.p
+          variants={fadeIn("down", 0.2)}
+          initial="hidden"
+          animate="show"
+          className="hidden text-[10px] text-white sm:block lg:text-base"
+        >
+          Hi! {LoggedInUser}
+        </motion.p>
+      ) : (
+        <motion.p
+          variants={fadeIn("down", 0.2)}
+          initial="hidden"
+          animate="show"
+          className="hidden text-[10px] text-white sm:block lg:text-base"
+        >
+          Hi! Guest
+        </motion.p>
+      )}
       <motion.div
         variants={fadeIn("down", 0.2)}
         initial="hidden"
