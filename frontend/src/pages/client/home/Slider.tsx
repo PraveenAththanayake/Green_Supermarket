@@ -17,7 +17,7 @@ export default class SimpleSlider extends Component {
     };
 
     return (
-      <div className="mx-auto flexCenter">
+      <div className="mx-auto my-20 flexCenter">
         <div className="relative w-[90vw] lg:w-[75vw]">
           <div className="absolute z-10 p-5 text-left transform -translate-y-1/2 sm:p-10 xl:p-14 top-1/2 font-nunito whitespace-nowrap">
             <span className="text-xs font-normal capitalize sm:text-xl md:text-2xl xl:text-4xl">

@@ -146,71 +146,75 @@ const Checkout = () => {
             Checkout
           </h1>
           <form
-            className="flex-col flexCenter lg:flexCenter"
+            className="flex flex-col justify-center gap-5 mt-8 md:justify-between md:flex-row"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="w-full">
-              <h2 className="mb-4 text-2xl font-semibold text-center">
-                Billing Details
-              </h2>
-              <div className="flex flex-col gap-4">
-                {Object.keys(schema.fields).map((fieldName, index) => (
-                  <div key={index} className="w-[80vw]">
-                    <Controller
-                      name={fieldName as keyof CheckoutFormData}
-                      control={control}
-                      defaultValue=""
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          label={fieldName
-                            .replace(/([A-Z])/g, " $1")
-                            .replace(/^./, (str) => str.toUpperCase())}
-                          variant="outlined"
-                          className="w-full"
-                          error={!!errors[fieldName as keyof typeof errors]}
-                          helperText={
-                            errors[fieldName as keyof typeof errors]?.message
-                          }
-                        />
-                      )}
-                    />
-                  </div>
-                ))}
+            <div className="w-[80vw] md:w-[40vw]">
+              <div className="w-full">
+                {/* <h2 className="mb-4 text-2xl font-semibold text-center">
+                  Billing Details
+                </h2> */}
+                <div className="flex flex-col gap-4">
+                  {Object.keys(schema.fields).map((fieldName, index) => (
+                    <div key={index} className="w-full">
+                      <Controller
+                        name={fieldName as keyof CheckoutFormData}
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                          <TextField
+                            {...field}
+                            label={fieldName
+                              .replace(/([A-Z])/g, " $1")
+                              .replace(/^./, (str) => str.toUpperCase())}
+                            variant="outlined"
+                            className="w-full"
+                            error={!!errors[fieldName as keyof typeof errors]}
+                            helperText={
+                              errors[fieldName as keyof typeof errors]?.message
+                            }
+                          />
+                        )}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="bg-gray/20 mt-5 w-[80vw] p-5 rounded-lg">
-              {cartItems.map((cartItem) => {
-                const item = products.find((i) => i.id === cartItem.id);
-                return (
-                  <div className="flexBetween" key={item?.id}>
-                    <p>{item?.productName}</p>
 
-                    <p className="">
-                      {formatCurrency(
-                        cartItem.quantity *
-                          (item?.discountPrice
-                            ? item.discountPrice
-                            : item?.price ?? 0)
-                      )}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+            <div className="w-[80vw] md:w-[40vw]">
+              <div className="w-full p-5 rounded-lg bg-gray/20">
+                {cartItems.map((cartItem) => {
+                  const item = products.find((i) => i.id === cartItem.id);
+                  return (
+                    <div className="flexBetween" key={item?.id}>
+                      <p>{item?.productName}</p>
 
-            <div className="w-[80vw] max-h-[157px] bg-gray/20 rounded-md p-3 mt-4 flexBetween text-2xl">
-              <h2 className="text-xl font-semibold">Total:</h2>
-              <span className="text-2xl text-customGreen">
-                LKR {totalPrice}
-              </span>
+                      <p className="">
+                        {formatCurrency(
+                          cartItem.quantity *
+                            (item?.discountPrice
+                              ? item.discountPrice
+                              : item?.price ?? 0)
+                        )}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-full max-h-[157px] bg-gray/20 rounded-md p-3 mt-4 flexBetween text-2xl">
+                <h2 className="text-xl font-semibold">Total:</h2>
+                <span className="text-2xl text-customGreen">
+                  LKR {totalPrice}
+                </span>
+              </div>
+              <button
+                type="submit"
+                className="w-full h-12 mt-4 text-4xl font-semibold text-white rounded-md bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
+              >
+                Place an Order
+              </button>
             </div>
-            <button
-              type="submit"
-              className="w-[80vw] bg-customGreen text-4xl font-semibold h-12 rounded-md mt-4 text-white "
-            >
-              Place an Order
-            </button>
           </form>
         </div>
         <div className="mt-4">
