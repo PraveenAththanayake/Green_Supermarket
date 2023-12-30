@@ -71,7 +71,7 @@ const Discount = () => {
         </div>
       </div>
 
-      <div className="flexCenter max-w-[946px] mb-[100px] mx-auto flex-wrap">
+      <div className="flexCenter max-w-[946px] mx-auto flex-wrap">
         {products.map(
           (product) =>
             product.discountPrice > 0 && (

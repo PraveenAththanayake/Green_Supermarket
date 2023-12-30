@@ -1,6 +1,0 @@
-.carouselText {
-  @apply absolute z-10 flex flex-col items-center justify-center w-full text-center text-black top-[20%];
-  @apply sm:top-1/4 sm:right-1/4;
-  @apply md:top-1/4 md:right-1/4;
-  @apply lg:top-1/4 lg:right-1/4;
-}
