@@ -267,8 +267,7 @@ export default function ColumnGroupingTable({
           setOpenModal(false);
           setSelectedProduct(null);
         }}
-        product={selectedProduct}
-        productId={selectedProduct?.id ?? null} // Add the productId prop here
+        product={selectedProduct ?? null} // Replace the productId prop with the product prop
       />
     </>
   );

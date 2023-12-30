@@ -7,6 +7,8 @@ import { MenuItem, Select, TextField } from "@mui/material";
 import { CategoriesList } from "../../constants/CategoriesList";
 import { SelectChangeEvent } from "@mui/material";
 import { updateProduct } from "../../services/api/fetchProduct";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 interface ProductData {
   id: number; // Change the type of 'id' to number
@@ -39,6 +41,7 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
   const [formData, setFormData] = useState<ProductData | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [productId, setProductId] = useState<string>();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     if (product) {
@@ -89,14 +92,18 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
           Number(productId),
           updatedProductData as import("d:/Projects/Green_Supermarket/frontend/src/types/topsales").ProductData
         );
+
         console.log("Product Updated:", updatedProduct);
-        // Optionally, you can do something with the updatedProduct data or show a success message
+        setSnackbarOpen(true);
       } catch (error) {
         console.error("Error updating product:", error);
-        // Handle errors, show error message, etc.
       }
     }
     onClose(); // Close the modal after updating or on error
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -229,6 +236,20 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
             </DialogActions>
           </form>
         </DialogContent>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={5000} // Show Snackbar for 5 seconds (adjust as needed)
+          onClose={handleCloseSnackbar}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={handleCloseSnackbar}
+            severity="success"
+          >
+            Product updated successfully!
+          </MuiAlert>
+        </Snackbar>
       </Dialog>
     </>
   );
