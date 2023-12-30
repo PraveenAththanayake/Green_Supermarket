@@ -21,7 +21,7 @@ interface Column {
   label: string;
   minWidth?: number;
   align?: "right";
-  format?: (value: any) => React.ReactNode;
+  format?: (value: string) => React.ReactNode;
 }
 
 const productsListTitle = [
@@ -44,8 +44,8 @@ const columns: Column[] = productsListTitle.map((product) => ({
   id: product,
   label: product,
   minWidth: 170,
-  align: "center",
-  format: (value: any) => {
+  align: "right",
+  format: (value: string) => {
     if (product === "mainImage" || product === "otherImages") {
       const images = Array.isArray(value) ? value : [value];
       return (
@@ -61,7 +61,7 @@ const columns: Column[] = productsListTitle.map((product) => ({
         </div>
       );
     } else {
-      return value ? value.toLocaleString("en-US") : "";
+      return value ? value.toLocaleString() : "";
     }
   },
 }));
@@ -94,7 +94,7 @@ export default function ColumnGroupingTable({
     console.log("Viewing product:", row);
   };
 
-  const handleDelete = async (productId: string) => {
+  const handleDelete = async (productId: number) => {
     try {
       await deleteProduct(productId);
       // Remove the deleted product from the state
@@ -120,7 +120,7 @@ export default function ColumnGroupingTable({
   }
 
   const rows: ProductData[] = products.map((product) => ({
-    id: product.id,
+    id: String(product.id),
     productName: product.productName,
     mainImage: product.mainImage,
     otherImages: product.otherImages,
@@ -268,6 +268,7 @@ export default function ColumnGroupingTable({
           setSelectedProduct(null);
         }}
         product={selectedProduct}
+        productId={selectedProduct?.id ?? null} // Add the productId prop here
       />
     </>
   );

@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import { useShoppingCart } from "../../store/CartContext";
+import { useShoppingCart } from "../../store/CartSlice";
 import { formatCurrency } from "../../utils/formatCurrency";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";

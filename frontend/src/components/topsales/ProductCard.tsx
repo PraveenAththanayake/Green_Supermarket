@@ -3,7 +3,7 @@ import RemoveShoppingCart from "@mui/icons-material/RemoveShoppingCart";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useShoppingCart } from "../../store/CartContext";
+import { useShoppingCart } from "../../store/CartSlice";
 import { Link } from "react-router-dom";
 
 export interface Product {

@@ -1,6 +1,5 @@
 import leftBG from "../../../public/images/Login/LogingVector.png";
 import React, { useState } from "react";
-import { FaGoogle } from "react-icons/fa";
 import {
   loginApiCall,
   savedLoggedInUser,
@@ -15,7 +14,9 @@ const Login = () => {
 
   const navigator = useNavigate();
 
-  async function handleLoginForm(e) {
+  async function handleLoginForm(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
     e.preventDefault();
 
     await loginApiCall(username, password)
@@ -28,7 +29,7 @@ const Login = () => {
         savedLoggedInUser(username);
         navigator("/");
 
-        window.location.reload(false);
+        window.location.reload();
       })
       .catch((error) => {
         console.error(error);

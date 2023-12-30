@@ -43,7 +43,7 @@ const Register = () => {
   const onSubmit = (data: formData) => {
     {
       registerApiCall(data)
-        .then((res) => {
+        .then(() => {
           setTimeout(() => {
             navigator("/login");
           }, 3000);

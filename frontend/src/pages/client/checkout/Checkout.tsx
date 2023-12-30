@@ -10,7 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import emailjs from "emailjs-com";
-import { useShoppingCart } from "../../../store/CartContext";
+import { useShoppingCart } from "../../../store/CartSlice";
 import { ProductData } from "../../../types";
 import { fetchProduct } from "../../../services/api/fetchProduct";
 import { formatCurrency } from "../../../utils/formatCurrency";

@@ -2,7 +2,7 @@
 import ClientLayout from "../ClientLayout";
 import ShoppingCart from "../../../components/cart/ShoppingCart";
 import AdminButton from "../../../components/buttons/AdminButton";
-import { useShoppingCart } from "../../../store/CartContext";
+import { useShoppingCart } from "../../../store/CartSlice";
 import { useEffect, useState } from "react";
 import { fetchProduct } from "../../../services/api/fetchProduct";
 import { ProductData } from "../../../types";

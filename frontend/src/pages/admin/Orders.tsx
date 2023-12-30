@@ -21,7 +21,7 @@ interface Column {
   label: string;
   minWidth?: number;
   align?: "right";
-  format?: (value: any) => React.ReactNode;
+  format?: (value: React.ReactNode) => React.ReactNode;
 }
 
 const checkoutColumns: Column[] = [
@@ -44,10 +44,10 @@ export default function ColumnGroupingTable() {
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteCheckout(id);
+      await deleteCheckout(Number(id));
       // Remove the deleted product from the state
       setCheckouts((prevCheckouts) =>
-        prevCheckouts.filter((checkout) => checkout.id !== id)
+        prevCheckouts.filter((checkout) => checkout.id !== Number(id))
       );
     } catch (error) {
       console.error(error);
@@ -80,7 +80,10 @@ export default function ColumnGroupingTable() {
     compantName: checkout.compantName,
   }));
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (
+    _event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
@@ -122,7 +125,7 @@ export default function ColumnGroupingTable() {
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     <TableCell align="center">
                       <IconButton
-                        onClick={() => handleDelete(row.id)}
+                        onClick={() => handleDelete(String(row.id))}
                         aria-label="delete"
                       >
                         <DeleteIcon />
@@ -136,8 +139,8 @@ export default function ColumnGroupingTable() {
                         className="truncate flexCenter"
                       >
                         {column.format
-                          ? column.format(row[column.id])
-                          : row[column.id]}
+                          ? column.format(row[column.id as keyof CheckoutData])
+                          : row[column.id as keyof CheckoutData]}
                       </TableCell>
                     ))}
                   </TableRow>

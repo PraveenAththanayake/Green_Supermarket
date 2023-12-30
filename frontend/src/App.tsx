@@ -8,7 +8,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import { isUserLoggedIn } from "./services/auth/AuthService";
 import Checkout from "./pages/client/checkout/Checkout";
-import { ShoppingCartProvider } from "./store/CartContext";
+import { ShoppingCartProvider } from "./store/CartSlice";
 
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const TopSales = lazy(() => import("./pages/client/topsales/TopSales"));
@@ -26,7 +26,7 @@ export const LoadingSpinner: React.FC = () => {
 };
 
 function App() {
-  const AuthenticatedRoute = ({ children }) => {
+  const AuthenticatedRoute = ({ children }: { children: React.ReactNode }) => {
     const isAuth = isUserLoggedIn();
     return isAuth ? children : <Navigate to="/" />;
   };

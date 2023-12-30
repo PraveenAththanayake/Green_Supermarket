@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AdminSideList } from "../../constants/AdminSideList";
 import Dashboard from "./Dashboard";
 import { AdminSideListInterface } from "../../types";

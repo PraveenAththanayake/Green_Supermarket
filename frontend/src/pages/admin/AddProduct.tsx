@@ -5,8 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { CategoriesList } from "../../constants/CategoriesList";
 import { addProduct } from "../../services/api/fetchProduct";
-import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
+import { ProductData } from "../../types";
 
 const AddProduct = () => {
   const schema = yup.object().shape({
@@ -27,16 +27,12 @@ const AddProduct = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const navigator = useNavigate();
-
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: ProductData) => {
     try {
       const response = await addProduct(data);
       console.log(response);
@@ -46,10 +42,6 @@ const AddProduct = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleCancel = () => {
-    reset();
   };
 
   return (
@@ -211,11 +203,6 @@ const AddProduct = () => {
           </div>
           <div className="flex flex-row gap-8 my-[42px] pb-4 text-white">
             <AdminButton type="submit" name="Save" className="bg-customGreen" />
-            <AdminButton
-              name="Cancel"
-              className="bg-red"
-              onClick={handleCancel}
-            />
           </div>
         </div>
       </form>

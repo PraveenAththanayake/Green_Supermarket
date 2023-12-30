@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getToken } from "../auth/AuthService";
+import { ProductData } from "../../types";
 
 const REST_API_BASE_URL = "http://localhost:8080/api/products";
 
@@ -24,21 +25,14 @@ export const fetchProductById = (productId: string) =>
 export const addProduct = (product: object) =>
   axios.post(REST_API_BASE_URL, product);
 
-export const updateProduct = async (productId: number, formData: FormData) => {
+export const updateProduct = async (
+  productId: number,
+  productData: ProductData
+) => {
   try {
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
-
-    // Log FormData contents for debugging
-    console.log("FormData Contents:", formData);
-
     const response = await axios.put(
       `${REST_API_BASE_URL}/${productId}`, // Use template literals for correct URL construction
-      formData,
-      config
+      productData
     );
 
     // Log the response for further debugging
@@ -50,7 +44,7 @@ export const updateProduct = async (productId: number, formData: FormData) => {
 
     return response.data;
   } catch (error) {
-    console.error("Error updating product:", error.message);
+    console.error("Error updating product:", (error as Error).message);
     throw error;
   }
 };

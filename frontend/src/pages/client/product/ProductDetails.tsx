@@ -1,10 +1,9 @@
-import PrimaryButton from "../../../components/buttons/primaryButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { decrement, increment } from "../../../store/counter/CounterSlice";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../../utils/formatCurrency";
-import { useShoppingCart } from "../../../store/CartContext";
+import { useShoppingCart } from "../../../store/CartSlice";
 
 interface ProductDetailsProps {
   discountedPrice: number;
@@ -13,7 +12,7 @@ interface ProductDetailsProps {
   type: string;
   brand: string;
   category: string;
-  tags: string[];
+  tags: string;
   mainImage: string;
   id: number;
 }

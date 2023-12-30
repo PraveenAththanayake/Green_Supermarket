@@ -21,7 +21,7 @@ import Typography from "@mui/material/Typography";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { Badge } from "@mui/material";
-import { useShoppingCart } from "../../store/CartContext";
+import { useShoppingCart } from "../../store/CartSlice";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
