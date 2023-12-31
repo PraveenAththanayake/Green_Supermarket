@@ -15,6 +15,7 @@ type ShoppingCartContext = {
   increaseCartQuantity: (id: number) => void;
   decreaseCartQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
+  clearCartItems: () => void;
   cartQuantity: number;
   cartItems: CartItem[];
 };
@@ -34,6 +35,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     (quantity, item) => item.quantity + quantity,
     0
   );
+
+  function clearCartItems() {
+    setCartItems([]); // Set cart items to an empty array
+  }
 
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
@@ -77,6 +82,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   return (
     <ShoppingCartContext.Provider
       value={{
+        clearCartItems,
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,

@@ -83,7 +83,7 @@ const Header = () => {
           <SearchBar />
         </div>
 
-        <div className="gap-5 xs:gap-[25px] flexCenter text-gray text-4xl md:text-5xl flex-none">
+        <div className="flex-none gap-4 text-4xl flexCenter text-gray md:text-5xl">
           <Link to="" className="hidden hover:text-customGreen sm:block">
             <FaRegBell />
           </Link>

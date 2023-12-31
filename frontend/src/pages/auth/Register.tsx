@@ -7,7 +7,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextField from "@mui/material/TextField";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import React from "react";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import React, { useState } from "react";
 
 const schema = yup.object().shape({
   name: yup.string().required("Full name is required"),
@@ -24,6 +26,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const navigator = useNavigate();
   const {
     register,
@@ -41,22 +44,22 @@ const Register = () => {
   }
 
   const onSubmit = (data: formData) => {
-    {
-      registerApiCall(data)
-        .then(() => {
-          setTimeout(() => {
-            navigator("/login");
-          }, 3000);
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response && err.response.status === 400) {
-            const errorMessage = "Username or Email already exists";
-
-            window.alert(errorMessage);
-          }
-        });
-    }
+    setLoading(true); // Show backdrop on form submission
+    registerApiCall(data)
+      .then(() => {
+        setTimeout(() => {
+          setLoading(false); // Hide backdrop after 2 seconds
+          navigator("/login");
+        }, 2000);
+      })
+      .catch((err) => {
+        setLoading(false); // Hide backdrop on error
+        console.error(err);
+        if (err.response && err.response.status === 400) {
+          const errorMessage = "Username or Email already exists";
+          window.alert(errorMessage);
+        }
+      });
   };
   return (
     <>
@@ -177,6 +180,14 @@ const Register = () => {
           </div>
         </div>
       </div>
+      {loading && ( // Display backdrop if loading is true
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </>
   );
 };

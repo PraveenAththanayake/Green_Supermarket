@@ -1,7 +1,7 @@
 // Import the necessary modules
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField } from "@mui/material";
+import { Backdrop, CircularProgress, TextField } from "@mui/material";
 import ClientLayout from "../ClientLayout";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import { useShoppingCart } from "../../../store/CartSlice";
 import { ProductData } from "../../../types";
 import { fetchProduct } from "../../../services/api/fetchProduct";
 import { formatCurrency } from "../../../utils/formatCurrency";
+import { useNavigate } from "react-router-dom";
 
 // Create interfaces for form data
 export interface CheckoutFormData {
@@ -57,10 +58,12 @@ const Checkout = () => {
     resolver: yupResolver<SubmitCheckoutData>(schema),
   });
 
-  const { cartItems } = useShoppingCart();
+  const { cartItems, clearCartItems } = useShoppingCart();
   const [products, setProducts] = useState<ProductData[]>([]);
   const [loading, setLoading] = useState(true);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     getProducts();
@@ -76,10 +79,6 @@ const Checkout = () => {
     }
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   const totalPrice = new URLSearchParams(location.search).get("totalPrice");
 
   const handleCloseSnackbar = () => {
@@ -88,39 +87,33 @@ const Checkout = () => {
 
   const onSubmit = async (data: SubmitCheckoutData) => {
     try {
-      // Add the selected payment method to the data
       const response = await submitCheckout({
         ...data,
         cartItems: cartItems,
       });
       console.log(response.data);
 
-      // If the form is submitted successfully, send an email and show Snackbar
-      sendEmail(data); // Call the function to send email
+      sendEmail(data);
       setSnackbarOpen(true);
-      // navigator("/");
+      clearCartItems();
+      navigator("/");
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Function to send an email using emailjs-com
   const sendEmail = (data: SubmitCheckoutData) => {
-    // Replace these values with your own EmailJS template and user ID
     const serviceId = "service_wf5sbz1";
     const templateId = "template_m5om2uo";
     const userId = "GoN6Nf0EO0e8It19v";
 
-    // Prepare the template parameters
     const templateParams = {
       to_email: data.email,
       to_name: `${data.firstName} ${data.lastName}`,
       date: new Date().toLocaleDateString(),
       totalAmount: totalPrice,
-      // Add more parameters as needed
     };
 
-    // Send the email using EmailJS
     emailjs
       .send(serviceId, templateId, templateParams, userId)
       .then((response) => {
@@ -183,14 +176,21 @@ const Checkout = () => {
             </div>
 
             <div className="w-[80vw] md:w-[40vw]">
-              <div className="w-full p-5 rounded-lg bg-gray/20">
+              <div className="flex flex-col w-full gap-3 p-5 rounded-lg bg-lightGray">
+                <h1 className="text-2xl font-semibold text-left capitalize">
+                  Product
+                </h1>
+
                 {cartItems.map((cartItem) => {
                   const item = products.find((i) => i.id === cartItem.id);
                   return (
-                    <div className="flexBetween" key={item?.id}>
-                      <p>{item?.productName}</p>
+                    <div
+                      className="w-full p-3 border border-gray/20 flexBetween"
+                      key={item?.id}
+                    >
+                      <p className="text-xs md:text-lg">{item?.productName}</p>
 
-                      <p className="">
+                      <p className="text-xs md:text-lg">
                         {formatCurrency(
                           cartItem.quantity *
                             (item?.discountPrice
@@ -202,25 +202,25 @@ const Checkout = () => {
                   );
                 })}
               </div>
-              <div className="w-full max-h-[157px] bg-gray/20 rounded-md p-3 mt-4 flexBetween text-2xl">
-                <h2 className="text-xl font-semibold">Total:</h2>
-                <span className="text-2xl text-customGreen">
+              <div className="w-full max-h-[157px] bg-lightGray rounded-md p-3 mt-4 flexBetween text-2xl">
+                <h2 className="text-lg font-semibold md:text-2xl">Total:</h2>
+                <span className="text-lg md:text-2xl text-customGreen">
                   LKR {totalPrice}
                 </span>
               </div>
               <button
                 type="submit"
-                className="w-full h-12 mt-4 text-4xl font-semibold text-white rounded-md bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
+                className="w-full h-10 mt-4 text-2xl font-medium text-white xl:text-4xl rounded-default md:h-12 xl:h-14 bg-customGreen hover:bg-white hover:text-customGreen hover:border hover:border-Gray"
               >
                 Place an Order
               </button>
+              <div className="mt-4">
+                <PayPalScriptProvider options={initialOptions}>
+                  <PayPalButtons />
+                </PayPalScriptProvider>
+              </div>
             </div>
           </form>
-        </div>
-        <div className="mt-4">
-          <PayPalScriptProvider options={initialOptions}>
-            <PayPalButtons />
-          </PayPalScriptProvider>
         </div>
 
         <Snackbar
@@ -237,6 +237,14 @@ const Checkout = () => {
             Thank you! Your order has been placed.
           </MuiAlert>
         </Snackbar>
+        {loading && (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
       </div>
     </ClientLayout>
   );

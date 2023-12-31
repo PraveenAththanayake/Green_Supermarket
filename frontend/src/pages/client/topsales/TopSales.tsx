@@ -3,9 +3,11 @@ import ProductCard from "../../../components/topsales/ProductCard";
 import ClientLayout from "../ClientLayout";
 import { ProductData } from "../../../types";
 import { fetchProduct } from "../../../services/api/fetchProduct";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 const TopSales = () => {
   const [products, setProducts] = useState<ProductData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getProducts();
@@ -14,6 +16,7 @@ const TopSales = () => {
   async function getProducts() {
     try {
       const response = await fetchProduct();
+      setLoading(false);
       setProducts(response.data);
     } catch (error) {
       console.error(error);
@@ -33,15 +36,24 @@ const TopSales = () => {
 
         <div className="flexCenter">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[13px] mx-0">
-            {products.map(
-              (product) =>
-                product.discountPrice && (
-                  <ProductCard key={product.id} product={product} />
-                )
+            {products.map((product) =>
+              product.discountPrice ? (
+                <ProductCard key={product.id} product={product} />
+              ) : (
+                ""
+              )
             )}
           </div>
         </div>
       </div>
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </ClientLayout>
   );
 };

@@ -7,10 +7,13 @@ import {
 } from "../../services/auth/AuthService";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigator = useNavigate();
 
@@ -18,22 +21,25 @@ const Login = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
+    setLoading(true);
 
-    await loginApiCall(username, password)
-      .then((response) => {
-        console.log(response.data);
+    try {
+      await loginApiCall(username, password);
+      const token = "Basic " + window.btoa(username + ":" + password);
+      storeToken(token);
 
-        const token = "Basic " + window.btoa(username + ":" + password);
-        storeToken(token);
+      savedLoggedInUser(username);
 
-        savedLoggedInUser(username);
-        navigator("/");
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
 
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      navigator("/");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   }
 
   return (
@@ -51,24 +57,8 @@ const Login = () => {
               <p className="text-center mb-[32px]">
                 Welcome to green supermarket
               </p>
-              {/* <button className="flex items-center justify-center border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] mb-[80px]">
-                <FaGoogle color="black" className="mr-[20px]" />
-                Log in with Google
-              </button> */}
+
               <form className="flex-col gap-3 flexCenter">
-                {/* <input
-                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-                  placeholder="Email address"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                  type="password"
-                  className="border border-[#84848220] w-full h-[44px] text-[15px] text-[#848482] font-light rounded-[5px] outline-0 py-2 px-3 mb-[12px]"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                /> */}
                 <TextField
                   label="Username or Email"
                   variant="outlined"
@@ -120,6 +110,14 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </>
   );
 };

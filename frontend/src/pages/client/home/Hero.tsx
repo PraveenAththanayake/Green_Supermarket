@@ -46,13 +46,13 @@ const Hero = () => {
           >
             <Link
               className="flexCenter w-32 h-9 md:w-[192px] md:h-[48px] bg-customGreen border-2 border-solid border-customGreen text-white rounded-[10px] hover:bg-darkerGreen"
-              to=""
+              to="/category"
             >
               Shop Now
             </Link>
             <Link
               className="flexCenter w-32 h-9 md:w-[192px] md:h-[48px] border-2 border-solid border-[#53B176] rounded-[10px] hover:bg-customGreen hover:text-white"
-              to=""
+              to="/topsaver"
             >
               See All Products
             </Link>

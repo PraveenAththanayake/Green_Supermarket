@@ -44,12 +44,12 @@ const Navbar = () => {
         </motion.div>
       </div>
       <div className="fixed bottom-0 z-20 w-full sm:hidden">
-        <div className="flexBetween font-bold text-5xl h-[50px] bg-customGreen mx-auto max-w-[1120px]">
+        <div className="flexBetween font-bold text-5xl h-[50px] bg-darkerGreen mx-auto max-w-[1120px]">
           {links.map((link, index) => (
             <NavLink
               key={index}
               to={link.to}
-              className="h-full px-5 text-center duration-100 ease-in text-black/80 hover:border-b-[3px] border-white flexCenter"
+              className="h-full px-5 text-center duration-100 ease-in text-black/80 hover:border-b-[3px] border-black flexCenter"
             >
               {link.icon}
             </NavLink>

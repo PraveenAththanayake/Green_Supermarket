@@ -1,4 +1,3 @@
-// Cart.js
 import ClientLayout from "../ClientLayout";
 import ShoppingCart from "../../../components/cart/ShoppingCart";
 import AdminButton from "../../../components/buttons/AdminButton";
@@ -7,6 +6,7 @@ import { useEffect, useState } from "react";
 import { fetchProduct } from "../../../services/api/fetchProduct";
 import { ProductData } from "../../../types";
 import { Link } from "react-router-dom";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 const Cart = () => {
   const {
@@ -30,10 +30,6 @@ const Cart = () => {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
   }
 
   const getTotalPrice = () => {
@@ -81,7 +77,7 @@ const Cart = () => {
         </div>
 
         <div className="mt-8">
-          <div className="overflow-hidden border rounded-lg w-[90vw] md:w-[85vw] lg:w-[90vw]">
+          <div className="overflow-hidden border rounded-lg w-[90vw] md:w-[85vw] lg:w-[80vw]">
             <div className="p-4 bg-lightGray">
               <div className="flex justify-between">
                 <p className="text-base font-normal text-gray">Sub Total</p>
@@ -113,6 +109,14 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </ClientLayout>
   );
 };

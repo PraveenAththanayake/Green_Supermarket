@@ -54,8 +54,8 @@ const Discount = () => {
   }
 
   return (
-    <section className="mt-10 lg:mt-[90px] mb-[70px] max-w-[1120px] mx-auto ">
-      <div className="flex mb-[71px] flex-col md:flex-row items-center">
+    <section className="mt-10 lg:mt-[90px] mb-5 md:mb-[70px] max-w-[1120px] mx-auto ">
+      <div className="flex mb-5 lg:mb-[71px] flex-col md:flex-row items-center">
         <h1 className="font-semibold mr-[25px] text-[24px] pl-[12px] xl:pl-0">
           Top saver today
         </h1>
